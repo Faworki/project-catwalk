@@ -7,7 +7,7 @@
     "start": "nodemon server",
     "build": "webpack",
     "watch": "webpack -w",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "Zac Realberg, Jimmy Ko, Colin Chauche, Raymond Hunce",
@@ -23,10 +23,14 @@
     "@babel/plugin-syntax-throw-expressions": "^7.12.1",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
+    "babel-jest": "^26.6.3",
     "babel-loader": "^8.1.0",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.5",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.4",
+    "react-test-render": "^1.1.2",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }
 }
-

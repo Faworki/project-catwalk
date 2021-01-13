@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Complete redesign of retail portal of a client-facing retail website.",
   "main": "index.js",
+  "jest": {"setupFilesAfterEnv": ["<rootDir>client/setupTests.js"]},
   "scripts": {
     "start": "nodemon server",
     "build": "webpack",

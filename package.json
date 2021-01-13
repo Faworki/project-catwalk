@@ -1,1 +1,32 @@
+{
+  "name": "project-catwalk",
+  "version": "1.0.0",
+  "description": "Complete redesign of retail portal of a client-facing retail website.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server",
+    "build": "webpack",
+    "watch": "webpack -w",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Zac Realberg, Jimmy Ko, Colin Chauche, Raymond Hunce",
+  "license": "",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/plugin-proposal-throw-expressions": "^7.12.1",
+    "@babel/plugin-syntax-throw-expressions": "^7.12.1",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "nodemon": "^2.0.4",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
+  }
+}
 

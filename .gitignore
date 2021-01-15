@@ -32,6 +32,7 @@ results
 npm-debug.log
 node_modules
 public/app.js
+server/config.js
 
 # Floobits
 .floo

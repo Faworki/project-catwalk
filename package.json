@@ -40,6 +40,7 @@
     "nodemon": "^2.0.4",
     "puppeteer": "^5.5.0",
     "react-test-render": "^1.1.2",
+    "supertest": "^6.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }

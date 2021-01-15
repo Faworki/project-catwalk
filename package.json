@@ -13,7 +13,8 @@
     "start": "nodemon server",
     "build": "webpack",
     "watch": "webpack -w",
-    "test": "jest"
+    "test": "jest",
+    "sass": "sass --watch public/styles.scss public/styles.css"
   },
   "keywords": [],
   "author": "Zac Realberg, Jimmy Ko, Colin Chauche, Raymond Hunce",
@@ -21,7 +22,8 @@
   "dependencies": {
     "axios": "^0.20.0",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "sass": "^1.32.4"
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",

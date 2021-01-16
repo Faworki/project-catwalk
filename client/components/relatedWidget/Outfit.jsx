@@ -10,7 +10,7 @@ class Outfit extends React.Component {
     return (
       <div>
         Outfit Carousel
-        <AddButton/>
+        <AddButton addToOutfit={this.props.addToOutfit}/>
       </div>
     );
   }

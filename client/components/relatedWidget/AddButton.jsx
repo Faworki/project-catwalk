@@ -8,7 +8,9 @@ class AddButton extends React.Component {
   render() {
     return (
       <div>
-        <button>Add to Outfit</button>
+        <button
+        onClick={this.props.addToOutfit}
+        >Add to Outfit</button>
       </div>
     );
   }

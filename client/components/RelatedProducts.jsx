@@ -25,7 +25,10 @@ class RelatedProducts extends React.Component {
         <RelatedCarousel
         relatedProducts={this.state.relatedProducts}
         />
-        <Outfit yourOutfit={this.props.yourOutfit}/>
+        <Outfit
+        yourOutfit={this.props.yourOutfit}
+        addToOutfit={this.props.addToOutfit}
+        />
       </div>
     );
   }

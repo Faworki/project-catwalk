@@ -9,7 +9,7 @@ const ATELIER_HOST = 'https://app-hrsei-api.herokuapp.com';
 const proxyOptions = {
   proxyReqOptDecorator: (proxyReqOpts, srcReq) => {
     proxyReqOpts.headers['Authorization'] = API_TOKEN;
-    return proxyReqOpts
+    return proxyReqOpts;
   }
 };
 

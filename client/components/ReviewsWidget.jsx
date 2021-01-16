@@ -1,24 +1,20 @@
-import React from 'react';
-// import axios from 'axios';
+import React, { Component } from 'react';
+import RatingBreakdown from './reviewWidget/RatingBreakdown';
+import ReviewList from './reviewWidget/ReviewList';
 
-class RatingsAndReviews extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {};
-  }
-
-  componentDidMount() {
-    console.log('RATINGS AND REVIEWS COMPONENT MOUNTED!');
-  }
-
-  render () {
+export class ReviewsWidget extends Component {
+  render() {
     return (
-      <div>
-        <div>RATINGS AND REVIEWS COMPONENT HERE</div>
+      <div className="reviews-widget">
+        <h3>{'Ratings & Reviews'}</h3>
+        <div className="reviews-container">
+          <RatingBreakdown />
+          <ReviewList />
+        </div>
       </div>
     );
   }
 }
 
-export default RatingsAndReviews;
+export default ReviewsWidget;
+

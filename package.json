@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "start": "nodemon server",
+    "start": "nodemon server/index.js",
     "build": "webpack",
     "watch": "webpack -w",
     "test": "jest"
@@ -22,7 +22,8 @@
     "axios": "^0.20.0",
     "express": "^4.17.1",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1"
+    "react-dom": "^16.13.1",
+    "express-http-proxy": "^1.6.2",
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -41,6 +42,7 @@
     "nodemon": "^2.0.4",
     "puppeteer": "^5.5.0",
     "react-test-render": "^1.1.2",
+    "supertest": "^6.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }

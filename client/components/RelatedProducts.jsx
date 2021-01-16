@@ -1,21 +1,31 @@
 import React from 'react';
-// import axios from 'axios';
+import RelatedCarousel from './relatedWidget/RelatedCarousel.jsx';
+import Outfit from './relatedWidget/Outfit.jsx';
+import axios from 'axios';
 
 class RelatedProducts extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
-    this.state = {};
+    this.state = {
+      relatedIDs: [],
+      relatedProducts:[{name: 'Product 1'}, {name: 'Product 2'}, {name: 'Product 3'}]
+    };
   }
 
   componentDidMount() {
+    //needs to send a GET request for each related product ID and populate it with that product data
     console.log('RELATED PRODUCTS COMPONENT MOUNTED!');
   }
 
   render () {
     return (
       <div>
-        <div>RELATED PRODUCTS COMPONENT HERE</div>
+        <strong>RELATED PRODUCTS</strong>
+        <RelatedCarousel
+        relatedProducts={this.state.relatedProducts}
+        />
+        <Outfit/>
       </div>
     );
   }

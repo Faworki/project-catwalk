@@ -1,4 +1,5 @@
 import React from 'react';
+import ProductCard from './ProductCard.jsx';
 
 class RelatedCarousel extends React.Component {
   constructor(props) {
@@ -8,7 +9,12 @@ class RelatedCarousel extends React.Component {
   render() {
     return (
       <div>
-        Related Products Carousel
+        <h5>Related Products Carousel</h5>
+        {
+          this.props.relatedProducts.map((product)=>{
+            return <ProductCard product={product}/>;
+          })
+        }
       </div>
     );
   }

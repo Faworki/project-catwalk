@@ -9,7 +9,7 @@ class RelatedProducts extends React.Component {
 
     this.state = {
       relatedIDs: [],
-      relatedProducts:[{name: 'Product 1'}, {name: 'Product 2'}, {name: 'Product 3'}]
+      relatedProducts: [{name: 'Product 1'}, {name: 'Product 2'}, {name: 'Product 3'}]
     };
   }
 
@@ -25,7 +25,7 @@ class RelatedProducts extends React.Component {
         <RelatedCarousel
         relatedProducts={this.state.relatedProducts}
         />
-        <Outfit/>
+        <Outfit yourOutfit={this.props.yourOutfit}/>
       </div>
     );
   }

@@ -15,6 +15,7 @@ class App extends React.Component {
       reviewAverage: null,
       yourOutfit: []
     };
+    this.addToOutfit = this.addToOutfit.bind(this);
   }
 
   componentDidMount() {
@@ -55,6 +56,13 @@ class App extends React.Component {
     return totalStars / totalVotes;
   }
 
+  addToOutfit(event) {
+    event.preventDefault();
+    let outfitArray = this.state.yourOutfit;
+    outfitArray.push({name: 'New Outfit Item'});
+    this.setState({yourOutfit: outfitArray});
+  }
+
   render () {
     return (
       <div>
@@ -72,6 +80,7 @@ class App extends React.Component {
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
+          addToOutfit = {this.addToOutfit}
         /><br />
         <QuestionsAndAnswers
           product={this.state.product}

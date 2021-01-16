@@ -7,20 +7,34 @@ class QnAs extends React.Component {
     super(props);
     this.state = {
       searchTerm: '',
+      questionsIDs: [],
+      questions: [],
+      answersIDs: [],
+      answers: [],
       visibleQsQuant: 2,
 
     };
+    this.updateSearchTerm = this.updateSearchTerm.bind(this);
   }
 
   componentDidMount() {
+    //get request to get all Questions related to this prodID
+    //setState with all Questions IDs
+    //one at a time, get request for each QuestionID
+    //store
+  }
 
+  updateSearchTerm (e) {
+    this.setState({
+      searchTerm: e.target.value
+    });
   }
 
   render() {
     return (
       <div>
         <h1>Quesions and Answers</h1>
-        <SearchQs />
+        <SearchQs updateSearchTerm={this.updateSearchTerm}/>
       </div>
     );
   }

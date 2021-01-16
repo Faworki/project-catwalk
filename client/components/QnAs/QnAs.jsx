@@ -24,10 +24,14 @@ class QnAs extends React.Component {
     //store
   }
 
-  updateSearchTerm (e) {
-    this.setState({
-      searchTerm: e.target.value
-    });
+  updateSearchTerm(e) {
+
+    if (e.target.value.length > 2) {
+      console.log('search term', e.target.value);
+      this.setState({
+        searchTerm: e.target.value
+      });
+    }
   }
 
   render() {

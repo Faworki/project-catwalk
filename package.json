@@ -10,7 +10,7 @@
     ]
   },
   "scripts": {
-    "start": "nodemon server",
+    "start": "nodemon server/index.js",
     "build": "webpack",
     "watch": "webpack -w",
     "test": "jest",
@@ -21,9 +21,14 @@
   "license": "",
   "dependencies": {
     "axios": "^0.20.0",
+    "express": "^4.17.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+<<<<<<< HEAD
     "sass": "^1.32.4"
+=======
+    "express-http-proxy": "^1.6.2",
+>>>>>>> master
   },
   "devDependencies": {
     "@babel/core": "^7.11.6",
@@ -35,11 +40,14 @@
     "babel-loader": "^8.1.0",
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.5",
+    "eslint": "^7.17.0",
+    "eslint-plugin-react": "^7.22.0",
     "jest": "^26.6.3",
     "jest-puppeteer": "^4.4.0",
     "nodemon": "^2.0.4",
     "puppeteer": "^5.5.0",
     "react-test-render": "^1.1.2",
+    "supertest": "^6.1.1",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12"
   }

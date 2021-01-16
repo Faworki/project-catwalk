@@ -32,9 +32,13 @@ results
 npm-debug.log
 node_modules
 public/app.js
+server/config.js
 
 # Floobits
 .floo
 .floobit
 .floo
 .flooignore
+
+# Testing
+coverage

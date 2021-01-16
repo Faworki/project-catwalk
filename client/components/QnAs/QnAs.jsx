@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import SearchQs from './SearchQs';
+import QAList from './QAList';
 
 class QnAs extends React.Component {
   constructor(props) {
@@ -39,6 +40,7 @@ class QnAs extends React.Component {
       <div>
         <h1>Quesions and Answers</h1>
         <SearchQs updateSearchTerm={this.updateSearchTerm}/>
+        <QAList id={this.props.product.id} />
       </div>
     );
   }

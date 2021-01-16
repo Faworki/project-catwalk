@@ -1,7 +1,11 @@
 import React from 'react';
 import ReviewBar from './ReviewBar';
 
-const ReviewsBreakdown = () => {
+// todo: Calculate percentage of reviews for each star value
+// todo: Pass percentage in to each ReviewBar
+// todo: assign each bar to a star number
+
+const ReviewsBreakdown = ({ratings}) => {
   return (
     <section>
       <ReviewBar />

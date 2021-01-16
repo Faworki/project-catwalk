@@ -1,4 +1,5 @@
 import React from 'react';
+import AddButton from './AddButton';
 
 class Outfit extends React.Component {
   constructor(props) {
@@ -9,6 +10,7 @@ class Outfit extends React.Component {
     return (
       <div>
         Outfit Carousel
+        <AddButton/>
       </div>
     );
   }

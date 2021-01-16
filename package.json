@@ -13,8 +13,7 @@
     "start": "nodemon server/index.js",
     "build": "webpack",
     "watch": "webpack -w",
-    "test": "jest",
-    "sass": "sass --watch public/styles.scss public/styles.css"
+    "test": "jest"
   },
   "keywords": [],
   "author": "Zac Realberg, Jimmy Ko, Colin Chauche, Raymond Hunce",

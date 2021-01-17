@@ -10,33 +10,48 @@ class App extends React.Component {
     super();
 
     this.state = {
-      product: {},
-      reviewMetaData: {},
+      product: {
+        id: null,
+        name: '',
+        slogan: '',
+        description: '',
+        category: '',
+        'default_price': '',
+        features: [],
+      },
+      reviewMetaData: {
+        'product_id': '2',
+        ratings: {},
+        recommended: {},
+        characteristics: {},
+      },
       reviewAverage: null,
-      yourOutfit: []
+      yourOutfit: [],
     };
   }
 
   componentDidMount() {
     // Set state for product
-    axios.get('/api/fec2/hrnyc/products/11001')
+    axios
+      .get('/api/fec2/hrnyc/products/11001')
       .then((productInfo) => {
         this.setState({
-          product: productInfo.data
+          product: productInfo.data,
         });
       })
       .catch((err) => console.error(err));
 
     // Set state for reviewMetaData and reviewAverage
-    axios.get('/api/fec2/hrnyc/reviews/meta?product_id=11001')
+    axios
+      .get('/api/fec2/hrnyc/reviews/meta?product_id=11001')
       .then((metaData) => {
         this.setState({
-          reviewMetaData: metaData.data
+          reviewMetaData: metaData.data,
         });
       })
       .then(() => {
         this.setState({
-          reviewAverage: this.reviewAverage()
+          reviewAverage: this.reviewAverage(),
         });
       })
       .catch((err) => console.error(err));
@@ -49,37 +64,40 @@ class App extends React.Component {
     let totalStars = 0;
     let totalVotes = 0;
     for (let rating in reviews) {
-      totalStars += (parseInt(rating) * parseInt(reviews[rating]));
+      totalStars += parseInt(rating) * parseInt(reviews[rating]);
       totalVotes += parseInt(reviews[rating]);
     }
     return totalStars / totalVotes;
   }
 
-  render () {
+  render() {
     return (
       <div>
-        <div>HEADER FOR OUR WEBSITE</div><br />
+        <div>HEADER FOR OUR WEBSITE</div>
+        <br />
         <Overview
           product={this.state.product}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
-        /><br />
+        />
+        <br />
         <RelatedProducts
           product={this.state.product}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
-        /><br />
-        <QuestionsAndAnswers
-          product={this.state.product}
-        /><br />
+        />
+        <br />
+        <QuestionsAndAnswers product={this.state.product} />
+        <br />
         <RatingsAndReviews
           product={this.state.product}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
-        /><br />
+        />
+        <br />
       </div>
     );
   }

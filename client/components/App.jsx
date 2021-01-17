@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Overview from './Overview.jsx';
 import RelatedProducts from './RelatedProducts.jsx';
-import QuestionsAndAnswers from './QnAs.jsx';
+import QnAs from './QnAs/QnAs.jsx';
 import RatingsAndReviews from './ReviewsWidget.jsx';
 
 class App extends React.Component {
@@ -89,7 +89,7 @@ class App extends React.Component {
           yourOutfit={this.state.yourOutfit}
           addToOutfit = {this.addToOutfit}
         /><br />
-        <QuestionsAndAnswers
+        <QnAs
           product={this.state.product}
         /><br />
         <RatingsAndReviews

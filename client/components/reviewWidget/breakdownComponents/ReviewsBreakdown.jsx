@@ -1,20 +1,21 @@
-import React from 'react';
-import ReviewBar from './ReviewBar';
+import React from "react";
+import ReviewBar from "./ReviewBar";
 
-// todo: Calculate percentage of reviews for each star value
-// todo: Pass percentage in to each ReviewBar
-// todo: assign each bar to a star number
+// Todo: Find a cleaner way to do these calculations.
+const ReviewsBreakdown = ({ ratings }) => {
+  let bars = [];
+  if (ratings) { // There must be a way to not have to do this
+    let totalRatings = Object.values(ratings).reduce((sum, num) => sum + parseInt(num), 0);
+    for (let i = 0; i < 6; i++) {
+      let numRatings = ratings.hasOwnProperty(i) ? ratings[i] : 0;
+      let percentOfRatings = Math.trunc((numRatings / totalRatings) * 100);
+      bars.push(
+        <ReviewBar key={i} starNum={i} percentOfRatings={percentOfRatings} />
+      );
+    }
+  }
 
-const ReviewsBreakdown = ({ratings}) => {
-  return (
-    <section>
-      <ReviewBar />
-      <ReviewBar />
-      <ReviewBar />
-      <ReviewBar />
-      <ReviewBar />
-    </section>
-  );
+  return <section>{bars}</section>;
 };
 
 export default ReviewsBreakdown;

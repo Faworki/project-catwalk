@@ -1,9 +1,9 @@
 import React from 'react';
 
-const ReviewBar = () => {
+const ReviewBar = ({starNum, percentOfRatings}) => {
   return (
     <article className="review-bar">
-      ReviewBar
+      <div>{starNum + ' stars'}</div><div>{percentOfRatings + '%'}</div>
     </article>
   );
 };

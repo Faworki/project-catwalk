@@ -1,4 +1,6 @@
 import React from 'react';
+import HelpfulReport from './HelpfulReport';
+
 
 class Question extends React.Component {
   constructor(props) {
@@ -8,7 +10,8 @@ class Question extends React.Component {
       answers: this.props.answers,
       visible: [],
       loadMoreLess: 'LOAD MORE ANSWERS',
-      less: true
+      less: true,
+      // reportText: 'Report'
     };
     this.toggleMoreFewer = this.toggleMoreFewer.bind(this);
   }
@@ -20,6 +23,12 @@ class Question extends React.Component {
           visible: this.props.answers.slice(0, 2)
         });
       }
+  }
+  report() {
+    console.log('we have reported this answer');
+    this.setState({
+      reportText: 'Reported'
+    });
   }
 
   toggleMoreFewer() {
@@ -51,8 +60,8 @@ class Question extends React.Component {
             <li>
               {answer.body}
             </li>
-            <div>{answer.answerer_name}</div>
-            <div>{answer.date.substring(0,10)}</div>
+            <div>by {answer.answerer_name},  {answer.date.substring(0, 10)}</div>
+            <HelpfulReport helpVotes={answer.helpfulness}/>
           </div>
         );
       }

@@ -31,43 +31,31 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    // Set state for product
-    axios
-      .get('/api/fec2/hrnyc/products/11001')
-      .then((productInfo) => {
+    let getProduct = axios.get('/api/fec2/hrnyc/products/11001');
+    let getReviewMetaData = axios.get('/api/fec2/hrnyc/reviews/meta?product_id=11001');
+    Promise.all([getProduct, getReviewMetaData])
+      .then((results) => {
+        let product = results[0].data;
+        let reviewMetaData = results[1].data;
+        let reviewAverage = this.reviewAverage(reviewMetaData.ratings);
+
         this.setState({
-          product: productInfo.data,
+          product,
+          reviewMetaData,
+          reviewAverage
         });
       })
       .catch((err) => console.error(err));
-
-    // Set state for reviewMetaData and reviewAverage
-    axios
-      .get('/api/fec2/hrnyc/reviews/meta?product_id=11001')
-      .then((metaData) => {
-        this.setState({
-          reviewMetaData: metaData.data,
-        });
-      })
-      .then(() => {
-        this.setState({
-          reviewAverage: this.reviewAverage(),
-        });
-      })
-      .catch((err) => console.error(err));
-
-    // Set state for yourOutfit
   }
 
-  reviewAverage() {
-    const reviews = this.state.reviewMetaData.ratings;
+  reviewAverage(ratings) {
     let totalStars = 0;
     let totalVotes = 0;
-    for (let rating in reviews) {
-      totalStars += parseInt(rating) * parseInt(reviews[rating]);
-      totalVotes += parseInt(reviews[rating]);
+    for (let rating in ratings) {
+      totalStars += parseInt(rating) * parseInt(ratings[rating]);
+      totalVotes += parseInt(ratings[rating]);
     }
-    return totalStars / totalVotes;
+    return (totalStars / totalVotes).toFixed(1);
   }
 
   render() {
@@ -92,10 +80,9 @@ class App extends React.Component {
         <QuestionsAndAnswers product={this.state.product} />
         <br />
         <RatingsAndReviews
-          product={this.state.product}
+          product={this.state.product.id}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
-          yourOutfit={this.state.yourOutfit}
         />
         <br />
       </div>

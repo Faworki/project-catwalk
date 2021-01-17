@@ -8,9 +8,7 @@ class QuestionsAndAnswers extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    console.log('QUESTIONS AND ANSWERS COMPONENT MOUNTED!');
-  }
+  componentDidMount() {}
 
   render () {
     return (

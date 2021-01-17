@@ -9,6 +9,7 @@ class HelpfulReport extends React.Component {
       helpfulClicked: false,
       reportText: 'Report',
       helpVotes: this.props.helpVotes,
+      // answerUsage: this.props.answerUsage
     };
     this.report = this.report.bind(this);
     this.clickHelpful = this.clickHelpful.bind(this);
@@ -52,7 +53,8 @@ class HelpfulReport extends React.Component {
         <div>
           Helpful?
           <a onClick={this.clickHelpful}> | Yes ({this.state.helpVotes}) | </a>
-          <a onClick={this.report}>{this.state.reportText}</a>
+          {this.props.answerUsage && <a onClick={this.report}>{this.state.reportText}</a>}
+          {!this.props.answerUsage && <a onClick={this.report}>add a question</a>}
         </div>
       </div>
     );

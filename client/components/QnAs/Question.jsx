@@ -63,6 +63,7 @@ class Question extends React.Component {
             <HelpfulReport
               id={this.props.id}
               helpVotes={answer.helpfulness}
+              answerUsage={true}
             />
           </div>
         );
@@ -80,6 +81,13 @@ class Question extends React.Component {
           {this.state.answers.length > 2 ? (
             <a onClick={this.toggleMoreFewer}>{this.state.loadMoreLess}</a>
           ) : null}
+        </div>
+        <div>
+          <HelpfulReport
+              id={this.props.id}
+              helpVotes={this.props.question.question_helpfulness}
+              answerUsage={false}
+          />
         </div>
       </div>
     );

@@ -17,7 +17,8 @@ class QnAs extends React.Component {
       newQnickname: '',
       newQtext: '',
       newQemail: '',
-      newQphotos: []
+      newQphotos: [],
+      showModal: false
 
     };
     this.updateSearchTerm = this.updateSearchTerm.bind(this);
@@ -38,43 +39,68 @@ class QnAs extends React.Component {
     this.setState({ showModal: false });
   }
 
-  handleNickmameInput(e) {
-    console.log('value', e.target.value);
-    e.preventDefault();
-    this.setState = ({
-      newQnickname: e.target.value
+  handleQuestionInput(e) {
+    // console.log('value', e.target.value);
+    var text = e.target.value;
+    this.setState({
+      newQtext: text
     });
+    e.preventDefault();
   }
 
-  handleQuestionInput(e) {
-    console.log('value', e.target.value);
-    this.setState = ({
-      newQtext: e.target.value
-    });
+  handleNickmameInput(e) {
+    // console.log('value', e.target.value);
     e.preventDefault();
+    this.setState({
+      newQnickname: e.target.value
+    });
   }
 
   handleEmailInput(e) {
     console.log('value', e.target.value);
 
-    this.setState = ({
+    this.setState({
       newQemail: e.target.value
     });
-    e.preventDefault();
+    // e.preventDefault();
   }
-  submit(e) {
-    console.log('submit!', this.state);
-    e.preventDefault();
 
-    var body = this.state.newQtext;
-    axios.post(`http://localhost:3000/api/fec2/hrnyc/qa/questions?body=${this.state.newQtext}` )
+  submit(e) {
+    // console.log('submit!', this.state);
+    // e.preventDefault();
+
+    axios.post('http://localhost:3000/api/fec2/hrnyc/qa/questions', {
+      params: {
+        'body': this.state.newQtext,
+        'name': this.state.newQnickname,
+        'email': this.state.newQemail,
+        'product_id': this.props.product.id
+      }
+    })
       .then((productInfo) => {
         console.log('product info', productInfo.data.results);
         this.setState({
           questionData: productInfo.data.results
         });
       })
-      .catch((err) => console.error(err));
+      .then(()=>{
+        this.setState({
+          showModal: false,
+          newQnickname: '',
+          newQtext: '',
+          newQemail: ''
+        });
+      })
+      .catch((err) => {
+        console.error(err);
+        this.setState({
+          showModal: false,
+          newQnickname: '',
+          newQtext: '',
+          newQemail: ''
+        });
+      });
+      e.preventDefault();
 
   }
   componentDidMount() {

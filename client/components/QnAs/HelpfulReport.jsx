@@ -1,5 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import Modal from 'react-modal';
+import ModalComp from './ModalComp';
+
+
 
 class HelpfulReport extends React.Component {
   constructor(props) {
@@ -9,11 +13,11 @@ class HelpfulReport extends React.Component {
       helpfulClicked: false,
       reportText: 'Report',
       helpVotes: this.props.helpVotes,
-      // answerUsage: this.props.answerUsage
     };
     this.report = this.report.bind(this);
     this.clickHelpful = this.clickHelpful.bind(this);
   }
+
 
   report() {
     if (!this.state.reported) {
@@ -54,7 +58,21 @@ class HelpfulReport extends React.Component {
           Helpful?
           <a onClick={this.clickHelpful}> | Yes ({this.state.helpVotes}) | </a>
           {this.props.answerUsage && <a onClick={this.report}>{this.state.reportText}</a>}
-          {!this.props.answerUsage && <a onClick={this.report}>add a question</a>}
+          {!this.props.answerUsage &&
+            <div>
+              <a
+                onClick={this.report}
+                >Add Answer
+              </a>
+              <div>
+                <ModalComp
+                  isOpen={this.state.showModal}
+                  handleCloseModal={this.handleCloseModal}
+                  id={this.props.id}
+                />
+              </div>
+            </div>
+          }
         </div>
       </div>
     );

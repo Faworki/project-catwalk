@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollMenu from 'react-horizontal-scrolling-menu';
 import RelatedCarousel from './relatedWidget/RelatedCarousel.jsx';
 import Outfit from './relatedWidget/Outfit.jsx';
 import axios from 'axios';

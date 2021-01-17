@@ -17,7 +17,6 @@ class QAList extends React.Component {
   }
 
   componentDidMount() {
-    // Set state for product/qa/questions
     //why can't i use a template literal here?
     axios.get('http://localhost:3000/api/fec2/hrnyc/qa/questions?product_id=11001')
       .then((productInfo) => {
@@ -31,13 +30,11 @@ class QAList extends React.Component {
 
 
   render() {
-    // console.log('question data', this.state.questionData);
     var QAItemArr = this.state.questionData.map((question)=>{
-      // console.log('question inside my map', question.answers);
-
       return (
         <div>
           <Question
+            id={this.props.id}
             key={question.id}
             question={question}
             answers={Object.values(question.answers)}

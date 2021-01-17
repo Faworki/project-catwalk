@@ -10,50 +10,57 @@ class App extends React.Component {
     super();
 
     this.state = {
-      product: {},
-      reviewMetaData: {},
+      product: {
+        id: null,
+        name: '',
+        slogan: '',
+        description: '',
+        category: '',
+        'default_price': '',
+        features: [],
+      },
+      reviewMetaData: {
+        'product_id': null,
+        ratings: {},
+        recommended: {},
+        characteristics: {},
+      },
       reviewAverage: null,
+<<<<<<< HEAD
       yourOutfit: [{name: 'Outfit 1'}, {name: 'Outfit 2'}, {name: 'Outfit 3'}]
+=======
+      yourOutfit: [],
+>>>>>>> master
     };
     this.addToOutfit = this.addToOutfit.bind(this);
   }
 
   componentDidMount() {
-    // Set state for product
-    axios.get('/api/fec2/hrnyc/products/11001')
-      .then((productInfo) => {
+    let getProduct = axios.get('/api/fec2/hrnyc/products/11001');
+    let getReviewMetaData = axios.get('/api/fec2/hrnyc/reviews/meta?product_id=11001');
+    Promise.all([getProduct, getReviewMetaData])
+      .then((results) => {
+        let product = results[0].data;
+        let reviewMetaData = results[1].data;
+        let reviewAverage = this.reviewAverage(reviewMetaData.ratings);
+
         this.setState({
-          product: productInfo.data
+          product,
+          reviewMetaData,
+          reviewAverage
         });
       })
       .catch((err) => console.error(err));
-
-    // Set state for reviewMetaData and reviewAverage
-    axios.get('/api/fec2/hrnyc/reviews/meta?product_id=11001')
-      .then((metaData) => {
-        this.setState({
-          reviewMetaData: metaData.data
-        });
-      })
-      .then(() => {
-        this.setState({
-          reviewAverage: this.reviewAverage()
-        });
-      })
-      .catch((err) => console.error(err));
-
-    // Set state for yourOutfit
   }
 
-  reviewAverage() {
-    const reviews = this.state.reviewMetaData.ratings;
+  reviewAverage(ratings) {
     let totalStars = 0;
     let totalVotes = 0;
-    for (let rating in reviews) {
-      totalStars += (parseInt(rating) * parseInt(reviews[rating]));
-      totalVotes += parseInt(reviews[rating]);
+    for (let rating in ratings) {
+      totalStars += parseInt(rating) * parseInt(ratings[rating]);
+      totalVotes += parseInt(ratings[rating]);
     }
-    return totalStars / totalVotes;
+    return (totalStars / totalVotes).toFixed(1);
   }
 
   addToOutfit(event) {

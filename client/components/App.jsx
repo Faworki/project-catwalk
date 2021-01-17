@@ -26,11 +26,7 @@ class App extends React.Component {
         characteristics: {},
       },
       reviewAverage: null,
-<<<<<<< HEAD
-      yourOutfit: [{name: 'Outfit 1'}, {name: 'Outfit 2'}, {name: 'Outfit 3'}]
-=======
       yourOutfit: [],
->>>>>>> master
     };
     this.addToOutfit = this.addToOutfit.bind(this);
   }

@@ -41,6 +41,7 @@ class Question extends React.Component {
   render() {
 
     var answersArr = this.state.visible.map((answer)=>{
+      console.log('answer body', answer);
       if (answer.length === 0) {
         return <div></div>;
       } else {
@@ -50,6 +51,8 @@ class Question extends React.Component {
             <li>
               {answer.body}
             </li>
+            <div>{answer.answerer_name}</div>
+            <div>{answer.date.substring(0,10)}</div>
           </div>
         );
       }

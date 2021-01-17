@@ -21,7 +21,7 @@ class QAList extends React.Component {
     //why can't i use a template literal here?
     axios.get('http://localhost:3000/api/fec2/hrnyc/qa/questions?product_id=11001')
       .then((productInfo) => {
-        console.log('product info', productInfo.data.results);
+        // console.log('product info', productInfo.data.results);
         this.setState({
           questionData: productInfo.data.results
         });
@@ -33,12 +33,7 @@ class QAList extends React.Component {
   render() {
     // console.log('question data', this.state.questionData);
     var QAItemArr = this.state.questionData.map((question)=>{
-      console.log('question inside my map', question.answers);
-      // Object.keys(question.answers).length === 0 && question.answers.constructor === Object
-      // if (Object.keys(question.answers).length === 0 && question.answers.constructor === Object) {
-      //   question.answers = [{body: 'NO ANSWER'}, {body: 'NO ANSWER'}];
-      // }
-      // var answersArr = Object.values(question.answers);
+      // console.log('question inside my map', question.answers);
 
       return (
         <div>

@@ -17,7 +17,7 @@ class Question extends React.Component {
   componentDidMount() {
     if (this.props.answers.length > 0) {
       var sortedAnswers = this.props.answers.sort(function(a, b) {
-        return  b.helpfulness - a.helpfulness;
+        return b.helpfulness - a.helpfulness;
       });
       this.setState({
         visible: this.props.answers.slice(0, 2),

@@ -9,11 +9,7 @@ class QAList extends React.Component {
     this.state = {
       searchTerm: '',
       questionData: [],
-      visibleQsQuant: 2,
-      visibleAsQuant: 2
     };
-
-
   }
 
   componentDidMount() {
@@ -31,20 +27,34 @@ class QAList extends React.Component {
 
   render() {
     var QAItemArr = this.state.questionData.map((question)=>{
-      return (
-        <div key={question.question_id}>
-          <Question
-            id={this.props.id}
-            question={question}
-            answers={Object.values(question.answers)}
-          />
-        </div>
-      );
+      var answersArr = Object.values(question.answers);
+      if (answersArr.length > 0) {
+        var questionAnswerText = answersArr.map((answer) => {
+          return answer.body;
+        });
+      }
+      var allText = question.question_body + questionAnswerText;
+      // console.log('all text', allText);
+
+      if (allText.indexOf(this.props.searchTerm) > -1) {
+        return (
+          <div key={question.question_id}>
+            <Question
+              id={this.props.id}
+              question={question}
+              answers={Object.values(question.answers)}
+            />
+          </div>
+        );
+      }
+
     });
+
+    // var hits = this.state.questdata.map((question))
 
     return (
       <div>
-        <h1>QAList</h1>
+        {/* <h1>QAList</h1> */}
         <div>
           {QAItemArr}
         </div>

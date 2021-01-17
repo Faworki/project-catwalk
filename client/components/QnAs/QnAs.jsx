@@ -28,9 +28,12 @@ class QnAs extends React.Component {
   updateSearchTerm(e) {
 
     if (e.target.value.length > 2) {
-      console.log('search term', e.target.value);
       this.setState({
         searchTerm: e.target.value
+      });
+    } else {
+      this.setState({
+        searchTerm: ''
       });
     }
   }
@@ -40,11 +43,13 @@ class QnAs extends React.Component {
       <div>
         <h1>Quesions and Answers</h1>
         <SearchQs updateSearchTerm={this.updateSearchTerm}/>
-        <QAList id={this.props.product.id} />
+        <QAList
+          id={this.props.product.id}
+          searchTerm={this.state.searchTerm}
+          />
         <button>
           MORE ANSWERED QUESTIONS
         </button>
-        {/* <button onclick="activateLasers()"> */}
         <button>
           ADD A QUESTION +
         </button>

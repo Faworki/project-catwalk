@@ -5,7 +5,7 @@ import {shallow} from 'enzyme'; // import any functions you are using from enzym
 import App from './App.jsx'; // import what ever component you are testing.
 import ReviewsWidget from './ReviewsWidget.jsx';
 import Overview from './Overview';
-import QnAs from './QnAs';
+import QnAs from './QnAs/QnAs.jsx';
 import RelatedProducts from './RelatedProducts';
 
 describe('App should ', () => {

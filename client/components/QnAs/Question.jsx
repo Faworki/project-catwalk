@@ -1,5 +1,5 @@
-import React from "react";
-import HelpfulReport from "./HelpfulReport";
+import React from 'react';
+import HelpfulReport from './HelpfulReport';
 
 class Question extends React.Component {
   constructor(props) {
@@ -8,7 +8,7 @@ class Question extends React.Component {
       question: this.props.question,
       answers: this.props.answers,
       visible: [],
-      loadMoreLess: "LOAD MORE ANSWERS",
+      loadMoreLess: 'LOAD MORE ANSWERS',
       less: true,
     };
     this.toggleMoreFewer = this.toggleMoreFewer.bind(this);
@@ -23,7 +23,7 @@ class Question extends React.Component {
   }
   report() {
     this.setState({
-      reportText: "Reported",
+      reportText: 'Reported',
     });
   }
 
@@ -31,13 +31,13 @@ class Question extends React.Component {
     if (this.state.less) {
       this.setState({
         visible: this.state.answers,
-        loadMoreLess: "SHOW FEWER",
+        loadMoreLess: 'SHOW FEWER',
         less: false,
       });
     } else {
       this.setState({
         visible: this.state.answers.slice(0, 2),
-        loadMoreLess: "LOAD MORE ANSWERS",
+        loadMoreLess: 'LOAD MORE ANSWERS',
         less: true,
       });
     }
@@ -49,13 +49,18 @@ class Question extends React.Component {
         return <div></div>;
       } else {
         return (
-          <div>
-            <h4>A</h4>
-            <li>{answer.body}</li>
+          <div key={answer.id}>
+            <h4>
+              A
+              <div>{answer.body}</div>
+            </h4>
             <div>
               by {answer.answerer_name}, {answer.date.substring(0, 10)}
             </div>
-            <HelpfulReport id={this.props.id} helpVotes={answer.helpfulness} />
+            <HelpfulReport
+              id={this.props.id}
+              helpVotes={answer.helpfulness}
+            />
           </div>
         );
       }
@@ -63,8 +68,9 @@ class Question extends React.Component {
     // var messagesShownController =
     return (
       <div>
-        <h4>Q</h4>
-        <li>{this.props.question.question_body}</li>
+        <h4>
+          Q
+          <div>{this.props.question.question_body}</div></h4>
         {answersArr}
         <br></br>
         <div>

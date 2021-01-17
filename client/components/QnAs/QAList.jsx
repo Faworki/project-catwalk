@@ -32,10 +32,9 @@ class QAList extends React.Component {
   render() {
     var QAItemArr = this.state.questionData.map((question)=>{
       return (
-        <div>
+        <div key={question.question_id}>
           <Question
             id={this.props.id}
-            key={question.id}
             question={question}
             answers={Object.values(question.answers)}
           />

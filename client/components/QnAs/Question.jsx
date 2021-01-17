@@ -15,15 +15,15 @@ class Question extends React.Component {
 
   componentDidMount() {
     // var answers = this.props.answers;
-      if(this.props.answers.length > 0) {
+      if (this.props.answers.length > 0) {
         this.setState({
-          visible: this.props.answers.slice(0,2)
+          visible: this.props.answers.slice(0, 2)
         });
       }
   }
 
   toggleMoreFewer() {
-    if(this.state.less) {
+    if (this.state.less) {
       this.setState({
         visible: this.state.answers,
         loadMoreLess: 'SHOW FEWER',
@@ -31,7 +31,7 @@ class Question extends React.Component {
       });
     } else {
       this.setState({
-        visible: this.state.answers.slice(0,2),
+        visible: this.state.answers.slice(0, 2),
         loadMoreLess: 'LOAD MORE ANSWERS',
         less: true
       });

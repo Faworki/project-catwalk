@@ -26,7 +26,7 @@ class App extends React.Component {
         characteristics: {},
       },
       reviewAverage: null,
-      yourOutfit: [],
+      yourOutfit: [{name: 'Outfit 1'}, {name: 'Outfit 2'}, {name: 'Outfit 3'}],
     };
     this.addToOutfit = this.addToOutfit.bind(this);
   }

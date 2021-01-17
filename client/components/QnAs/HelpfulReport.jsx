@@ -22,7 +22,7 @@ class HelpfulReport extends React.Component {
       });
       axios.put(`http://localhost:3000/api/fec2/hrnyc/qa/questions/${this.props.id}/report`)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
       })
       .catch(function (error) {
         console.log(error);
@@ -37,7 +37,7 @@ class HelpfulReport extends React.Component {
       });
       axios.put(`http://localhost:3000/api/fec2/hrnyc/qa/questions/${this.props.id}/helpful`)
       .then(function (response) {
-        console.log(response);
+        // console.log(response);
       })
       .catch(function (error) {
         console.log(error);

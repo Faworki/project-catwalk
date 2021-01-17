@@ -8,7 +8,7 @@ import Overview from './Overview';
 import QnAs from './QnAs';
 import RelatedProducts from './RelatedProducts';
 
-describe('App should render ', () => {
+describe('App should ', () => {
   let app;
   beforeAll(() => {
     app = shallow(<App />, {disableLifecycleMethods: true});
@@ -18,19 +18,48 @@ describe('App should render ', () => {
     app.unMount();
   });
 
-  test('the Overview Widget', () => {
+  test('intialize state with all product keys', () => {
+
+    let productState = {
+      id: null,
+      name: '',
+      slogan: '',
+      description: '',
+      category: '',
+      'default_price': '',
+      features: [],
+    };
+
+    expect(app.state().product).toEqual(expect.objectContaining(productState));
+
+  });
+
+  test('intialize state with all reviewMetaData keys', () => {
+
+    let reviewMetaData = {
+        'product_id': null,
+        ratings: {},
+        recommended: {},
+        characteristics: {},
+      };
+
+    expect(app.state().reviewMetaData).toEqual(expect.objectContaining(reviewMetaData));
+
+  });
+
+  test('render the Overview Widget', () => {
     expect(app.containsAnyMatchingElements([Overview])).toEqual(true);
   });
 
-  test('the Related Products Widget', () => {
+  test('render the Related Products Widget', () => {
     expect(app.containsAnyMatchingElements([RelatedProducts])).toEqual(true);
   });
 
-  test('the Questions & Answers Widget', () => {
+  test('render the Questions & Answers Widget', () => {
     expect(app.containsAnyMatchingElements([QnAs])).toEqual(true);
   });
 
-  test('the Reviews Widget', () => {
+  test('render the Reviews Widget', () => {
     expect(app.containsAnyMatchingElements([ReviewsWidget])).toEqual(true);
   });
 

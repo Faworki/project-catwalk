@@ -5,56 +5,67 @@ class Question extends React.Component {
     super(props);
     this.state = {
       question: this.props.question,
-      answers: this.props.answers
+      answers: this.props.answers,
+      visible: [],
+      loadMoreLess: 'LOAD MORE ANSWERS',
+      less: true
     };
+    this.toggleMoreFewer = this.toggleMoreFewer.bind(this);
   }
 
   componentDidMount() {
-    // console.log('answers as they come in', this.props.data.answers);
-    // if (!(Object.keys(this.props.answers).length === 0 && this.props.answers.constructor === Object)) {
-    //   console.log('answer found');
-    //   this.setState({
-    //     answers: Object.values(this.props.answers)
-    //   });
-    // } else {
+    // var answers = this.props.answers;
+      if(this.props.answers.length > 0) {
+        this.setState({
+          visible: this.props.answers.slice(0,2)
+        });
+      }
+  }
 
-    // }
-
+  toggleMoreFewer() {
+    if(this.state.less) {
+      this.setState({
+        visible: this.state.answers,
+        loadMoreLess: 'SHOW FEWER',
+        less: false
+      });
+    } else {
+      this.setState({
+        visible: this.state.answers.slice(0,2),
+        loadMoreLess: 'LOAD MORE ANSWERS',
+        less: true
+      });
+    }
   }
 
   render() {
-    // if (this.state.answers[0]['body']) {
-      console.log('this.props.answers', this.props.answers);
-    // }
-    var answersArr = this.props.answers.map((answer)=>{
+
+    var answersArr = this.state.visible.map((answer)=>{
       if (answer.length === 0) {
         return <div></div>;
       } else {
         return (
-          <li>
-            {answer.body}
-          </li>
+          <div>
+            <h4>A</h4>
+            <li>
+              {answer.body}
+            </li>
+          </div>
         );
       }
     });
-
+    // var messagesShownController =
     return (
       <div>
         <h4>Q</h4>
         <li>
           {this.props.question.question_body}
         </li>
-        <h4>A</h4>
-        {answersArr}
-        {/* <div>
-          {this.state.answers[0]['body']}
-        </div>
-        <h4>A</h4>
+          {answersArr}
+        <br></br>
         <div>
-          {this.state.answers[1]['body']}
-        </div> */}
-        <div>
-          LOAD MORE ANSWERS
+          { this.state.answers.length > 2 ?
+            <a onClick={this.toggleMoreFewer}>{this.state.loadMoreLess}</a> : null }
         </div>
       </div>
     );

@@ -20,7 +20,7 @@ class App extends React.Component {
         features: [],
       },
       reviewMetaData: {
-        'product_id': '2',
+        'product_id': null,
         ratings: {},
         recommended: {},
         characteristics: {},

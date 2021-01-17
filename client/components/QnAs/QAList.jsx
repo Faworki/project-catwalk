@@ -50,11 +50,8 @@ class QAList extends React.Component {
 
     });
 
-    // var hits = this.state.questdata.map((question))
-
     return (
       <div>
-        {/* <h1>QAList</h1> */}
         <div>
           {QAItemArr}
         </div>

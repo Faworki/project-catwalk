@@ -4,6 +4,7 @@ class Question extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      question: this.props.question,
       answers: this.props.answers
     };
   }
@@ -16,30 +17,44 @@ class Question extends React.Component {
     //     answers: Object.values(this.props.answers)
     //   });
     // } else {
-    //   this.setState({
-    //     answers: [{body: 'no answer for this questions'}, {body: 'no answer for this questions'}]
-    //   });
+
     // }
 
   }
 
   render() {
     // if (this.state.answers[0]['body']) {
-      console.log('this.state.answers[0]', this.state.answers[0]['body']);
+      console.log('this.props.answers', this.props.answers);
     // }
+    var answersArr = this.props.answers.map((answer)=>{
+      if (answer.length === 0) {
+        return <div></div>;
+      } else {
+        return (
+          <li>
+            {answer.body}
+          </li>
+        );
+      }
+    });
+
     return (
       <div>
         <h4>Q</h4>
-        <div>
-          {this.props.question}
-        </div>
+        <li>
+          {this.props.question.question_body}
+        </li>
         <h4>A</h4>
-        <div>
+        {answersArr}
+        {/* <div>
           {this.state.answers[0]['body']}
         </div>
         <h4>A</h4>
         <div>
           {this.state.answers[1]['body']}
+        </div> */}
+        <div>
+          LOAD MORE ANSWERS
         </div>
       </div>
     );

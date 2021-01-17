@@ -41,6 +41,13 @@ class QnAs extends React.Component {
         <h1>Quesions and Answers</h1>
         <SearchQs updateSearchTerm={this.updateSearchTerm}/>
         <QAList id={this.props.product.id} />
+        <button>
+          MORE ANSWERED QUESTIONS
+        </button>
+        {/* <button onclick="activateLasers()"> */}
+        <button>
+          ADD A QUESTION +
+        </button>
       </div>
     );
   }

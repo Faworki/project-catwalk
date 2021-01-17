@@ -35,17 +35,17 @@ class QAList extends React.Component {
     var QAItemArr = this.state.questionData.map((question)=>{
       console.log('question inside my map', question.answers);
       // Object.keys(question.answers).length === 0 && question.answers.constructor === Object
-      if (Object.keys(question.answers).length === 0 && question.answers.constructor === Object) {
-        question.answers = [{body: 'NO ANSWER'}, {body: 'NO ANSWER'}];
-      }
-      var answersArr = Object.values(question.answers);
+      // if (Object.keys(question.answers).length === 0 && question.answers.constructor === Object) {
+      //   question.answers = [{body: 'NO ANSWER'}, {body: 'NO ANSWER'}];
+      // }
+      // var answersArr = Object.values(question.answers);
 
       return (
         <div>
           <Question
             key={question.id}
-            question={question.question_body}
-            answers={answersArr}
+            question={question}
+            answers={Object.values(question.answers)}
           />
         </div>
       );

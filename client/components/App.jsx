@@ -58,33 +58,34 @@ class App extends React.Component {
     return (totalStars / totalVotes).toFixed(1);
   }
 
-  render() {
+  render () {
     return (
       <div>
-        <div>HEADER FOR OUR WEBSITE</div>
-        <br />
+        <div>HEADER FOR OUR WEBSITE</div><br />
         <Overview
           product={this.state.product}
+          reviewData={this.state.reviewData}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
-        />
-        <br />
+        /><br />
         <RelatedProducts
           product={this.state.product}
+          reviewData={this.state.reviewData}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
-        />
-        <br />
-        <QuestionsAndAnswers product={this.state.product} />
-        <br />
+        /><br />
+        <QuestionsAndAnswers
+          product={this.state.product}
+        /><br />
         <RatingsAndReviews
-          product={this.state.product.id}
+          product={this.state.product}
+          reviewData={this.state.reviewData}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
-        />
-        <br />
+          yourOutfit={this.state.yourOutfit}
+        /><br />
       </div>
     );
   }

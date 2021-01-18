@@ -35,7 +35,7 @@ class ProductInformation extends React.Component {
   render () {
     return (
       <div>
-        <StarAverage />{' '}<a href="/"><small>{`Read all ${this.state.reviewCount } reviews here`}</small></a>
+        <StarAverage />{' '}<a href="/"><small>{`Read all ${this.state.reviewCount} reviews here`}</small></a>
         <div>{this.props.product.category}</div>
         <div>{this.props.product.name}</div>
         <div>${this.props.product.default_price}</div><br />

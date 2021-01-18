@@ -30,6 +30,7 @@ class Thumbnails extends React.Component {
           alt="Thumbnail"
           width="60"
           height="90"
+          onClick={this.props.thumbnailClickHandler}
         />{' '}
       </span>
     );

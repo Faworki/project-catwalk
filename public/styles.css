@@ -6,11 +6,12 @@ body h1 {
 }
 
 .menu-item {
+  height: 100px;
   padding: 0 40px;
   margin: 50px 10px;
   user-select: none;
   cursor: pointer;
-  border: 50px blue solid;
+  border: 5px blue solid;
 }
 
 .menu-item-wrapper.active {

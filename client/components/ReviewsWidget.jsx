@@ -8,7 +8,7 @@ let dummyData = [
     rating: 5,
     summary: 'This product was great!',
     recommend: true,
-    response: '',
+    response: 'So glad you liked the product!',
     body:
       'I really did or did not like this product based on whether it was sustainably sourced. Then I found out that its made from nothing at all.',
     date: '2019-01-01T00:00:00.000Z',
@@ -35,9 +35,10 @@ export class ReviewsWidget extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      reviewCount: 5,
+      filteredReviews: dummyData,
       productReviews: dummyData,
-
+      page: 1,
+      reviewsToDisplay: 2,
     };
   }
 
@@ -51,7 +52,10 @@ export class ReviewsWidget extends Component {
             reviewAverage={this.props.reviewAverage}
             reviewCount={this.state.reviewCount}
           />
-          <ReviewList reviews={this.state.productReviews} />
+          <ReviewList
+            reviews={this.state.filteredReviews}
+            reviewCount={this.props.reviewCount}
+          />
         </div>
       </div>
     );

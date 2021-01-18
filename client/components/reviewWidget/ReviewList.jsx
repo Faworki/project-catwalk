@@ -1,20 +1,27 @@
 import React from 'react';
 import ReviewCard from './ReviewCard';
 
-const ReviewList = () => {
+const ReviewList = ({reviews, reviewCount}) => {
   return (
     <main>
       <div className="list-controls">
-        248 reviews, sorted by
-        <select>
-          <option selected value='relevant'>Relevant</option>
-          <option value='helpful'>Helpful</option>
-          <option value='newest'>Newest</option>
+        {`${reviewCount} reviews, sorted by`}
+        <select defaultValue={'Relevant'}>
+          <option value='relevant'>relevance</option>
+          <option value='helpful'>helpfulness</option>
+          <option value='newest'>newest</option>
         </select>
       </div>
       <div className="card-container">
-        <ReviewCard />
-        <ReviewCard />
+        {reviews.map((review, index) => {
+          return (
+            <ReviewCard
+              key={review.review_id}
+              review={review}
+              index={index}
+            />
+          );
+        })}
       </div>
       <div>
         <button>More Reviews</button>

@@ -27,9 +27,13 @@ class RelatedCarousel extends React.Component {
     this.setState({ selected: key });
   }
 
-  render() {
-    const { selected } = this.state;
+componentDidUpdate(prevProps) {
+  if (this.props.relatedProducts !== prevProps.relatedProducts) {
+    this.productItems = ProductList(this.props.relatedProducts, this.state.selected);
+  }
+}
 
+  render() {
     return (
       <div>
         <ScrollMenu

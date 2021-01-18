@@ -18,7 +18,7 @@ class RelatedProducts extends React.Component {
     axios.get('/api/fec2/hrnyc/products/11001/related')
     .then(results=>{
       return results.data.map(relatedId=>{
-        return axios.get(`/api/fec2/hrnyc/products/${relatedId}`);
+        return axios.get(`/api/fec2/hrnyc/products/${relatedId}/styles`);
       });
     })
     .then(results=>{

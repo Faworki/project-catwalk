@@ -98,9 +98,8 @@ class ModalComp extends React.Component {
   }
 
   testForm(e) {
-    console.log('test form');
     var fieldsObj = {
-      'form body': this.state.formBody,
+      Question: this.state.formBody,
       Nickname: this.state.formNickname,
       Email: this.state.formEmail,
     };
@@ -110,9 +109,11 @@ class ModalComp extends React.Component {
         emptyFields.push(key);
       }
     }
+    if (!this.props.question) {
+      emptyFields.splice(0, 1, 'Answer');
+    }
     var emptyAlertText = emptyFields.join(', ');
     if (emptyFields.length > 0) {
-      console.log('empty alert text', emptyAlertText);
       alert('You must enter the following: ' + emptyAlertText);
     } else if (!this.validateEmail(this.state.formEmail)) {
       alert('Please enter a valid email address');

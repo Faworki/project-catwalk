@@ -16,24 +16,43 @@ class App extends React.Component {
         slogan: '',
         description: '',
         category: '',
-        'default_price': '',
+        default_price: '',
         features: [],
       },
       reviewMetaData: {
-        'product_id': null,
+        product_id: null,
         ratings: {},
         recommended: {},
         characteristics: {},
       },
       reviewAverage: null,
-      yourOutfit: [{name: 'Outfit 1'}, {name: 'Outfit 2'}, {name: 'Outfit 3'}],
+      yourOutfit: [
+        {
+          id: 11001,
+          campus: 'hrnyc',
+          name: 'Camo Onesie',
+          slogan: 'Blend in to your crowd',
+          description:
+            'The So Fatigues will wake you up and fit you in. This high energy camo will have you blending in to even the wildest surroundings.',
+          category: 'Jackets',
+          default_price: '140.00',
+          created_at: '2021-01-12T21:17:59.200Z',
+          updated_at: '2021-01-12T21:17:59.200Z',
+          features: [
+            { feature: 'Fabric', value: 'Canvas' },
+            { feature: 'Buttons', value: 'Brass' },
+          ],
+        },
+      ],
     };
     this.addToOutfit = this.addToOutfit.bind(this);
   }
 
   componentDidMount() {
     let getProduct = axios.get('/api/fec2/hrnyc/products/11001');
-    let getReviewMetaData = axios.get('/api/fec2/hrnyc/reviews/meta?product_id=11001');
+    let getReviewMetaData = axios.get(
+      '/api/fec2/hrnyc/reviews/meta?product_id=11001'
+    );
     Promise.all([getProduct, getReviewMetaData])
       .then((results) => {
         let product = results[0].data;
@@ -43,7 +62,7 @@ class App extends React.Component {
         this.setState({
           product,
           reviewMetaData,
-          reviewAverage
+          reviewAverage,
         });
       })
       .catch((err) => console.error(err));
@@ -62,39 +81,42 @@ class App extends React.Component {
   addToOutfit(event) {
     event.preventDefault();
     let outfitArray = this.state.yourOutfit;
-    outfitArray.push({name: 'New Outfit Item'});
-    this.setState({yourOutfit: outfitArray});
+    outfitArray.push(this.state.product);
+    this.setState({ yourOutfit: outfitArray });
   }
 
-  render () {
+  render() {
     return (
       <div>
-        <div>HEADER FOR OUR WEBSITE</div><br />
+        <div>HEADER FOR OUR WEBSITE</div>
+        <br />
         <Overview
           product={this.state.product}
           reviewData={this.state.reviewData}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
-        /><br />
+        />
+        <br />
         <RelatedProducts
           product={this.state.product}
           reviewData={this.state.reviewData}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
-          addToOutfit = {this.addToOutfit}
-        /><br />
-        <QnAs
-          product={this.state.product}
-        /><br />
+          addToOutfit={this.addToOutfit}
+        />
+        <br />
+        <QnAs product={this.state.product} />
+        <br />
         <RatingsAndReviews
           product={this.state.product}
           reviewData={this.state.reviewData}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
-        /><br />
+        />
+        <br />
       </div>
     );
   }

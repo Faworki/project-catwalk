@@ -7,164 +7,193 @@ import QAList from './QAList';
 Modal.setAppElement(document.getElementById('app'));
 
 const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    marginRight: '-50%',
+    transform: 'translate(-50%, -50%)',
+  },
 };
 
 class ModalComp extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      newQnickname: '',
-      newQtext: '',
-      newQemail: '',
+      formBody: '',
+      formNickname: '',
+      formEmail: '',
       newQphotos: [],
-      showModal: false
+      showModal: false,
     };
 
     this.handleNickmameInput = this.handleNickmameInput.bind(this);
     this.handleQuestionInput = this.handleQuestionInput.bind(this);
     this.handleEmailInput = this.handleEmailInput.bind(this);
+    this.testForm = this.testForm.bind(this);
     this.submit = this.submit.bind(this);
+    this.validateEmail = this.validateEmail.bind(this);
   }
 
-
   handleQuestionInput(e) {
-    console.log('question input', e.target.value);
     this.setState({
-      newQtext: e.target.value
+      formBody: e.target.value,
     });
     e.preventDefault();
   }
 
   handleNickmameInput(e) {
     this.setState({
-      newQnickname: e.target.value
+      formNickname: e.target.value,
     });
     e.preventDefault();
   }
 
   handleEmailInput(e) {
     this.setState({
-      newQemail: e.target.value
+      formEmail: e.target.value,
     });
     e.preventDefault();
-
   }
 
-  submit(e) {
-    axios.post('http://localhost:3000/api/fec2/hrnyc/qa/questions', {
-      params: {
-        'body': this.state.newQtext,
-        'name': this.state.newQnickname,
-        'email': this.state.newQemail,
-        'product_id': this.props.id
-      }
-    })
-      .then(()=>{
+  submit() {
+    axios
+    //this is built out to POST a new question, need to build POST answer logic
+      .post('http://localhost:3000/api/fec2/hrnyc/qa/questions', {
+        params: {
+          'body': this.state.formBody,
+          'name': this.state.formNickname,
+          'email': this.state.formEmail,
+          'product_id': this.props.id,
+        },
+      })
+      .then(() => {
         this.setState({
           showModal: false,
-          newQnickname: '',
-          newQtext: '',
-          newQemail: ''
+          formNickname: '',
+          formBody: '',
+          formEmail: '',
         });
-        // this.handleCloseModal();
-
       })
       .catch((err) => {
         console.error(err);
         this.setState({
           showModal: false,
-          newQnickname: '',
-          newQtext: '',
-          newQemail: ''
+          formNickname: '',
+          formBody: '',
+          formEmail: '',
         });
-        // this.handleCloseModal();
       });
-      this.props.handleCloseModal();
-      e.preventDefault();
+    this.props.handleCloseModal();
+  }
 
+  validateEmail(inputText) {
+    var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+    if (inputText.match(mailformat)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  testForm(e) {
+    console.log('test form');
+    var fieldsObj = {
+      'form body': this.state.formBody,
+      Nickname: this.state.formNickname,
+      Email: this.state.formEmail,
+    };
+    var emptyFields = [];
+    for (var key in fieldsObj) {
+      if (fieldsObj[key].length === 0) {
+        emptyFields.push(key);
+      }
+    }
+    var emptyAlertText = emptyFields.join(', ');
+    if (emptyFields.length > 0) {
+      console.log('empty alert text', emptyAlertText);
+      alert('You must enter the following: ' + emptyAlertText);
+    } else if (!this.validateEmail(this.state.formEmail)) {
+      alert('Please enter a valid email address');
+    } else {
+      this.submit();
+    }
+    e.preventDefault();
   }
 
   render() {
-    console.log('prod name', this.props.prodName);
-    console.log('questionbody', this.props.question_body);
     return (
       <div>
-          <Modal
-           style={customStyles}
-           isOpen={this.props.isOpen}
-           contentLabel="Minimal Modal Example"
-          >
-            {this.props.question ?
+        <Modal
+          style={customStyles}
+          isOpen={this.props.isOpen}
+          contentLabel='Minimal Modal Example'
+        >
+          {this.props.question ? (
             <div>
               <div>
-                <h1>
-                  Ask Your Question
-                </h1>
-                <h4>
-                  About the {this.props.prodName}
-                </h4>
+                <h1>Ask Your Question</h1>
+                <h4>About the {this.props.prodName}</h4>
+              </div>
+              <br></br>
+              <div>
+                <div>* Your Question (1000 character limit)</div>
               </div>
             </div>
-            :
+          ) : (
             <div>
               <div>
-                <h1>
-                  Submit Your Answer
-                </h1>
+                <h1>Submit Your Answer</h1>
                 <h4>
                   {this.props.prodName} : {this.props.question_body}
                 </h4>
               </div>
               <br></br>
               <div>
-                <div>
-                  Your Questions (1000 character limit)
-                </div>
+                <div>* Your Answer (1000 character limit)</div>
               </div>
             </div>
-            }
+          )}
+          <div>
+            <textarea
+              name='message'
+              style={{ width: '400px', height: '200px' }}
+              type='text'
+              onChange={this.handleQuestionInput}
+              maxLength='1000'
+            />
+          </div>
+          <br></br>
+          <div>
+            <div>* Your Nickname (60 character limit)</div>
+            <input
+              type='text'
+              onChange={this.handleNickmameInput}
+              placeholder='Example: jackson11!'
+              maxLength='60'
+            />
             <div>
-              <textarea
-                name='message'
-                style={{width: '400px', height: '200px'}}
-                type="text"
-                onChange={this.handleQuestionInput}
-              />
+              For privacy reasons, do not use your full name or email address
             </div>
-            <br></br>
-            <div>
-              <div>
-                Your Nickname (60 character limit)
-              </div>
-              <input type="text" onChange={this.handleNickmameInput} placeholder='Example: jackson11!'/>
-              <div>
-                For privacy reasons, do not use your full name or email address
-              </div>
-            </div>
-            <br></br>
-            <div>
-              <div>
-                Your email (60 character limit)
-              </div>
-              <input type="text" onChange={this.handleEmailInput} placeholder='Example: jack@email.com'/>
-              <div>
-                For authentication reasons, you will not be emailed
-              </div>
-            </div>
-            <br></br>
-            <div>
-              <button onClick={this.props.handleCloseModal}>Close Modal</button>
-              <button onClick={this.submit}>Submit</button>
-            </div>
-          </Modal>
+          </div>
+          <br></br>
+          <div>
+            <div>* Your email (60 character limit)</div>
+            <input
+              type='text'
+              onChange={this.handleEmailInput}
+              placeholder='Example: jack@email.com'
+              maxLength='60'
+            />
+            <div>For authentication reasons, you will not be emailed</div>
+          </div>
+          <br></br>
+          <div>
+            <button onClick={this.props.handleCloseModal}>Close Modal</button>
+            <button onClick={this.testForm}>Submit</button>
+          </div>
+        </Modal>
       </div>
     );
   }

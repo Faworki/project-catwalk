@@ -1,7 +1,6 @@
 import React from 'react';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import ProductList from './ProductList.jsx';
-import ProductCard from './ProductCard.jsx';
 import ArrowButton from './ArrowButton.jsx';
 
 const selected = null;

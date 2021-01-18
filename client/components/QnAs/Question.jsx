@@ -92,6 +92,7 @@ class Question extends React.Component {
               helpVotes={this.props.question.question_helpfulness}
               answerUsage={false}
               question_body={this.props.question.question_body}
+              question_id={this.props.question.question_id}
               prodName={this.props.prodName}
           />
         </div>

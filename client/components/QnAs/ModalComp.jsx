@@ -58,15 +58,21 @@ class ModalComp extends React.Component {
   }
 
   submit() {
-    axios
-    //this is built out to POST a new question, need to build POST answer logic
-      .post('http://localhost:3000/api/fec2/hrnyc/qa/questions', {
-        params: {
-          'body': this.state.formBody,
-          'name': this.state.formNickname,
-          'email': this.state.formEmail,
-          'product_id': this.props.id,
-        },
+    //default to post a QUESTION
+    var reqUrl = 'http://localhost:3000/api/fec2/hrnyc/qa/questions';
+    var reqParams = {
+      'body': this.state.formBody,
+      'name': this.state.formNickname,
+      'email': this.state.formEmail,
+      'product_id': this.props.id,
+    };
+    //unless were posting an answer
+    if (!this.props.question) {
+      reqUrl = `http://localhost:3000/api/fec2/hrnyc/qa/questions/${this.props.question_id}/answers`;
+      delete reqParams['product_id'];
+    }
+    axios.post(reqUrl, {
+        params: reqParams,
       })
       .then(() => {
         this.setState({
@@ -98,19 +104,25 @@ class ModalComp extends React.Component {
   }
 
   testForm(e) {
+    //set a fields object with current state values
     var fieldsObj = {
-      Question: this.state.formBody,
-      Nickname: this.state.formNickname,
-      Email: this.state.formEmail,
+      'Question': this.state.formBody,
+      'Nickname': this.state.formNickname,
+      'Email': this.state.formEmail,
     };
+    if (!this.props.question) {
+      console.log('ModalComp sees an new answer form');
+      delete fieldsObj['Question'];
+      fieldsObj['Answer'] = this.state.formBody;
+      // emptyFields.splice(0, 1, 'Answer');
+    }
+    console.log('heres my fieldsObj, it should be different based on context', fieldsObj);
+    //empty array, to capture the names of empty fields
     var emptyFields = [];
     for (var key in fieldsObj) {
       if (fieldsObj[key].length === 0) {
         emptyFields.push(key);
       }
-    }
-    if (!this.props.question) {
-      emptyFields.splice(0, 1, 'Answer');
     }
     var emptyAlertText = emptyFields.join(', ');
     if (emptyFields.length > 0) {
@@ -201,3 +213,20 @@ class ModalComp extends React.Component {
 }
 
 export default ModalComp;
+
+// //post a question
+// post('http://localhost:3000/api/fec2/hrnyc/qa/questions', {
+//         params: {
+//           'body': this.state.formBody,
+//           'name': this.state.formNickname,
+//           'email': this.state.formEmail,
+//           'product_id': this.props.id,
+//         },
+
+// //post an answer
+// post('http://localhost:3000/api/fec2/hrnyc/qa/questions/${question_id}/answers', {
+//         params: {
+//           'body': this.state.formBody,
+//           'name': this.state.formNickname,
+//           'email': this.state.formEmail
+//         },

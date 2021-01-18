@@ -78,6 +78,7 @@ class HelpfulReport extends React.Component {
                 >Add Answer
               </a>
               <div>
+                {/* this modal is for submitting a new answer */}
                 <ModalComp
                   isOpen={this.state.showModal}
                   handleCloseModal={this.handleCloseModal}
@@ -85,6 +86,8 @@ class HelpfulReport extends React.Component {
                   question={false}
                   prodName={this.props.prodName}
                   question_body={this.props.question_body}
+                  question_id={this.props.question_id}
+
                 />
               </div>
             </div>

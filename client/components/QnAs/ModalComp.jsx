@@ -90,30 +90,36 @@ class ModalComp extends React.Component {
            isOpen={this.props.isOpen}
            contentLabel="Minimal Modal Example"
           >
-            {this.props.question &&
-            <div>
-              <h1>
-                Ask Your Question
-              </h1>
-              <h4>
-                About the {this.props.prodName}
-              </h4>
-            </div>}
-            {!this.props.question &&
-            <div>
-              <h1>
-                Submit Your Answer
-              </h1>
-              <h4>
-                {this.props.prodName} : {this.props.question_body}
-              </h4>
-            </div>
-            }
-            <br></br>
+            {this.props.question ?
             <div>
               <div>
-                Your Questions (1000 character limit)
+                <h1>
+                  Ask Your Question
+                </h1>
+                <h4>
+                  About the {this.props.prodName}
+                </h4>
               </div>
+            </div>
+            :
+            <div>
+              <div>
+                <h1>
+                  Submit Your Answer
+                </h1>
+                <h4>
+                  {this.props.prodName} : {this.props.question_body}
+                </h4>
+              </div>
+              <br></br>
+              <div>
+                <div>
+                  Your Questions (1000 character limit)
+                </div>
+              </div>
+            </div>
+            }
+            <div>
               <textarea
                 name='message'
                 style={{width: '400px', height: '200px'}}

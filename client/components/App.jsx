@@ -26,26 +26,35 @@ class App extends React.Component {
         characteristics: {},
       },
       reviewAverage: null,
-      yourOutfit: [],
+      reviewCount: null,
+      yourOutfit: []
     };
+    this.getNewProduct = this.getNewProduct.bind(this);
   }
 
-  componentDidMount() {
-    let getProduct = axios.get('/api/fec2/hrnyc/products/11001');
-    let getReviewMetaData = axios.get('/api/fec2/hrnyc/reviews/meta?product_id=11001');
+  getNewProduct(productId) {
+    let getProduct = axios.get(`/api/fec2/hrnyc/products/${productId}`);
+    let getReviewMetaData = axios.get(`/api/fec2/hrnyc/reviews/meta?product_id=${productId}`);
     Promise.all([getProduct, getReviewMetaData])
       .then((results) => {
         let product = results[0].data;
         let reviewMetaData = results[1].data;
         let reviewAverage = this.reviewAverage(reviewMetaData.ratings);
+        let reviewCount = this.sumReviewCount(reviewMetaData.ratings);
+
 
         this.setState({
           product,
           reviewMetaData,
-          reviewAverage
+          reviewAverage,
+          reviewCount
         });
       })
       .catch((err) => console.error(err));
+  }
+
+  componentDidMount() {
+    this.getNewProduct(11001);
   }
 
   reviewAverage(ratings) {
@@ -56,6 +65,12 @@ class App extends React.Component {
       totalVotes += parseInt(ratings[rating]);
     }
     return (totalStars / totalVotes).toFixed(1);
+  }
+
+  sumReviewCount(ratings) {
+    return Object.values(ratings).reduce((sum, num) => {
+      return sum + parseInt(num);
+    }, 0);
   }
 
   render () {
@@ -73,6 +88,7 @@ class App extends React.Component {
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
+          getNewProduct={this.getNewProduct}
         /><br />
         <QnAs
           product={this.state.product}

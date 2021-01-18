@@ -23,9 +23,11 @@ class RelatedCarousel extends React.Component {
       relatedProducts: [],
       relatedImages: []
     };
-    this.productItems = ProductList({
-      products: this.state.relatedProducts,
-      images: this.state.relatedImages},
+    this.productItems = ProductList(
+      {
+        products: this.state.relatedProducts,
+        images: this.state.relatedImages
+      },
       this.state.selected);
     this.onSelect = this.onSelect.bind(this);
   }
@@ -38,71 +40,114 @@ class RelatedCarousel extends React.Component {
     axios.get('/api/fec2/hrnyc/products/11001/related')
     .then(results=>{
       this.setState({relatedIds: results.data});
-      return results.data.map(relatedId=>{
+      let products = results.data.map(relatedId=>{
         return axios.get(`/api/fec2/hrnyc/products/${relatedId}`);
       });
-    })
-    .then(results=>{
-      Promise.all(results)
-      .then(results=>{
-        return results.map((res)=>{
-          return res.data;
-        });
-      })
-      .then(results=>{
-        this.setState({relatedProducts: results});
-        return results;
-      })
-      .then(results=>{
-        this.productItems = ProductList({
-          products: this.state.relatedProducts,
-          images: this.state.relatedImages},
-          this.state.selected);
-        console.log('this.productItems:', this.productItems);
-      })
-      .catch(err=>{ console.log('getRelatedProduct Promise.all error'); });
-    })
-    .catch(err=>{
-      console.log('getRelatedProduct Error');
-    });
-  }
-
-  getRelatedImages() {
-    let imagesArray = this.state.relatedIds.map(relatedId=>{
-      console.log('relatedId:', relatedId);
+      let images = results.data.map(relatedId=>{
         return axios.get(`/api/fec2/hrnyc/products/${relatedId}/styles`);
       });
+      return {
+        products: products,
+        images: images
+      };
+    })
+    .then(results=>{
+      console.log('unresolved results:', results);
+      // let resolvedProducts = Promise.all(results.products)
+      //   .then(results=>{
+      //     return results.map((res)=>{
+      //       return res.data;
+      //       });
+      //       });
+      //   let resolvedImages = Promise.all(results.images)
+      //   .then(results=>{
+      //     return results.map((res)=>{
+      //       return res.data.results[0].photos[0].thumbnail_url;
+      //     });
+      //   });
+          Promise.all(results.products)
+          .then(results=>{
+            return results.map((res)=>{
+              return res.data;
+              });
+              })
+              .then(results=>{ this.setState({relatedProducts: results}); })
+              .catch(err=>{ console.log(err); });
 
-      Promise.all(imagesArray)
-      .then(results=>{
-        return results.map((res)=>{
-          return res.data.results[0].photos[0].thumbnail_url;
-        });
-      })
-      .then(results=>{
-        this.setState({relatedImages: results});
-      })
-      .catch(err=>{
-        console.log('getRelatedImages Promise.all error');
-      });
-      console.log('imagesArray:', this.state.relatedIds);
+          Promise.all(results.images)
+          .then(results=>{
+            return results.map((res)=>{
+              return res.data.results[0].photos[0].thumbnail_url;
+            });
+          })
+          .then(results=>{ this.setState({relatedImages: results}); });
+        })
+        .catch(err=>{ console.log(err); });
+    // .then(results=>{
+    //   console.log('resolved results:', results);
+    //   return {
+    //   products: Promise.resolve(results.products),
+    //   images: Promise.resolve(results.images)
+    //   }
+    // })
+    // .then(results=>{
+    //   console.log('resolved results again:', results);
+    //   this.productItems = ProductList(results, this.state.selected);
+    //   console.log('bundled state:', results);
+    //   console.log('this.productItems:', this.productItems);
+    // })
+    // .catch(err=>{
+    //   console.log('getRelatedProduct Promise.all error');
+    // });
+  }
+
+  // getRelatedImages() {
+  //   let imagesArray = this.state.relatedIds.map(relatedId=>{
+  //     console.log('relatedId:', relatedId);
+  //       return axios.get(`/api/fec2/hrnyc/products/${relatedId}/styles`);
+  //     });
+
+  //     Promise.all(imagesArray)
+  //     .then(results=>{
+  //       return results.map((res)=>{
+  //         return res.data.results[0].photos[0].thumbnail_url;
+  //       });
+  //     })
+  //     .then(results=>{
+  //       this.setState({relatedImages: results});
+  //     })
+  //     .catch(err=>{
+  //       console.log('getRelatedImages Promise.all error');
+  //     });
+  //     console.log('imagesArray:', this.state.relatedIds);
+  // }
+
+  buildCarousel() {
+    this.productItems = ProductList(
+      {
+        products: this.state.relatedProducts,
+        images: this.state.relatedImages
+      },
+      this.state.selected);
+      console.log('inside buildCarousel');
   }
 
   componentDidMount() {
+    console.log('componentDidMount');
     this.getRelatedProduct();
+    this.buildCarousel();
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.product.id !== prevProps.product.id) {
-      this.getRelatedImages();
+  componentDidUpdate(prevState) {
+    console.log('componentDidUpdate');
+    console.log(this.state);
+    if (this.state.relatedImages !== prevState.relatedImages) {
+      this.buildCarousel();
     }
-    this.productItems = ProductList({
-      products: this.state.relatedProducts,
-      images: this.state.relatedImages},
-      this.state.selected);
   }
 
   render() {
+    console.log('render');
     return (
       <div>
         Related Products Carousel

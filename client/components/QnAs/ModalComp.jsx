@@ -111,12 +111,10 @@ class ModalComp extends React.Component {
       'Email': this.state.formEmail,
     };
     if (!this.props.question) {
-      console.log('ModalComp sees an new answer form');
       delete fieldsObj['Question'];
       fieldsObj['Answer'] = this.state.formBody;
       // emptyFields.splice(0, 1, 'Answer');
     }
-    console.log('heres my fieldsObj, it should be different based on context', fieldsObj);
     //empty array, to capture the names of empty fields
     var emptyFields = [];
     for (var key in fieldsObj) {
@@ -151,7 +149,7 @@ class ModalComp extends React.Component {
               </div>
               <br></br>
               <div>
-                <div>* Your Question (1000 character limit)</div>
+                <div>* Your Question (Mandatory)</div>
               </div>
             </div>
           ) : (
@@ -164,7 +162,7 @@ class ModalComp extends React.Component {
               </div>
               <br></br>
               <div>
-                <div>* Your Answer (1000 character limit)</div>
+                <div>* Your Answer (Mandatory)</div>
               </div>
             </div>
           )}
@@ -179,7 +177,7 @@ class ModalComp extends React.Component {
           </div>
           <br></br>
           <div>
-            <div>* Your Nickname (60 character limit)</div>
+            <div>* What is your nickname (Mandatory)</div>
             <input
               type='text'
               onChange={this.handleNickmameInput}
@@ -192,7 +190,7 @@ class ModalComp extends React.Component {
           </div>
           <br></br>
           <div>
-            <div>* Your email (60 character limit)</div>
+            <div>* Your email (Mandatory)</div>
             <input
               type='text'
               onChange={this.handleEmailInput}
@@ -213,20 +211,3 @@ class ModalComp extends React.Component {
 }
 
 export default ModalComp;
-
-// //post a question
-// post('http://localhost:3000/api/fec2/hrnyc/qa/questions', {
-//         params: {
-//           'body': this.state.formBody,
-//           'name': this.state.formNickname,
-//           'email': this.state.formEmail,
-//           'product_id': this.props.id,
-//         },
-
-// //post an answer
-// post('http://localhost:3000/api/fec2/hrnyc/qa/questions/${question_id}/answers', {
-//         params: {
-//           'body': this.state.formBody,
-//           'name': this.state.formNickname,
-//           'email': this.state.formEmail
-//         },

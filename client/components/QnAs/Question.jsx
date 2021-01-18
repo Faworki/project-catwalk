@@ -49,7 +49,7 @@ class Question extends React.Component {
   render() {
     var answersArr = this.state.visible.map((answer) => {
       if (answer.length === 0) {
-        return <span/>;
+        return null;
       } else {
         return (
           <div key={answer.id}>

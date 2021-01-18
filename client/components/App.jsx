@@ -33,7 +33,6 @@ class App extends React.Component {
   }
 
   getNewProduct(productId) {
-    console.log('productId:', productId);
     let getProduct = axios.get(`/api/fec2/hrnyc/products/${productId}`);
     let getReviewMetaData = axios.get(`/api/fec2/hrnyc/reviews/meta?product_id=${productId}`);
     Promise.all([getProduct, getReviewMetaData])
@@ -55,9 +54,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    console.log('inside componentDidMount')
     this.getNewProduct(11001);
-    console.log('reviewCount:', this.state.reviewCount)
   }
 
   reviewAverage(ratings) {

@@ -1,46 +1,27 @@
 import React from 'react';
-import AddButton from './AddButton';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
-import ProductCard from './ProductCard.jsx';
+import ProductList from './ProductList.jsx';
+import ArrowButton from './ArrowButton.jsx';
+import AddButton from './AddButton';
 
-// One item component
-// selected prop will be passed
-const MenuItem = ({text, selected}) => {
-  return <div
-    className={`menu-item ${selected ? 'active' : ''}`}
-    >{text}</div>;
-};
-
-// All items component
-// Important! add unique key
-export const Menu = (list, selected) =>
-  list.map(el => {
-    const {name} = el;
-
-    return <MenuItem text={name} key={name} selected={selected} />;
-  });
-
-
-const Arrow = ({ text, className }) => {
-  return (
-    <div
-      className={className}
-    >{text}</div>
-  );
-};
-
-const ArrowLeft = Arrow({ text: '<', className: 'arrow-prev' });
-const ArrowRight = Arrow({ text: '>', className: 'arrow-next' });
-
-const selected = 'item1';
+const selected = null;
+const ArrowLeft = ArrowButton({
+  text: '<',
+  className: 'arrow-prev'
+});
+const ArrowRight = ArrowButton({
+  text: '>',
+  className: 'arrow-next'
+});
 
 class Outfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      outfit: [],
       selected: selected
     };
-    this.menuItems = Menu(this.props.yourOutfit, selected);
+    this.productItems = ProductList(this.props.yourOutfit, selected);
     this.onSelect = this.onSelect.bind(this);
   }
 
@@ -50,22 +31,20 @@ class Outfit extends React.Component {
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
-    if (this.props.yourOutfit !== prevProps.yourOutfit) {
-      this.fetchData(this.props.yourOutfit);
+    if (this.state.outfit !== prevProps.yourOutfit) {
+      console.log('inside componentDidUpdate');
+      this.productItems = Menu(this.props.yourOutfit, selected);
     }
   }
 
   render() {
-    const { selected } = this.state;
-    // Create menu from items
-    const menu = this.menuItems;
 
     return (
       <div>
         Outfit Carousel
-        <AddButton yourOutfit={this.props.yourOutfit} addToOutfit={this.props.addToOutfit}/>
+        <AddButton yourOutfit={this.props.outfit} addToOutfit={this.props.addToOutfit}/>
         <ScrollMenu
-          data={menu}
+          data={this.productItems}
           arrowLeft={ArrowLeft}
           arrowRight={ArrowRight}
           selected={selected}

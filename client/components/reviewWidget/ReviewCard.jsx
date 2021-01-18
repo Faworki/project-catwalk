@@ -26,12 +26,27 @@ const ReviewCard = ({ review, index }) => {
       </div>
       <div className="review-body">
         <p>{review.body}</p>
-        <div className="review-images">Review Images</div>
+        <div className="review-images">
+          {review.photos.map((photo) => {
+            return (
+              <img
+                src={photo.url}
+                alt="Reviewer product image"
+                key={photo.id}
+                height="100px"
+              />
+            );
+          })}
+        </div>
         {review.recommend ? ReviewCard.recommended : null}
         {response}
-        <div className="review-footer">
-          <div>Helpful? <a>Yes</a> {`(${review.helpfulness})`}</div>
-          <div><a>Report</a></div>
+      </div>
+      <div className="review-footer">
+        <div>
+          Helpful? <a>Yes</a> {`(${review.helpfulness})`}
+        </div>
+        <div>
+          <a>Report</a>
         </div>
       </div>
     </section>

@@ -13,14 +13,25 @@ class Overview extends React.Component {
     this.state = {
       selectedStyle: null
     };
+
+    this.clickedStyleHandler = this.clickedStyleHandler.bind(this);
   }
 
   componentDidMount() {}
 
+  clickedStyleHandler(e) {
+    this.setState({
+      selectedStyle: e.target.id
+    });
+  }
+
   render () {
     return (
       <div>
-        <ImageGallery product={this.props.product}/>
+        <ImageGallery
+          product={this.props.product}
+          selectedStyle={this.state.selectedStyle}
+        />
         <ProductInformation
           product={this.props.product}
           reviewMetaData={this.props.reviewMetaData}
@@ -28,6 +39,8 @@ class Overview extends React.Component {
         />
         <StyleSelector
           product={this.props.product}
+          selectedStyle={this.state.selectedStyle}
+          clickedStyleHandler={this.clickedStyleHandler}
         />
         <AddToCart
           product={this.props.product}

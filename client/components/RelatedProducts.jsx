@@ -15,36 +15,34 @@ class RelatedProducts extends React.Component {
 
   componentDidMount() {
     console.log('RELATED PRODUCTS COMPONENT MOUNTED!');
-    axios.get('/api/fec2/hrnyc/products/11001/related')
-    .then(results=>{
-      return results.data.map(relatedId=>{
-        return axios.get(`/api/fec2/hrnyc/products/${relatedId}/styles`);
-      });
-    })
-    .then(results=>{
-      Promise.all(results)
-      .then(results=>{
-        return results.map((res)=>{
-          return res.data;
-        });
-      })
-      .then(results=>{
-        this.setState({relatedProducts: results});
-      })
-      .catch(err=>{ console.log('Promise.all error'); });
-    })
-    .catch(err=>{
-      console.log('Related Products Error');
-    });
+    // axios.get('/api/fec2/hrnyc/products/11001/related')
+    // .then(results=>{
+    //   return results.data.map(relatedId=>{
+    //     return axios.get(`/api/fec2/hrnyc/products/${relatedId}/styles`);
+    //   });
+    // })
+    // .then(results=>{
+    //   Promise.all(results)
+    //   .then(results=>{
+    //     return results.map((res)=>{
+    //       return res.data;
+    //     });
+    //   })
+    //   .then(results=>{
+    //     this.setState({relatedProducts: results});
+    //   })
+    //   .catch(err=>{ console.log('Promise.all error'); });
+    // })
+    // .catch(err=>{
+    //   console.log('Related Products Error');
+    // });
   }
 
   render () {
     return (
       <div>
         <strong>RELATED PRODUCTS</strong>
-        <RelatedCarousel
-        relatedProducts={this.state.relatedProducts}
-        />
+        <RelatedCarousel/>
         <Outfit
         yourOutfit={this.props.yourOutfit}
         addToOutfit={this.props.addToOutfit}

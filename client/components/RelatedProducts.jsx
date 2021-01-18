@@ -8,9 +8,7 @@ class RelatedProducts extends React.Component {
     this.state = {};
   }
 
-  componentDidMount() {
-    console.log('RELATED PRODUCTS COMPONENT MOUNTED!');
-  }
+  componentDidMount() {}
 
   render () {
     return (

@@ -19,7 +19,7 @@ class RelatedCarousel extends React.Component {
     this.state = {
       selected: selected
     };
-    this.productItems = ProductList(this.props.relatedProducts, selected);
+    this.productItems = ProductList(this.props.relatedProducts, this.state.selected);
     this.onSelect = this.onSelect.bind(this);
   }
 
@@ -38,6 +38,11 @@ class RelatedCarousel extends React.Component {
           arrowRight={ArrowRight}
           selected={selected}
           onSelect={this.onSelect}
+          alignCenter={false}
+          wheel={false}
+          hideArrows={true}
+          arrowDisabledClass='scroll-menu-arrow--disabled'
+          hideSingleArrow={true}
         />
       </div>
     );

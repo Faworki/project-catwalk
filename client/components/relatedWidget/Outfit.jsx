@@ -33,7 +33,7 @@ class Outfit extends React.Component {
     // Typical usage (don't forget to compare props):
     if (this.state.outfit !== prevProps.yourOutfit) {
       console.log('inside componentDidUpdate');
-      this.productItems = Menu(this.props.yourOutfit, selected);
+      this.productItems = ProductList(this.props.yourOutfit, this.state.selected);
     }
   }
 
@@ -49,6 +49,11 @@ class Outfit extends React.Component {
           arrowRight={ArrowRight}
           selected={selected}
           onSelect={this.onSelect}
+          alignCenter={false}
+          wheel={false}
+          hideArrows={true}
+          arrowDisabledClass='scroll-menu-arrow--disabled'
+          hideSingleArrow={true}
         />
       </div>
     );

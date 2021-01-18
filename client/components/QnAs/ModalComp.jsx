@@ -6,6 +6,17 @@ import QAList from './QAList';
 
 Modal.setAppElement(document.getElementById('app'));
 
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    transform             : 'translate(-50%, -50%)'
+  }
+};
+
 class ModalComp extends React.Component {
   constructor(props) {
     super(props);
@@ -87,6 +98,7 @@ class ModalComp extends React.Component {
     return (
       <div>
           <Modal
+           style={customStyles}
            isOpen={this.props.isOpen}
            contentLabel="Minimal Modal Example"
           >

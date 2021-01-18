@@ -71,7 +71,8 @@ class ModalComp extends React.Component {
       reqUrl = `http://localhost:3000/api/fec2/hrnyc/qa/questions/${this.props.question_id}/answers`;
       delete reqParams['product_id'];
     }
-    axios.post(reqUrl, {
+    axios
+      .post(reqUrl, {
         params: reqParams,
       })
       .then(() => {
@@ -106,14 +107,13 @@ class ModalComp extends React.Component {
   testForm(e) {
     //set a fields object with current state values
     var fieldsObj = {
-      'Question': this.state.formBody,
-      'Nickname': this.state.formNickname,
-      'Email': this.state.formEmail,
+      Question: this.state.formBody,
+      Nickname: this.state.formNickname,
+      Email: this.state.formEmail,
     };
     if (!this.props.question) {
       delete fieldsObj['Question'];
       fieldsObj['Answer'] = this.state.formBody;
-      // emptyFields.splice(0, 1, 'Answer');
     }
     //empty array, to capture the names of empty fields
     var emptyFields = [];

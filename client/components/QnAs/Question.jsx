@@ -16,7 +16,7 @@ class Question extends React.Component {
 
   componentDidMount() {
     if (this.props.answers.length > 0) {
-      var sortedAnswers = this.props.answers.sort(function(a, b) {
+      var sortedAnswers = this.props.answers.sort(function (a, b) {
         return b.helpfulness - a.helpfulness;
       });
       this.setState({
@@ -54,8 +54,7 @@ class Question extends React.Component {
         return (
           <div key={answer.id}>
             <h4>
-              A
-              <div>{answer.body}</div>
+              A<div>{answer.body}</div>
             </h4>
             <div>
               by {answer.answerer_name}, {answer.date.substring(0, 10)}
@@ -76,8 +75,8 @@ class Question extends React.Component {
     return (
       <div>
         <h4>
-          Q
-          <div>{this.props.question.question_body}</div></h4>
+          Q<div>{this.props.question.question_body}</div>
+        </h4>
         {answersArr}
         <br></br>
         <div>
@@ -88,12 +87,12 @@ class Question extends React.Component {
         <div>
           {/* //controls the answer instances of helpfulReport*/}
           <HelpfulReport
-              id={this.props.id}
-              helpVotes={this.props.question.question_helpfulness}
-              answerUsage={false}
-              question_body={this.props.question.question_body}
-              question_id={this.props.question.question_id}
-              prodName={this.props.prodName}
+            id={this.props.id}
+            helpVotes={this.props.question.question_helpfulness}
+            answerUsage={false}
+            question_body={this.props.question.question_body}
+            question_id={this.props.question.question_id}
+            prodName={this.props.prodName}
           />
         </div>
       </div>

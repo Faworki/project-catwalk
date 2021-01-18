@@ -19,9 +19,14 @@ class RelatedCarousel extends React.Component {
     super(props);
     this.state = {
       selected: selected,
-      relatedProducts: []
+      relatedIds: [],
+      relatedProducts: [],
+      relatedImages: []
     };
-    this.productItems = ProductList(this.state.relatedProducts, this.state.selected);
+    this.productItems = ProductList({
+      products: this.state.relatedProducts,
+      images: this.state.relatedImages},
+      this.state.selected);
     this.onSelect = this.onSelect.bind(this);
   }
 
@@ -29,15 +34,10 @@ class RelatedCarousel extends React.Component {
     this.setState({ selected: key });
   }
 
-// componentDidUpdate(prevProps) {
-//   if (this.props.relatedProducts !== prevProps.relatedProducts) {
-//     this.productItems = ProductList(this.props.relatedProducts, this.state.selected);
-//   }
-// }
-
-  componentDidMount() {
+  getRelatedProduct() {
     axios.get('/api/fec2/hrnyc/products/11001/related')
     .then(results=>{
+      this.setState({relatedIds: results.data});
       return results.data.map(relatedId=>{
         return axios.get(`/api/fec2/hrnyc/products/${relatedId}`);
       });
@@ -54,19 +54,58 @@ class RelatedCarousel extends React.Component {
         return results;
       })
       .then(results=>{
-        this.productItems = ProductList(this.state.relatedProducts, this.state.selected);
-        console.log('this.productItems:', this.productItems)
+        this.productItems = ProductList({
+          products: this.state.relatedProducts,
+          images: this.state.relatedImages},
+          this.state.selected);
+        console.log('this.productItems:', this.productItems);
       })
-      .catch(err=>{ console.log('Promise.all error'); });
+      .catch(err=>{ console.log('getRelatedProduct Promise.all error'); });
     })
     .catch(err=>{
-      console.log('componentDidMount Error');
+      console.log('getRelatedProduct Error');
     });
+  }
+
+  getRelatedImages() {
+    let imagesArray = this.state.relatedIds.map(relatedId=>{
+      console.log('relatedId:', relatedId);
+        return axios.get(`/api/fec2/hrnyc/products/${relatedId}/styles`);
+      });
+
+      Promise.all(imagesArray)
+      .then(results=>{
+        return results.map((res)=>{
+          return res.data.results[0].photos[0].thumbnail_url;
+        });
+      })
+      .then(results=>{
+        this.setState({relatedImages: results});
+      })
+      .catch(err=>{
+        console.log('getRelatedImages Promise.all error');
+      });
+      console.log('imagesArray:', this.state.relatedIds);
+  }
+
+  componentDidMount() {
+    this.getRelatedProduct();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.product.id !== prevProps.product.id) {
+      this.getRelatedImages();
+    }
+    this.productItems = ProductList({
+      products: this.state.relatedProducts,
+      images: this.state.relatedImages},
+      this.state.selected);
   }
 
   render() {
     return (
       <div>
+        Related Products Carousel
         <ScrollMenu
           data={this.productItems}
           arrowLeft={ArrowLeft}

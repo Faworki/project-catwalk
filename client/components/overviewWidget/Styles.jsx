@@ -12,57 +12,14 @@ class Styles extends React.Component {
 
   render () {
     return (
-      <div>
+      <span>
         <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
+          src={this.props.thumbnail}
+          alt="Thumbnail"
+          width="60"
           height="90"
         />{' '}
-        <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
-          height="90"
-        />{' '}
-        <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
-          height="90"
-        />{' '}
-        <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
-          height="90"
-        />
-        <br />
-        <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
-          height="90"
-        />{' '}
-        <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
-          height="90"
-        />{' '}
-        <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
-          height="90"
-        />{' '}
-        <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
-          height="90"
-        />
-      </div>
+      </span>
     );
   }
 }

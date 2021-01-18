@@ -10,7 +10,9 @@ class Overview extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      selectedStyle: null
+    };
   }
 
   componentDidMount() {}
@@ -18,11 +20,21 @@ class Overview extends React.Component {
   render () {
     return (
       <div>
-        <ImageGallery />
-        <ProductInformation />
-        <StyleSelector />
-        <AddToCart />
-        <ProductOverview />
+        <ImageGallery product={this.props.product}/>
+        <ProductInformation
+          product={this.props.product}
+          reviewMetaData={this.props.reviewMetaData}
+          reviewAverage={this.props.reviewAverage}
+        />
+        <StyleSelector
+          product={this.props.product}
+        />
+        <AddToCart
+          product={this.props.product}
+        />
+        <ProductOverview
+          product={this.props.product}
+        />
       </div>
     );
   }

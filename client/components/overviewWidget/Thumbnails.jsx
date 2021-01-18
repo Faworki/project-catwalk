@@ -5,47 +5,33 @@ class Thumbnails extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      productId: null,
+      thumbnails: []
+    };
   }
 
   componentDidMount() {}
 
-  componentDidUpdate(prevProps) {}
+  componentDidUpdate(prevProps) {
+    if (this.props.productId !== prevProps.productId) {
+      this.setState({
+        productId: this.props.productId,
+        thumbnails: this.props.thumbnails
+      });
+    }
+  }
 
   render () {
     return (
-      <div>
+      <span>
         <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
+          src={this.props.thumbnail}
+          alt="Thumbnail"
+          width="60"
           height="90"
-        />{' '}
-        <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
-          height="90"
-        />{' '}
-        <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
-          height="90"
-        />{' '}
-        <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
-          height="90"
-        />{' '}
-        <img
-          src='https://www.newsmax.com/CMSPages/GetFile.aspx?guid=7b87c9cf-647e-4092-961d-282cddd1a205&SiteName=Newsmax&maxsidesize=600'
-          alt="Description"
-          width="90"
-          height="90"
-        /><br />
-      </div>
+        />
+      </span>
     );
   }
 }

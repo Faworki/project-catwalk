@@ -13,9 +13,12 @@ class HelpfulReport extends React.Component {
       helpfulClicked: false,
       reportText: 'Report',
       helpVotes: this.props.helpVotes,
+      showModal: false
     };
     this.report = this.report.bind(this);
     this.clickHelpful = this.clickHelpful.bind(this);
+    this.addAnswer = this.addAnswer.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
 
@@ -47,8 +50,15 @@ class HelpfulReport extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-
     }
+  }
+  addAnswer() {
+    console.log('addAnswer');
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal () {
+    this.setState({ showModal: false });
   }
 
   render() {
@@ -61,7 +71,7 @@ class HelpfulReport extends React.Component {
           {!this.props.answerUsage &&
             <div>
               <a
-                onClick={this.report}
+                onClick={this.addAnswer}
                 >Add Answer
               </a>
               <div>

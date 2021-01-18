@@ -4,6 +4,8 @@ import Modal from 'react-modal';
 import SearchQs from './SearchQs';
 import QAList from './QAList';
 
+// Modal.setAppElement('#app')
+Modal.setAppElement(document.getElementById('app'));
 
 class ModalComp extends React.Component {
   constructor(props) {
@@ -24,9 +26,9 @@ class ModalComp extends React.Component {
 
 
   handleQuestionInput(e) {
-    var text = e.target.value;
+    console.log('question input', e.target.value);
     this.setState({
-      newQtext: text
+      newQtext: e.target.value
     });
     e.preventDefault();
   }

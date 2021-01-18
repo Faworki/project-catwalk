@@ -64,14 +64,12 @@ class App extends React.Component {
         <div>HEADER FOR OUR WEBSITE</div><br />
         <Overview
           product={this.state.product}
-          reviewData={this.state.reviewData}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
         /><br />
         <RelatedProducts
           product={this.state.product}
-          reviewData={this.state.reviewData}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
@@ -81,7 +79,6 @@ class App extends React.Component {
         /><br />
         <RatingsAndReviews
           product={this.state.product}
-          reviewData={this.state.reviewData}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}

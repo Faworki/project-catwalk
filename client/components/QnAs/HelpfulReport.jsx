@@ -62,6 +62,9 @@ class HelpfulReport extends React.Component {
   }
 
   render() {
+    // if (this.props.answerUsage) {
+    //   console.log('HR this.props.prodName', this.props.prodName);
+    // }
     return (
       <div>
         <div>
@@ -79,6 +82,9 @@ class HelpfulReport extends React.Component {
                   isOpen={this.state.showModal}
                   handleCloseModal={this.handleCloseModal}
                   id={this.props.id}
+                  question={false}
+                  prodName={this.props.prodName}
+                  question_body={this.props.question_body}
                 />
               </div>
             </div>

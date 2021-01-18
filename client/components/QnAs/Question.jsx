@@ -60,10 +60,13 @@ class Question extends React.Component {
             <div>
               by {answer.answerer_name}, {answer.date.substring(0, 10)}
             </div>
+            {/* //controls the question instances of helpfulReport*/}
             <HelpfulReport
               id={this.props.id}
               helpVotes={answer.helpfulness}
               answerUsage={true}
+              question_body={this.props.question_body}
+              prodName={this.props.prodName}
             />
           </div>
         );
@@ -83,10 +86,13 @@ class Question extends React.Component {
           ) : null}
         </div>
         <div>
+          {/* //controls the answer instances of helpfulReport*/}
           <HelpfulReport
               id={this.props.id}
               helpVotes={this.props.question.question_helpfulness}
               answerUsage={false}
+              question_body={this.props.question.question_body}
+              prodName={this.props.prodName}
           />
         </div>
       </div>

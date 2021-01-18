@@ -42,6 +42,7 @@ class QAList extends React.Component {
             <Question
               id={this.props.id}
               question={question}
+              prodName={this.props.prodName}
               answers={Object.values(question.answers)}
             />
           </div>

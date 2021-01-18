@@ -4,7 +4,6 @@ import Modal from 'react-modal';
 import SearchQs from './SearchQs';
 import QAList from './QAList';
 
-// Modal.setAppElement('#app')
 Modal.setAppElement(document.getElementById('app'));
 
 class ModalComp extends React.Component {
@@ -83,18 +82,70 @@ class ModalComp extends React.Component {
   }
 
   render() {
+    console.log('prod name', this.props.prodName);
+    console.log('questionbody', this.props.question_body);
     return (
       <div>
           <Modal
            isOpen={this.props.isOpen}
            contentLabel="Minimal Modal Example"
           >
-            <button onClick={this.props.handleCloseModal}>Close Modal</button>
-            <input type="text" onChange={this.handleQuestionInput} placeholder='Your Question' />
-            <input type="text" onChange={this.handleNickmameInput} placeholder='Nickname'/>
-            <input type="text" onChange={this.handleEmailInput} placeholder='email'/>
-            <button onClick={this.submit}>Submit</button>
-
+            {this.props.question &&
+            <div>
+              <h1>
+                Ask Your Question
+              </h1>
+              <h4>
+                About the {this.props.prodName}
+              </h4>
+            </div>}
+            {!this.props.question &&
+            <div>
+              <h1>
+                Submit Your Answer
+              </h1>
+              <h4>
+                {this.props.prodName} : {this.props.question_body}
+              </h4>
+            </div>
+            }
+            <br></br>
+            <div>
+              <div>
+                Your Questions (1000 character limit)
+              </div>
+              <textarea
+                name='message'
+                style={{width: '400px', height: '200px'}}
+                type="text"
+                onChange={this.handleQuestionInput}
+              />
+            </div>
+            <br></br>
+            <div>
+              <div>
+                Your Nickname (60 character limit)
+              </div>
+              <input type="text" onChange={this.handleNickmameInput} placeholder='Example: jackson11!'/>
+              <div>
+                For privacy reasons, do not use your full name or email address
+              </div>
+            </div>
+            <br></br>
+            <div>
+              <div>
+                Your email (60 character limit)
+              </div>
+              <input type="text" onChange={this.handleEmailInput} placeholder='Example: jack@email.com'/>
+              <div>
+                For authentication reasons, you will not be emailed
+              </div>
+            </div>
+            <br></br>
+            <div>
+              <button onClick={this.props.handleCloseModal}>Close Modal</button>
+              <button onClick={this.submit}>Submit</button>
+            </div>
           </Modal>
       </div>
     );

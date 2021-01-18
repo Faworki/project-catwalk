@@ -25,11 +25,6 @@ class QnAs extends React.Component {
     this.updateSearchTerm = this.updateSearchTerm.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
-    // this.handleNickmameInput = this.handleNickmameInput.bind(this);
-    // this.handleQuestionInput = this.handleQuestionInput.bind(this);
-    // this.handleEmailInput = this.handleEmailInput.bind(this);
-    // this.submit = this.submit.bind(this);
-
   }
 
   handleOpenModal () {
@@ -120,6 +115,7 @@ class QnAs extends React.Component {
   }
 
   render() {
+    // console.log('product data', this.props.product);
     return (
       <div>
         <h1>Quesions and Answers</h1>
@@ -127,23 +123,15 @@ class QnAs extends React.Component {
         <QAList
           id={this.props.product.id}
           searchTerm={this.state.searchTerm}
+          prodName={this.props.product.name}
           />
           <ModalComp
             isOpen={this.state.showModal}
             handleCloseModal={this.handleCloseModal}
             id={this.props.product.id}
+            question={true}
+            prodName={this.props.product.name}
           />
-          {/* <Modal
-           isOpen={this.state.showModal}
-           contentLabel="Minimal Modal Example"
-          >
-            <button onClick={this.handleCloseModal}>Close Modal</button>
-            <input type="text" onChange={this.handleQuestionInput} placeholder='Your Question' />
-            <input type="text" onChange={this.handleNickmameInput} placeholder='Nickname'/>
-            <input type="text" onChange={this.handleEmailInput} placeholder='email'/>
-            <button onClick={this.submit}>Submit</button>
-
-          </Modal> */}
         <button>
           MORE ANSWERED QUESTIONS
         </button>

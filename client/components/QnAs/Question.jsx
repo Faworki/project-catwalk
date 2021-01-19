@@ -5,11 +5,10 @@ class Question extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      question: this.props.question,
-      answers: this.props.answers,
       visible: [],
+      allAnswers: [],
       loadMoreLess: 'LOAD MORE ANSWERS',
-      less: true,
+      less: true
     };
     this.toggleMoreFewer = this.toggleMoreFewer.bind(this);
   }
@@ -21,6 +20,7 @@ class Question extends React.Component {
       });
       this.setState({
         visible: this.props.answers.slice(0, 2),
+        allAnswers: this.props.answers
       });
     }
   }
@@ -33,13 +33,13 @@ class Question extends React.Component {
   toggleMoreFewer() {
     if (this.state.less) {
       this.setState({
-        visible: this.state.answers,
+        visible: this.props.answers,
         loadMoreLess: 'SHOW FEWER',
         less: false,
       });
     } else {
       this.setState({
-        visible: this.state.answers.slice(0, 2),
+        visible: this.props.answers.slice(0, 2),
         loadMoreLess: 'LOAD MORE ANSWERS',
         less: true,
       });
@@ -71,7 +71,7 @@ class Question extends React.Component {
         );
       }
     });
-    // var messagesShownController =
+
     return (
       <div>
         <h4>
@@ -80,7 +80,7 @@ class Question extends React.Component {
         {answersArr}
         <br></br>
         <div>
-          {this.state.answers.length > 2 ? (
+          {this.props.answers.length > 2 ? (
             <a onClick={this.toggleMoreFewer}>{this.state.loadMoreLess}</a>
           ) : null}
         </div>

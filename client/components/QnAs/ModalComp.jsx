@@ -59,7 +59,7 @@ class ModalComp extends React.Component {
 
   submit() {
     //default to post a QUESTION
-    var reqUrl = 'http://localhost:3000/api/fec2/hrnyc/qa/questions';
+    var reqUrl = '/api/fec2/hrnyc/qa/questions';
     var reqParams = {
       'body': this.state.formBody,
       'name': this.state.formNickname,
@@ -68,7 +68,7 @@ class ModalComp extends React.Component {
     };
     //unless were posting an answer
     if (!this.props.question) {
-      reqUrl = `http://localhost:3000/api/fec2/hrnyc/qa/questions/${this.props.question_id}/answers`;
+      reqUrl = `/api/fec2/hrnyc/qa/questions/${this.props.question_id}/answers`;
       delete reqParams['product_id'];
     }
     axios
@@ -141,56 +141,58 @@ class ModalComp extends React.Component {
           isOpen={this.props.isOpen}
           contentLabel='Minimal Modal Example'
         >
-          {this.props.question ? (
-            <div>
+          <label>
+            {this.props.question ? (
               <div>
-                <h1>Ask Your Question</h1>
-                <h4>About the {this.props.prodName}</h4>
+                <div>
+                  <h1>Ask Your Question</h1>
+                  <h4>About the {this.props.prodName}</h4>
+                </div>
+                <br></br>
+                <div>
+                  <label>* Your Question (Mandatory)</label>
+                </div>
               </div>
-              <br></br>
+            ) : (
               <div>
-                <div>* Your Question (Mandatory)</div>
+                <div>
+                  <h1>Submit Your Answer</h1>
+                  <h4>
+                    {this.props.prodName} : {this.props.question_body}
+                  </h4>
+                </div>
+                <br></br>
+                <div>
+                  <label>* Your Answer (Mandatory)</label>
+                </div>
+              </div>
+            )}
+            <div>
+              <textarea
+                name='message'
+                style={{ width: '400px', height: '200px' }}
+                type='text'
+                onChange={this.handleQuestionInput}
+                maxLength='1000'
+              />
+            </div>
+            <br></br>
+            <div>
+              <label>* What is your nickname (Mandatory)</label>
+              <input
+                type='text'
+                onChange={this.handleNickmameInput}
+                placeholder='Example: jackson11!'
+                maxLength='60'
+              />
+              <div>
+                For privacy reasons, do not use your full name or email address
               </div>
             </div>
-          ) : (
-            <div>
-              <div>
-                <h1>Submit Your Answer</h1>
-                <h4>
-                  {this.props.prodName} : {this.props.question_body}
-                </h4>
-              </div>
-              <br></br>
-              <div>
-                <div>* Your Answer (Mandatory)</div>
-              </div>
-            </div>
-          )}
-          <div>
-            <textarea
-              name='message'
-              style={{ width: '400px', height: '200px' }}
-              type='text'
-              onChange={this.handleQuestionInput}
-              maxLength='1000'
-            />
-          </div>
+          </label>
           <br></br>
           <div>
-            <div>* What is your nickname (Mandatory)</div>
-            <input
-              type='text'
-              onChange={this.handleNickmameInput}
-              placeholder='Example: jackson11!'
-              maxLength='60'
-            />
-            <div>
-              For privacy reasons, do not use your full name or email address
-            </div>
-          </div>
-          <br></br>
-          <div>
-            <div>* Your email (Mandatory)</div>
+            <label>* Your email (Mandatory)</label>
             <input
               type='text'
               onChange={this.handleEmailInput}

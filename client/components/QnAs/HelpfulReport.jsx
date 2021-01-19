@@ -10,7 +10,7 @@ class HelpfulReport extends React.Component {
       reported: false,
       helpfulClicked: false,
       reportText: 'Report',
-      helpVotes: this.props.helpVotes,
+      helpVotes: 0,
       showModal: false,
     };
     this.report = this.report.bind(this);
@@ -27,7 +27,7 @@ class HelpfulReport extends React.Component {
       });
       axios
         .put(
-          `http://localhost:3000/api/fec2/hrnyc/qa/questions/${this.props.id}/report`
+          `/api/fec2/hrnyc/qa/questions/${this.props.id}/report`
         )
         .then(function (response) {})
         .catch(function (error) {
@@ -35,15 +35,16 @@ class HelpfulReport extends React.Component {
         });
     }
   }
+
   clickHelpful() {
     if (!this.state.helpfulClicked) {
       this.setState({
-        helpVotes: this.state.helpVotes + 1,
+        helpVotes: this.props.helpVotes + 1,
         helpfulClicked: true,
       });
       axios
         .put(
-          `http://localhost:3000/api/fec2/hrnyc/qa/questions/${this.props.id}/helpful`
+          `/api/fec2/hrnyc/qa/questions/${this.props.id}/helpful`
         )
         .then(function (response) {})
         .catch(function (error) {
@@ -57,6 +58,11 @@ class HelpfulReport extends React.Component {
 
   handleCloseModal() {
     this.setState({ showModal: false });
+  }
+  componentDidMount() {
+    this.setState({
+      helpVotes: this.props.helpVotes
+    });
   }
 
   render() {

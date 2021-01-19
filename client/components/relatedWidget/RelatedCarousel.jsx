@@ -96,9 +96,9 @@ class RelatedCarousel extends React.Component {
     // console.log('componentDidUpdate');
     // console.log('state:', this.state);
     if (this.props.product.id !== prevProps.product.id) {
-      this.getRelatedProduct(this.props.product.id);
+      // this.getRelatedProduct(this.props.product.id);
+      this.buildCarousel();
     }
-    this.buildCarousel();
   }
 
   render() {

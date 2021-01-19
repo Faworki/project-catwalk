@@ -37,3 +37,24 @@ body h1 {
 .scroll-menu-arrow--disabled {
   visibility: hidden;
 }
+
+.char-scale {
+  display: flex;
+  flex-flow: column nowrap;
+}
+
+.scale {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scale-bar {
+  background-color: #bfbdbd;
+  flex: 0 1 24.5%;
+  height: 8px;
+}
+
+.pointer {
+  position: absolute;
+  left: 50%;
+}

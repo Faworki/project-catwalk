@@ -1,0 +1,26 @@
+.review-bar {
+  display: flex;
+  padding: 5px;
+}
+
+.review-bar:hover {
+  cursor: pointer;
+}
+
+.star-bar-filled {
+  background-color: #467c46;
+  box-shadow: 2px 0px 2px -1px rgba(0, 0, 0, 0.399);
+  height: 100%;
+}
+
+.star-bar {
+  align-self: center;
+  background-color: #bfbdbd;
+  flex-grow: 1;
+  margin-left: 5px;
+  height:10px;
+}
+
+.review-bar span {
+  text-decoration: underline;
+}

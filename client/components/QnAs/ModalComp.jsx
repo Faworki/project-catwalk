@@ -4,7 +4,6 @@ import Modal from 'react-modal';
 import SearchQs from './SearchQs';
 import QAList from './QAList';
 
-// Modal.setAppElement(document.getElementById('app'));
 Modal.setAppElement('#app');
 
 const customStyles = {

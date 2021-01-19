@@ -19,7 +19,10 @@ class RelatedProducts extends React.Component {
     return (
       <div>
         <strong>RELATED PRODUCTS WIDGET</strong>
-        <RelatedCarousel product={this.props.product}/>
+        <RelatedCarousel
+        product={this.props.product}
+        getNewProduct={this.props.getNewProduct}
+        />
         {/* <Outfit
         yourOutfit={this.props.yourOutfit}
         addToOutfit={this.props.addToOutfit}

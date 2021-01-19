@@ -28,7 +28,8 @@ class RelatedCarousel extends React.Component {
         products: this.state.relatedProducts,
         images: this.state.relatedImages
       },
-      this.state.selected);
+      this.state.selected,
+      this.props.getNewProduct);
     this.onSelect = this.onSelect.bind(this);
   }
 
@@ -36,8 +37,8 @@ class RelatedCarousel extends React.Component {
     this.setState({ selected: key });
   }
 
-  getRelatedProduct() {
-    axios.get('/api/fec2/hrnyc/products/11001/related')
+  getRelatedProduct(productId) {
+    axios.get(`/api/fec2/hrnyc/products/${productId}/related`)
     .then(results=>{
       this.setState({relatedIds: results.data});
       let products = results.data.map(relatedId=>{
@@ -80,22 +81,24 @@ class RelatedCarousel extends React.Component {
         products: this.state.relatedProducts,
         images: this.state.relatedImages
       },
-      this.state.selected);
+      this.state.selected,
+      this.props.getNewProduct);
       // console.log('inside buildCarousel');
   }
 
   componentDidMount() {
     // console.log('componentDidMount');
-    this.getRelatedProduct();
+    // console.log(this.props.product)
     this.buildCarousel();
   }
 
-  componentDidUpdate(prevState) {
+  componentDidUpdate(prevProps) {
     // console.log('componentDidUpdate');
     // console.log('state:', this.state);
-    if (this.state.relatedImages !== prevState.relatedImages) {
-      this.buildCarousel();
+    if (this.props.product.id !== prevProps.product.id) {
+      this.getRelatedProduct(this.props.product.id);
     }
+    this.buildCarousel();
   }
 
   render() {

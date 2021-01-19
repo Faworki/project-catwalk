@@ -1,10 +1,3 @@
-body h1 {
-  color: #2ef8f8;
-  background-color: #b86d30;
-  border: 4px solid black;
-  font-style: italic;
-}
-
 .menu-item {
   height: 450px;
   width: 250px;
@@ -14,6 +7,12 @@ body h1 {
   cursor: pointer;
   border: 5px black solid;
 }
+// .menu-item-wrapper.active {
+//   border: 1px blue solid;
+// }
+// .menu-item.active {
+//   border: 1px green solid;
+// }
 
 .scroll-menu-arrow {
   padding: 20px;

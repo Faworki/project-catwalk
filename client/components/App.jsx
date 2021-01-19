@@ -30,6 +30,7 @@ class App extends React.Component {
       yourOutfit: []
     };
     this.getNewProduct = this.getNewProduct.bind(this);
+    this.addToOutfit = this.addToOutfit.bind(this);
   }
 
   getNewProduct(productId) {
@@ -73,22 +74,31 @@ class App extends React.Component {
     }, 0);
   }
 
+  addToOutfit() {
+    let outfitArray = this.state.yourOutfit;
+    outfitArray.push(this.state.product);
+    this.setState({yourOutfit: outfitArray});
+  }
+
   render () {
     return (
       <div>
-        <div>HEADER FOR OUR WEBSITE</div><br />
+        <div>HEADER FOR OUR WEBSITE</div>
+        <br />
         <Overview
           product={this.state.product}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
-        /><br />
+        />
+        <br />
         <RelatedProducts
           product={this.state.product}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
           getNewProduct={this.getNewProduct}
+          addToOutfit={this.addToOutfit}
         /><br />
         <QnAs
           product={this.state.product}

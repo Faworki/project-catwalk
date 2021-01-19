@@ -76,7 +76,7 @@ class RelatedCarousel extends React.Component {
   }
 
   buildCarousel() {
-    this.productItems = ProductList(
+    this.productItems = new ProductList(
       {
         products: this.state.relatedProducts,
         images: this.state.relatedImages

@@ -1,17 +1,9 @@
 import React from 'react';
+import StarAverage from '../shared/StarAverage.jsx';
 
 class ProductListItem extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      display: false
-    };
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.image !== prevProps.image) {
-      this.setState({display: true});
-    }
   }
 
   render () {
@@ -19,8 +11,11 @@ class ProductListItem extends React.Component {
     return (<div
       className={`menu-item ${this.props.selected ? 'active' : ''}`}
       >
-        {this.props.text.name}
-        <img src={this.props.image} width='300' height='300'/>
+        <h4>{this.props.text.category}</h4>
+        <h4>{this.props.text.name}</h4>
+        <img src={this.props.image} width='200' height='250'/>
+        <h4>{this.props.text.default_price}</h4>
+        <StarAverage/>
       </div>);
   }
 }

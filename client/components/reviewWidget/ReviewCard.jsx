@@ -1,36 +1,60 @@
 import React from 'react';
 import StarAverage from '../shared/StarAverage.jsx';
 
-const ReviewCard = () => {
+const ReviewCard = ({ review, index }) => {
+  // Conditionally render a response if present
+  let response = null;
+  if (review.response) {
+    response = (
+      <div className="review-response">
+        <h6>Response:</h6>
+        <p>{review.response}</p>
+      </div>
+    );
+  }
+
+  let dateString = new Date(Date.parse(review.date)).toDateString();
+
   return (
     <section className="review-card">
       <div className="review-header">
-        <StarAverage />
-        <p>Username, January 1, 2019</p>
+        <StarAverage reviewAverage={review.rating} />
+        <p>{`${review.reviewer_name}, ${dateString}`}</p>
       </div>
       <div className="review-summary">
-        <h5>This is the review summary</h5>
+        <h5>{review.summary}</h5>
       </div>
       <div className="review-body">
-        <p>This is the review text</p>
+        <p>{review.body}</p>
         <div className="review-images">
-          Review Images
+          {review.photos.map((photo) => {
+            return (
+              <img
+                src={photo.url}
+                alt="Reviewer product image"
+                key={photo.id}
+                height="100px"
+              />
+            );
+          })}
         </div>
-        <div className="review-recommended">
-          I recommended this product
+        {review.recommend ? ReviewCard.recommended : null}
+        {response}
+      </div>
+      <div className="review-footer">
+        <div>
+          Helpful? <a>Yes</a> {`(${review.helpfulness})`}
         </div>
-        <div className="review-response">
-          <h6>Response:</h6>
-          <p>So glad that you loved our product! Come again and tell all your friends</p>
-        </div>
-        <div className="review-footer">
-          <div>Helpful?</div>
-          <div>Report</div>
+        <div>
+          <a>Report</a>
         </div>
       </div>
-
     </section>
   );
 };
+
+ReviewCard.recommended = (
+  <p className="review-recommended">&#10003; I recommended this product</p>
+);
 
 export default ReviewCard;

@@ -52,27 +52,15 @@ class RelatedCarousel extends React.Component {
       };
     })
     .then(results=>{
-      console.log('unresolved results:', results);
-      // let resolvedProducts = Promise.all(results.products)
-      //   .then(results=>{
-      //     return results.map((res)=>{
-      //       return res.data;
-      //       });
-      //       });
-      //   let resolvedImages = Promise.all(results.images)
-      //   .then(results=>{
-      //     return results.map((res)=>{
-      //       return res.data.results[0].photos[0].thumbnail_url;
-      //     });
-      //   });
+      // console.log('unresolved results:', results);
           Promise.all(results.products)
           .then(results=>{
             return results.map((res)=>{
               return res.data;
-              });
-              })
-              .then(results=>{ this.setState({relatedProducts: results}); })
-              .catch(err=>{ console.log(err); });
+            });
+          })
+          .then(results=>{ this.setState({relatedProducts: results}); })
+          .catch(err=>{ console.log(err); });
 
           Promise.all(results.images)
           .then(results=>{
@@ -80,47 +68,11 @@ class RelatedCarousel extends React.Component {
               return res.data.results[0].photos[0].thumbnail_url;
             });
           })
-          .then(results=>{ this.setState({relatedImages: results}); });
-        })
-        .catch(err=>{ console.log(err); });
-    // .then(results=>{
-    //   console.log('resolved results:', results);
-    //   return {
-    //   products: Promise.resolve(results.products),
-    //   images: Promise.resolve(results.images)
-    //   }
-    // })
-    // .then(results=>{
-    //   console.log('resolved results again:', results);
-    //   this.productItems = ProductList(results, this.state.selected);
-    //   console.log('bundled state:', results);
-    //   console.log('this.productItems:', this.productItems);
-    // })
-    // .catch(err=>{
-    //   console.log('getRelatedProduct Promise.all error');
-    // });
+          .then(results=>{ this.setState({relatedImages: results}); })
+          .catch(err=>{ console.log(err); });
+    })
+    .catch(err=>{ console.log(err); });
   }
-
-  // getRelatedImages() {
-  //   let imagesArray = this.state.relatedIds.map(relatedId=>{
-  //     console.log('relatedId:', relatedId);
-  //       return axios.get(`/api/fec2/hrnyc/products/${relatedId}/styles`);
-  //     });
-
-  //     Promise.all(imagesArray)
-  //     .then(results=>{
-  //       return results.map((res)=>{
-  //         return res.data.results[0].photos[0].thumbnail_url;
-  //       });
-  //     })
-  //     .then(results=>{
-  //       this.setState({relatedImages: results});
-  //     })
-  //     .catch(err=>{
-  //       console.log('getRelatedImages Promise.all error');
-  //     });
-  //     console.log('imagesArray:', this.state.relatedIds);
-  // }
 
   buildCarousel() {
     this.productItems = ProductList(
@@ -129,25 +81,25 @@ class RelatedCarousel extends React.Component {
         images: this.state.relatedImages
       },
       this.state.selected);
-      console.log('inside buildCarousel');
+      // console.log('inside buildCarousel');
   }
 
   componentDidMount() {
-    console.log('componentDidMount');
+    // console.log('componentDidMount');
     this.getRelatedProduct();
     this.buildCarousel();
   }
 
   componentDidUpdate(prevState) {
-    console.log('componentDidUpdate');
-    console.log(this.state);
+    // console.log('componentDidUpdate');
+    // console.log('state:', this.state);
     if (this.state.relatedImages !== prevState.relatedImages) {
       this.buildCarousel();
     }
   }
 
   render() {
-    console.log('render');
+    // console.log('render');
     return (
       <div>
         Related Products Carousel

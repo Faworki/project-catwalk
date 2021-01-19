@@ -7,7 +7,7 @@ class ProductListItem extends React.Component {
   }
 
   render () {
-    console.log('image:', this.props.image);
+    // console.log('image:', this.props.image);
     return (<div
       className={`menu-item ${this.props.selected ? 'active' : ''}`}
       >

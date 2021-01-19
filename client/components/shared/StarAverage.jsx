@@ -9,7 +9,6 @@ import React from "react";
 
 const StarAverage = ({ reviewAverage }) => {
   let reviewPercent = Math.round(reviewAverage / 25 * 100) * 5 + '%';
-  debugger;
   return (
     <div className="star-container">
       <span className="stars-empty">☆☆☆☆☆</span>

@@ -33,6 +33,7 @@ npm-debug.log
 node_modules
 public/app.js
 server/config.js
+public/styles.css
 
 # Floobits
 .floo

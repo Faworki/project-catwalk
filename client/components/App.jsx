@@ -16,11 +16,11 @@ class App extends React.Component {
         slogan: '',
         description: '',
         category: '',
-        'default_price': '',
+        default_price: '',
         features: [],
       },
       reviewMetaData: {
-        'product_id': null,
+        product_id: null,
         ratings: {},
         recommended: {},
         characteristics: {},
@@ -76,13 +76,15 @@ class App extends React.Component {
   render () {
     return (
       <div>
-        <div>HEADER FOR OUR WEBSITE</div><br />
+        <div>HEADER FOR OUR WEBSITE</div>
+        <br />
         <Overview
           product={this.state.product}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
-        /><br />
+        />
+        <br />
         <RelatedProducts
           product={this.state.product}
           reviewMetaData={this.state.reviewMetaData}

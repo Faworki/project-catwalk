@@ -20,6 +20,9 @@ class QAList extends React.Component {
           questionData: productInfo.data.results,
         });
       })
+      .then(()=>{
+        this.props.getQuestionQuantity(this.state.questionData.length);
+      })
       .catch((err) => console.error(err));
   }
 
@@ -50,7 +53,7 @@ class QAList extends React.Component {
           </div>
         );
       }
-    });
+    }).slice(0, this.props.visibleQsQuant);
 
     return (
       <div>

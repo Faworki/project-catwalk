@@ -11,12 +11,16 @@ class QnAs extends React.Component {
     this.state = {
       searchTerm: '',
       visibleQsQuant: 2,
-      showModal: false
+      allQsQuanity: 2,
+      showModal: false,
+      // visibleQuestions: [],
+      // allQuestions: []
 
     };
     this.updateSearchTerm = this.updateSearchTerm.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.getQuestionQuantity = this.getQuestionQuantity.bind(this);
   }
 
   handleOpenModal () {
@@ -27,15 +31,23 @@ class QnAs extends React.Component {
     this.setState({ showModal: false });
   }
 
+  getQuestionQuantity(value) {
+    this.setState({
+      allQsQuanity: value
+    });
+  }
+
   updateSearchTerm(e) {
 
     if (e.target.value.length > 2) {
       this.setState({
-        searchTerm: e.target.value
+        searchTerm: e.target.value,
+        visibleQsQuant: this.state.allQsQuanity
       });
     } else {
       this.setState({
-        searchTerm: ''
+        searchTerm: '',
+        visibleQsQuant: 2
       });
     }
   }
@@ -50,6 +62,8 @@ class QnAs extends React.Component {
           id={this.props.product.id}
           searchTerm={this.state.searchTerm}
           prodName={this.props.product.name}
+          visibleQsQuant={this.state.visibleQsQuant}
+          getQuestionQuantity={this.getQuestionQuantity}
           />
           <ModalComp
             isOpen={this.state.showModal}

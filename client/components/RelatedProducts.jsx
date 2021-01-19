@@ -23,10 +23,11 @@ class RelatedProducts extends React.Component {
         product={this.props.product}
         getNewProduct={this.props.getNewProduct}
         />
-        {/* <Outfit
+        <Outfit
+        product={this.props.product}
         yourOutfit={this.props.yourOutfit}
         addToOutfit={this.props.addToOutfit}
-        /> */}
+        />
       </div>
     );
   }

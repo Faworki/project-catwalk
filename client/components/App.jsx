@@ -94,10 +94,10 @@ class App extends React.Component {
           product={this.state.product}
         /><br />
         <RatingsAndReviews
-          productId={this.state.product.id}
+          product={this.state.product}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
-          reviewCount={this.state.reviewCount}
+          yourOutfit={this.state.yourOutfit}
         /><br />
       </div>
     );

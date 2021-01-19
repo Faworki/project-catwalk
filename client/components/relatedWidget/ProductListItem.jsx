@@ -3,12 +3,14 @@ import React from 'react';
 class ProductListItem extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      display: false
+    };
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.image !== prevProps.image) {
-      console.log('list item render')
-      this.render();
+      this.setState({display: true});
     }
   }
 
@@ -19,18 +21,8 @@ class ProductListItem extends React.Component {
       >
         {this.props.text.name}
         <img src={this.props.image} width='300' height='300'/>
-      </div>)
+      </div>);
   }
 }
-
-// const ProductListItem = ({text, image, selected}) => {
-//   console.log('image:', image);
-//   return (<div
-//     className={`menu-item ${selected ? 'active' : ''}`}
-//     >
-//       {text.name}
-//       <img src={image}/>
-//     </div>)
-// };
 
 export default ProductListItem;

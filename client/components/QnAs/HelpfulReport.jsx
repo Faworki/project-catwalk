@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import Modal from 'react-modal';
+import ModalComp from './ModalComp';
 
 class HelpfulReport extends React.Component {
   constructor(props) {
@@ -8,10 +10,13 @@ class HelpfulReport extends React.Component {
       reported: false,
       helpfulClicked: false,
       reportText: 'Report',
-      helpVotes: this.props.helpVotes,
+      helpVotes: 0,
+      showModal: false,
     };
     this.report = this.report.bind(this);
     this.clickHelpful = this.clickHelpful.bind(this);
+    this.addAnswer = this.addAnswer.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   report() {
@@ -20,30 +25,44 @@ class HelpfulReport extends React.Component {
         reportText: 'Reported',
         reported: true,
       });
-      axios.put(`http://localhost:3000/api/fec2/hrnyc/qa/questions/${this.props.id}/report`)
-      .then(function (response) {
-        // console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      axios
+        .put(
+          `/api/fec2/hrnyc/qa/questions/${this.props.id}/report`
+        )
+        .then(function (response) {})
+        .catch(function (error) {
+          console.log(error);
+        });
     }
   }
+
   clickHelpful() {
     if (!this.state.helpfulClicked) {
       this.setState({
-        helpVotes: this.state.helpVotes + 1,
+        helpVotes: this.props.helpVotes + 1,
         helpfulClicked: true,
       });
-      axios.put(`http://localhost:3000/api/fec2/hrnyc/qa/questions/${this.props.id}/helpful`)
-      .then(function (response) {
-        // console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-
+      axios
+        .put(
+          `/api/fec2/hrnyc/qa/questions/${this.props.id}/helpful`
+        )
+        .then(function (response) {})
+        .catch(function (error) {
+          console.log(error);
+        });
     }
+  }
+  addAnswer() {
+    this.setState({ showModal: true });
+  }
+
+  handleCloseModal() {
+    this.setState({ showModal: false });
+  }
+  componentDidMount() {
+    this.setState({
+      helpVotes: this.props.helpVotes
+    });
   }
 
   render() {
@@ -52,7 +71,26 @@ class HelpfulReport extends React.Component {
         <div>
           Helpful?
           <a onClick={this.clickHelpful}> | Yes ({this.state.helpVotes}) | </a>
-          <a onClick={this.report}>{this.state.reportText}</a>
+          {this.props.answerUsage && (
+            <a onClick={this.report}>{this.state.reportText}</a>
+          )}
+          {!this.props.answerUsage && (
+            <div>
+              <a onClick={this.addAnswer}>Add Answer</a>
+              <div>
+                {/* this modal is for submitting a new answer */}
+                <ModalComp
+                  isOpen={this.state.showModal}
+                  handleCloseModal={this.handleCloseModal}
+                  id={this.props.id}
+                  question={false}
+                  prodName={this.props.prodName}
+                  question_body={this.props.question_body}
+                  question_id={this.props.question_id}
+                />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     );

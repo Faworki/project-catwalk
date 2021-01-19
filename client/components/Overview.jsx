@@ -59,6 +59,7 @@ class Overview extends React.Component {
         />
         <AddToCart
           product={this.props.product}
+          selectedStyle={this.state.selectedStyle}
         />
         <ProductOverview
           product={this.props.product}

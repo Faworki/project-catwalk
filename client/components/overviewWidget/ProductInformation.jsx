@@ -36,8 +36,6 @@ class ProductInformation extends React.Component {
       });
       const styleOriginalPrice = parseFloat(selectedStyleData[0].original_price);
       const styleSalePrice = parseFloat(selectedStyleData[0].sale_price) || null;
-      console.log('styleOriginalPrice', styleOriginalPrice);
-      console.log('styleSalePrice', styleSalePrice);
       this.setState({
         defaultPrice: styleOriginalPrice,
         salePrice: styleSalePrice
@@ -53,6 +51,11 @@ class ProductInformation extends React.Component {
         <div>{this.props.product.category}</div>
         <div>{this.props.product.name}</div>
         {this.state.salePrice ? <div><span style={{textDecoration: 'line-through'}}>${this.state.defaultPrice}</span><span style={{color: 'red'}}> ${this.state.salePrice}</span></div> : <div>${this.state.defaultPrice}</div>}
+        <div>
+          <button><i className="fab fa-facebook"></i></button>{' '}
+          <button><i className="fab fa-twitter"></i></button>{' '}
+          <button><i className="fab fa-pinterest"></i></button>
+        </div>
       </div>
     );
   }

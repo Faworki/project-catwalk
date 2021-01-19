@@ -1,7 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import Sizes from './Sizes.jsx';
-import Quantities from './Quantities.jsx';
 
 class AddToCart extends React.Component {
   constructor(props) {
@@ -10,12 +8,14 @@ class AddToCart extends React.Component {
     this.state = {
       product: null,
       styles: [],
+      selectedStyle: null,
       sizes: [],
       quantities: []
     };
-  }
 
-  componentDidMount() {}
+    this.clickHandler = this.clickHandler.bind(this);
+    this.addToBagHandler = this.addToBagHandler.bind(this);
+  }
 
   componentDidUpdate(prevProps) {
     if (this.props.product !== prevProps.product) {
@@ -31,6 +31,7 @@ class AddToCart extends React.Component {
           this.setState({
             product: this.props.product,
             styles: data.results,
+            selectedStyle: data.results[0],
             sizes,
             quantities
           });
@@ -39,6 +40,32 @@ class AddToCart extends React.Component {
           console.error(err);
         });
     }
+
+    if (this.props.selectedStyle !== prevProps.selectedStyle) {
+      const newSelectedStyleData = this.state.styles.filter((style) => {
+        return style.style_id === parseInt(this.props.selectedStyle);
+      });
+      let skus = Object.values(newSelectedStyleData[0].skus);
+      let sizes = [];
+      let quantities = [];
+      skus.forEach((sku) => {
+        sizes.push(sku.size);
+        quantities.push(sku.quantity);
+      });
+      this.setState({
+        selectedStyle: newSelectedStyleData[0],
+        sizes,
+        quantities
+      });
+    }
+  }
+
+  clickHandler(e) {
+    console.log('obj.value: ', e.target.value);
+  }
+
+  addToBagHandler() {
+    console.log('Item added to bag!');
   }
 
   render () {
@@ -46,20 +73,19 @@ class AddToCart extends React.Component {
       <div>
         <br />
         <form>
-          <select id="select-size" name="select-size">
+          <select id="select-size" name="select-size" onChange={this.clickHandler}>
             <option value="select-size">SELECT SIZE</option>
             {this.state.sizes.map((size, index) => {
-              return <Sizes key={index} size={size}/>;
+              return <option key={index} value={size}>{size}</option>;
             })}
           </select>{' '}
           <select id="quantity" name="quantity">
             <option value="-"> - </option>
             {this.state.quantities.map((quantity, index) => {
-              return <Quantities key={index} quantity={quantity}/>;
+              return <option key={index} value={quantity}>{quantity}</option>;
             })}
           </select><br /><br />
-          <button type="button">ADD TO BAG &#43;</button>{' '}
-          <button type="button">&#9734;</button>
+          <button type="button" onClick={this.addToBagHandler}>ADD TO BAG &#43;</button>{' '}
         </form><br />
       </div>
     );

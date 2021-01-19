@@ -6,21 +6,13 @@ body h1 {
 }
 
 .menu-item {
-  height: 350px;
-  width: 350px;
+  height: 450px;
+  width: 250px;
   padding: 0 40px;
-  margin: 50px 10px;
+  margin: 10px 10px;
   user-select: none;
   cursor: pointer;
   border: 5px blue solid;
-}
-
-.menu-item-wrapper.active {
-  border: 1px blue solid;
-}
-
-.menu-item.active {
-  border: 1px green solid;
 }
 
 .scroll-menu-arrow {

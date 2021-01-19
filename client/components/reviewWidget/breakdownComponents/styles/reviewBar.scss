@@ -9,17 +9,16 @@
 
 .star-bar-filled {
   background-color: #467c46;
-  border-radius: 9999px;
+  box-shadow: 2px 0px 2px -1px rgba(0, 0, 0, 0.399);
   height: 100%;
 }
 
 .star-bar {
   align-self: center;
   background-color: #bfbdbd;
-  border-radius: 9999px;
   flex-grow: 1;
   margin-left: 5px;
-  height:12px;
+  height:10px;
 }
 
 .review-bar span {

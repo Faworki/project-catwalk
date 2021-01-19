@@ -4,20 +4,33 @@ import ProductInformation from './overviewWidget/ProductInformation.jsx';
 import StyleSelector from './overviewWidget/StyleSelector.jsx';
 import AddToCart from './overviewWidget/AddToCart.jsx';
 import ProductOverview from './overviewWidget/ProductOverview.jsx';
-// import axios from 'axios';
+import axios from 'axios';
 
 class Overview extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      styles: [],
       selectedStyle: null
     };
 
     this.clickedStyleHandler = this.clickedStyleHandler.bind(this);
   }
 
-  componentDidMount() {}
+  componentDidUpdate(prevProps) {
+    if (this.props.product !== prevProps.product) {
+      axios.get(`/api/fec2/hrnyc/products/${this.props.product.id}/styles`)
+        .then(({data}) => {
+          this.setState({
+            styles: data.results
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }
 
   clickedStyleHandler(e) {
     this.setState({
@@ -36,6 +49,8 @@ class Overview extends React.Component {
           product={this.props.product}
           reviewMetaData={this.props.reviewMetaData}
           reviewAverage={this.props.reviewAverage}
+          styles={this.state.styles}
+          selectedStyle={this.state.selectedStyle}
         />
         <StyleSelector
           product={this.props.product}

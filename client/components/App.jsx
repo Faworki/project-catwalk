@@ -65,7 +65,7 @@ class App extends React.Component {
       totalStars += parseInt(rating) * parseInt(ratings[rating]);
       totalVotes += parseInt(ratings[rating]);
     }
-    return (totalStars / totalVotes).toFixed(1);
+    return (totalStars / totalVotes).toFixed(2);
   }
 
   sumReviewCount(ratings) {

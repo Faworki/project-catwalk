@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 /**
  * This component expects a prop called 'reviewAverage'
  * that sould be a number between 0 and 5.
@@ -7,10 +7,14 @@ import React from 'react';
  *     <StarAverage reviewAverage={this.props.reviewAverage}
  * */
 
-const StarAverage = ({reviewAverage}) => {
+const StarAverage = ({ reviewAverage }) => {
+  let reviewPercent = Math.round(reviewAverage / 25 * 100) * 5 + '%';
   return (
     <div className="star-container">
-      {reviewAverage + ' Stars'}
+      <span className="stars-empty">☆☆☆☆☆</span>
+      <span className="stars-filled" style={{width: reviewPercent}}>
+        ★★★★★
+      </span>
     </div>
   );
 };

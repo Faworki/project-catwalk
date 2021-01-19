@@ -16,11 +16,11 @@ class App extends React.Component {
         slogan: '',
         description: '',
         category: '',
-        default_price: '',
+        'default_price': '',
         features: [],
       },
       reviewMetaData: {
-        product_id: null,
+        'product_id': null,
         ratings: {},
         recommended: {},
         characteristics: {},
@@ -30,6 +30,7 @@ class App extends React.Component {
       yourOutfit: []
     };
     this.getNewProduct = this.getNewProduct.bind(this);
+    this.addToOutfit = this.addToOutfit.bind(this);
   }
 
   getNewProduct(productId) {
@@ -73,6 +74,12 @@ class App extends React.Component {
     }, 0);
   }
 
+  addToOutfit() {
+    let outfitArray = this.state.yourOutfit;
+    outfitArray.push(this.state.product);
+    this.setState({yourOutfit: outfitArray});
+  }
+
   render () {
     return (
       <div>
@@ -91,6 +98,7 @@ class App extends React.Component {
           reviewAverage={this.state.reviewAverage}
           yourOutfit={this.state.yourOutfit}
           getNewProduct={this.getNewProduct}
+          addToOutfit={this.addToOutfit}
         /><br />
         <QnAs
           product={this.state.product}

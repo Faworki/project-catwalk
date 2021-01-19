@@ -13,9 +13,7 @@ class RelatedProducts extends React.Component {
     };
   }
 
-  componentDidMount() {
-    console.log('RELATED PRODUCTS COMPONENT MOUNTED!');
-  }
+  componentDidMount() {}
 
   render () {
     return (

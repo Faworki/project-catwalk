@@ -64,10 +64,10 @@ class Outfit extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    // if (this.props.yourOutfit !== prevProps.yourOutfit) {
+    if (this.props.yourOutfit !== prevProps.yourOutfit) {
       this.getImage(this.props.product.id);
       this.buildCarousel();
-    // }
+    }
   }
 
   render() {

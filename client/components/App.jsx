@@ -64,7 +64,7 @@ class App extends React.Component {
       totalStars += parseInt(rating) * parseInt(ratings[rating]);
       totalVotes += parseInt(ratings[rating]);
     }
-    return (totalStars / totalVotes).toFixed(1);
+    return (totalStars / totalVotes).toFixed(2);
   }
 
   sumReviewCount(ratings) {
@@ -94,10 +94,10 @@ class App extends React.Component {
           product={this.state.product}
         /><br />
         <RatingsAndReviews
-          product={this.state.product}
+          productId={this.state.product.id}
           reviewMetaData={this.state.reviewMetaData}
           reviewAverage={this.state.reviewAverage}
-          yourOutfit={this.state.yourOutfit}
+          reviewCount={this.state.reviewCount}
         /><br />
       </div>
     );

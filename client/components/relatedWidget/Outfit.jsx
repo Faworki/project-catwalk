@@ -59,7 +59,7 @@ class Outfit extends React.Component {
   }
 
   componentDidMount() {
-    // this.getImage(this.props.product.id);
+    this.getImage(this.props.product.id);
     this.buildCarousel();
   }
 

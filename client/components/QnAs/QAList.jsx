@@ -43,7 +43,7 @@ class QAList extends React.Component {
       var allText = question.question_body + questionAnswerText;
       if (allText.indexOf(this.props.searchTerm) > -1) {
         return (
-          <div className='QuestionsList' key={question.question_id}>
+          <div key={question.question_id}>
             <Question
               className='questionComp'
               id={this.props.id}
@@ -57,7 +57,7 @@ class QAList extends React.Component {
     }).slice(0, this.props.visibleQsQuant);
 
     return (
-      <div>
+      <div className='QAItemArr'>
         <div>{QAItemArr}</div>
       </div>
     );

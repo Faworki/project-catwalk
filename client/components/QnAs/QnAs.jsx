@@ -59,7 +59,7 @@ class QnAs extends React.Component {
   render() {
     // console.log('product data', this.props.product);
     return (
-      <div class='QnAsComp'>
+      <div className='QnAsComp'>
         <h1>Quesions and Answers</h1>
         <SearchQs className='SearchQsComp' updateSearchTerm={this.updateSearchTerm}/>
         <QAList

@@ -14,10 +14,12 @@ class Styles extends React.Component {
     return (
       <span>
         <img
+          id={this.props.styleId}
           src={this.props.thumbnail}
           alt="Thumbnail"
           width="60"
           height="90"
+          onClick={this.props.clickedStyleHandler}
         />{' '}
       </span>
     );

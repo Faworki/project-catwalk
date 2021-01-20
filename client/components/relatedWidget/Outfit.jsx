@@ -36,7 +36,7 @@ class Outfit extends React.Component {
     axios.get(`/api/fec2/hrnyc/products/${productId}/styles`)
     .then(results=>{
       let imageArray = this.state.image.slice();
-      imageArray.push(results.data.results[0].photos[0].thumbnail_url)
+      imageArray.push(results.data.results[0].photos[0].thumbnail_url);
       this.setState({image: imageArray});
     })
     .catch(err=>{
@@ -59,7 +59,6 @@ class Outfit extends React.Component {
   }
 
   componentDidMount() {
-    console.log(this.props.product);
     // this.getImage(this.props.product.id);
     this.buildCarousel();
   }

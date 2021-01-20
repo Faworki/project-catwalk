@@ -7,7 +7,6 @@ class ProductListItem extends React.Component {
   }
 
   render () {
-    // console.log('image:', this.props.image);
     return (<div
       onClick={()=>{ this.props.getNewProduct(this.props.text.id); }}
       className={`menu-item ${this.props.selected ? 'active' : ''}`}

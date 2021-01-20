@@ -1,14 +1,16 @@
-import React from 'react';
+import React from "react";
 
 const CharacteristicScale = ({ valuePercent, name, labels }) => {
   return (
     <article className="char-scale">
       <h5>{name}</h5>
       <div className="scale">
-        <div className="scale-bar"></div>
-        <div className="scale-bar"></div>
-        <div className="scale-bar"></div>
-        <div className="scale-bar"></div>
+        <div className="scale-bar">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
         <span className="pointer">▼</span>
       </div>
       <div>

@@ -56,7 +56,7 @@ class Question extends React.Component {
         //must revisit this once I have a grasp on styling to bold the name,
         //not change the value
         if (answer.answerer_name === 'Seller') {
-          var author = <div class='seller'>Seller</div>;
+          var author = <b>Seller</b>;
         }
         return (
           <div key={answer.id}>
@@ -64,8 +64,7 @@ class Question extends React.Component {
               A<div>{answer.body}</div>
             </h4>
             <div>
-              by  {author}
-              , {answer.date.substring(0, 10)}
+              by {author}, {answer.date.substring(0, 10)}
             </div>
             {/* //controls the question instances of helpfulReport*/}
             <HelpfulReport

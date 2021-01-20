@@ -24,16 +24,22 @@ class Thumbnails extends React.Component {
 
   render () {
     return (
-      <span>
+      <div>
         <img
           src={this.props.thumbnail}
           alt="Thumbnail"
           width="60"
           height="90"
-        />
-      </span>
+          onClick={this.props.thumbnailClickHandler}
+          style={styles}
+        />{' '}
+      </div>
     );
   }
 }
 
 export default Thumbnails;
+
+const styles = {
+  borderRadius: '100%'
+};

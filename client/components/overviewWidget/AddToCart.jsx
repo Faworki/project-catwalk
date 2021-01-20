@@ -10,10 +10,11 @@ class AddToCart extends React.Component {
       styles: [],
       selectedStyle: null,
       sizes: [],
-      quantities: []
+      selectedSize: '',
+      selectedSizeQuantities: []
     };
 
-    this.clickHandler = this.clickHandler.bind(this);
+    this.sizeSelectorClickHandler = this.sizeSelectorClickHandler.bind(this);
     this.addToBagHandler = this.addToBagHandler.bind(this);
   }
 
@@ -42,26 +43,44 @@ class AddToCart extends React.Component {
     }
 
     if (this.props.selectedStyle !== prevProps.selectedStyle) {
+      console.log('styles: ', this.state.styles);
       const newSelectedStyleData = this.state.styles.filter((style) => {
         return style.style_id === parseInt(this.props.selectedStyle);
       });
       let skus = Object.values(newSelectedStyleData[0].skus);
       let sizes = [];
-      let quantities = [];
       skus.forEach((sku) => {
         sizes.push(sku.size);
-        quantities.push(sku.quantity);
       });
       this.setState({
         selectedStyle: newSelectedStyleData[0],
-        sizes,
-        quantities
+        sizes
       });
+      this.sizeSelectorClickHandler({ target: { value: 'select-size' } });
     }
   }
 
-  clickHandler(e) {
-    console.log('obj.value: ', e.target.value);
+  sizeSelectorClickHandler(e) {
+    const selectedSize = e.target.value;
+    if (selectedSize === 'select-size') {
+      this.setState({
+        selectedSizeQuantities: []
+      });
+    } else {
+      const selectedStyle = this.state.selectedStyle;
+      const selectedSku = Object.values(selectedStyle.skus).filter((sku) => {
+        return sku.size === selectedSize;
+      });
+      const selectedSizeQuantity = selectedSku[0].quantity;
+      const maxAvailableQuantity = Math.min(selectedSizeQuantity, 15);
+      const availableQuantities = [];
+      for (let i = 1; i <= maxAvailableQuantity; i++) {
+        availableQuantities.push(i);
+      }
+      this.setState({
+        selectedSizeQuantities: availableQuantities
+      });
+    }
   }
 
   addToBagHandler() {
@@ -73,7 +92,7 @@ class AddToCart extends React.Component {
       <div>
         <br />
         <form>
-          <select id="select-size" name="select-size" onChange={this.clickHandler}>
+          <select id="select-size" name="select-size" onChange={this.sizeSelectorClickHandler}>
             <option value="select-size">SELECT SIZE</option>
             {this.state.sizes.map((size, index) => {
               return <option key={index} value={size}>{size}</option>;
@@ -81,7 +100,7 @@ class AddToCart extends React.Component {
           </select>{' '}
           <select id="quantity" name="quantity">
             <option value="-"> - </option>
-            {this.state.quantities.map((quantity, index) => {
+            {this.state.selectedSizeQuantities.map((quantity, index) => {
               return <option key={index} value={quantity}>{quantity}</option>;
             })}
           </select><br /><br />

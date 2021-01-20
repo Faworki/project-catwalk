@@ -77,12 +77,12 @@ class QnAs extends React.Component {
             prodName={this.props.product.name}
           />
         {(this.state.allQsQuanity > 2 && this.state.visibleQsQuant < this.state.allQsQuanity) ?
-        <button onClick={this.addQuestions}>
+        <button className='QnABtn' onClick={this.addQuestions}>
           MORE ANSWERED QUESTIONS
         </button>
         : <div/>
         }
-        <button onClick={this.handleOpenModal}>
+        <button className='QnABtn' onClick={this.handleOpenModal}>
           ADD A QUESTION +
         </button>
       </div>

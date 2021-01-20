@@ -52,9 +52,6 @@ class Question extends React.Component {
         return null;
       } else {
         var author = answer.answerer_name;
-        //this test is able to find if the answerer is the seller,
-        //must revisit this once I have a grasp on styling to bold the name,
-        //not change the value
         if (answer.answerer_name === 'Seller') {
           var author = <b>Seller</b>;
         }

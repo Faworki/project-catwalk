@@ -9,7 +9,6 @@ class ProductListItem extends React.Component {
   render () {
     return (<div
       onClick={()=>{
-        console.log(this.props.text.id);
         this.props.getNewProduct(this.props.text.id);
       }}
       className={`menu-item ${this.props.selected ? 'active' : ''}`}

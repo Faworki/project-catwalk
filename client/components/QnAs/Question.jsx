@@ -56,7 +56,7 @@ class Question extends React.Component {
           var author = <b>Seller</b>;
         }
         return (
-          <div className='key' key={answer.id}>
+          <div className='answerPkg' key={answer.id}>
             <h4>
               A: {answer.body}
             </h4>
@@ -65,7 +65,7 @@ class Question extends React.Component {
             </div>
             {/* //controls the answer instances of helpfulReport*/}
             <HelpfulReport
-              // className='questionHR'
+              className='questionHR'
               id={this.props.id}
               helpVotes={answer.helpfulness}
               answerUsage={true}
@@ -78,7 +78,7 @@ class Question extends React.Component {
     });
 
     return (
-      <div>
+      <div className='HRComp'>
         <h4>
           Q: {this.props.question.question_body}
         </h4>
@@ -89,17 +89,15 @@ class Question extends React.Component {
             <a onClick={this.toggleMoreFewer}>{this.state.loadMoreLess}</a>
           ) : null}
         </div>
-        <div>
-          {/* //controls the question instances of helpfulReport*/}
-          <HelpfulReport
-            id={this.props.id}
-            helpVotes={this.props.question.question_helpfulness}
-            answerUsage={false}
-            question_body={this.props.question.question_body}
-            question_id={this.props.question.question_id}
-            prodName={this.props.prodName}
-          />
-        </div>
+        {/* //controls the question instances of helpfulReport*/}
+        <HelpfulReport
+          id={this.props.id}
+          helpVotes={this.props.question.question_helpfulness}
+          answerUsage={false}
+          question_body={this.props.question.question_body}
+          question_id={this.props.question.question_id}
+          prodName={this.props.prodName}
+        />
       </div>
     );
   }

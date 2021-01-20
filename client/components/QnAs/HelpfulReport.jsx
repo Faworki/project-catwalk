@@ -86,7 +86,8 @@ class HelpfulReport extends React.Component {
 
     return (
       <div className={hrType}>
-        <div>
+      {/* <div className={hrType}> */}
+        {/* <div> */}
           Helpful?  | {yesText}  | {answerText}
           {/* this logic asks if this IS NOT an answer instance, i.e. is this for a question */}
           {!this.props.answerUsage && (
@@ -106,7 +107,7 @@ class HelpfulReport extends React.Component {
               </div>
             </div>
           )}
-        </div>
+        {/* </div> */}
       </div>
     );
   }

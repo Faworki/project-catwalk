@@ -14,8 +14,6 @@ class QnAs extends React.Component {
       allQsQuanity: null,
       showModal: false,
       showMoreQsBtn: true
-      // visibleQuestions: [],
-      // allQuestions: []
 
     };
     this.updateSearchTerm = this.updateSearchTerm.bind(this);
@@ -39,11 +37,6 @@ class QnAs extends React.Component {
     });
   }
   addQuestions () {
-    // if (this.state.visibleQsQuant >= this.state.allQsQuanity) {
-    //   this.setState({
-    //     showMoreQsBtn: false
-    //   })
-    // }
     this.setState({
       visibleQsQuant: this.state.visibleQsQuant + 2
     });
@@ -83,17 +76,15 @@ class QnAs extends React.Component {
             question={true}
             prodName={this.props.product.name}
           />
-        {(this.state.allQsQuanity > 2) ?
+        {(this.state.allQsQuanity > 2 && this.state.visibleQsQuant < this.state.allQsQuanity) ?
         <button onClick={this.addQuestions}>
           MORE ANSWERED QUESTIONS
         </button>
         : <div/>
         }
-        {this.state.visibleQsQuant < this.state.allQsQuanity
-        &&
         <button onClick={this.handleOpenModal}>
           ADD A QUESTION +
-        </button>}
+        </button>
       </div>
     );
   }

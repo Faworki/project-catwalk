@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 /**
  * This component expects a prop called 'reviewAverage'
  * that sould be a number between 0 and 5.

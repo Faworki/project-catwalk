@@ -11,12 +11,16 @@ class QnAs extends React.Component {
     this.state = {
       searchTerm: '',
       visibleQsQuant: 2,
-      showModal: false
+      allQsQuanity: null,
+      showModal: false,
+      showMoreQsBtn: true
 
     };
     this.updateSearchTerm = this.updateSearchTerm.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.getQuestionQuantity = this.getQuestionQuantity.bind(this);
+    this.addQuestions = this.addQuestions.bind(this);
   }
 
   handleOpenModal () {
@@ -27,15 +31,27 @@ class QnAs extends React.Component {
     this.setState({ showModal: false });
   }
 
+  getQuestionQuantity(value) {
+    this.setState({
+      allQsQuanity: value
+    });
+  }
+  addQuestions () {
+    this.setState({
+      visibleQsQuant: this.state.visibleQsQuant + 2
+    });
+  }
   updateSearchTerm(e) {
 
     if (e.target.value.length > 2) {
       this.setState({
-        searchTerm: e.target.value
+        searchTerm: e.target.value,
+        visibleQsQuant: this.state.allQsQuanity
       });
     } else {
       this.setState({
-        searchTerm: ''
+        searchTerm: '',
+        visibleQsQuant: 2
       });
     }
   }
@@ -50,6 +66,8 @@ class QnAs extends React.Component {
           id={this.props.product.id}
           searchTerm={this.state.searchTerm}
           prodName={this.props.product.name}
+          visibleQsQuant={this.state.visibleQsQuant}
+          getQuestionQuantity={this.getQuestionQuantity}
           />
           <ModalComp
             isOpen={this.state.showModal}
@@ -58,9 +76,12 @@ class QnAs extends React.Component {
             question={true}
             prodName={this.props.product.name}
           />
-        <button>
+        {(this.state.allQsQuanity > 2 && this.state.visibleQsQuant < this.state.allQsQuanity) ?
+        <button onClick={this.addQuestions}>
           MORE ANSWERED QUESTIONS
         </button>
+        : <div/>
+        }
         <button onClick={this.handleOpenModal}>
           ADD A QUESTION +
         </button>

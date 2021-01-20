@@ -28,7 +28,7 @@ class Outfit extends React.Component {
         images: this.state.image
       },
         this.state.selected,
-        this.props.addToOutfit);
+        this.props.getNewProduct);
     this.onSelect = this.onSelect.bind(this);
   }
 
@@ -55,7 +55,7 @@ class Outfit extends React.Component {
       images: this.state.image
     },
       this.state.selected,
-      this.props.addToOutfit);
+      this.props.getNewProduct);
   }
 
   componentDidMount() {

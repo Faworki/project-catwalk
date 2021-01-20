@@ -8,7 +8,10 @@ class ProductListItem extends React.Component {
 
   render () {
     return (<div
-      onClick={()=>{ this.props.getNewProduct(this.props.text.id); }}
+      onClick={()=>{
+        console.log(this.props.text.id);
+        this.props.getNewProduct(this.props.text.id);
+      }}
       className={`menu-item ${this.props.selected ? 'active' : ''}`}
       >
         <h4>{this.props.text.category}</h4>

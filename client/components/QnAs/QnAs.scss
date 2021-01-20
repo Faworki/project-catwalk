@@ -1,3 +1,33 @@
 .seller {
   font-weight: bold
 }
+
+.addAnswer {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  font-family: "Times New Roman";
+  font-size: 16px;
+  padding: 0px;
+  display: inline;
+}
+.reportAnswer {
+  background: none;
+  border: none;
+  text-decoration: underline;
+  font-family: "Times New Roman";
+  font-size: 16px;
+  padding: 0px;
+  display: inline;
+}
+.reported {
+  padding: 0px;
+  display: inline;
+}
+
+.addAnswer:hover {
+  color: blue;
+}
+.reportAnswer:hover {
+  color: blue;
+}

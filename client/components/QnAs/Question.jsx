@@ -56,15 +56,16 @@ class Question extends React.Component {
           var author = <b>Seller</b>;
         }
         return (
-          <div key={answer.id}>
+          <div className='key' key={answer.id}>
             <h4>
-              A<div>{answer.body}</div>
+              A: {answer.body}
             </h4>
             <div>
               by {author}, {answer.date.substring(0, 10)}
             </div>
-            {/* //controls the question instances of helpfulReport*/}
+            {/* //controls the answer instances of helpfulReport*/}
             <HelpfulReport
+              // className='questionHR'
               id={this.props.id}
               helpVotes={answer.helpfulness}
               answerUsage={true}
@@ -79,17 +80,17 @@ class Question extends React.Component {
     return (
       <div>
         <h4>
-          Q<div>{this.props.question.question_body}</div>
+          Q: {this.props.question.question_body}
         </h4>
         {answersArr}
-        <br></br>
+        {/* <br></br> */}
         <div>
           {this.props.answers.length > 2 ? (
             <a onClick={this.toggleMoreFewer}>{this.state.loadMoreLess}</a>
           ) : null}
         </div>
         <div>
-          {/* //controls the answer instances of helpfulReport*/}
+          {/* //controls the question instances of helpfulReport*/}
           <HelpfulReport
             id={this.props.id}
             helpVotes={this.props.question.question_helpfulness}

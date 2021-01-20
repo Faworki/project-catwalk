@@ -38,4 +38,14 @@
   border: 2px solid #4CAF50; /* Green */
   margin: 10px;
   padding: 18px;
+  transition-duration: 0.4s;
+}
+
+.QnABtn:hover {
+  background-color: #4CAF50; /* Green */
+  color: white;
+}
+
+.questionHR {
+  float: right;
 }

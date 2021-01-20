@@ -82,10 +82,10 @@ class HelpfulReport extends React.Component {
       yesText = <p className='reported'> Yes ({this.state.helpVotes})</p>;
     }
 
-
+    var hrType = (this.props.answerUsage ? 'answerHR' : 'questionHR');
 
     return (
-      <div>
+      <div className={hrType}>
         <div>
           Helpful?  | {yesText}  | {answerText}
           {/* this logic asks if this IS NOT an answer instance, i.e. is this for a question */}

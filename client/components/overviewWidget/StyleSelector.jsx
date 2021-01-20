@@ -7,20 +7,16 @@ class StyleSelector extends React.Component {
     super(props);
 
     this.state = {
-      product: null,
       styles: [],
       selectedStyle: ''
     };
   }
-
-  componentDidMount() {}
 
   componentDidUpdate(prevProps) {
     if (this.props.product !== prevProps.product) {
       axios.get(`/api/fec2/hrnyc/products/${this.props.product.id}/styles`)
         .then(({data}) => {
           this.setState({
-            product: this.props.product,
             styles: data.results,
             selectedStyle: data.results[0].name
           });
@@ -28,6 +24,15 @@ class StyleSelector extends React.Component {
         .catch((err) => {
           console.error(err);
         });
+    }
+
+    if (this.props.selectedStyle !== prevProps.selectedStyle) {
+      const newStyle = this.state.styles.filter((style) => {
+        return style.style_id === parseInt(this.props.selectedStyle);
+      });
+      this.setState({
+        selectedStyle: newStyle[0].name
+      });
     }
   }
 
@@ -40,6 +45,7 @@ class StyleSelector extends React.Component {
             key={style.style_id}
             styleId={style.style_id}
             thumbnail={style.photos[0].thumbnail_url}
+            clickedStyleHandler={this.props.clickedStyleHandler}
           />);
         })}
       </div>

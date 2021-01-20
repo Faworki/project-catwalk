@@ -151,13 +151,24 @@ export class ReviewsWidget extends Component {
       count: 5,
       numToDisplay: 2,
       sortOrder: 'relevant',
+      reviewFilters: {
+        '1': false,
+        '2': false,
+        '3': false,
+        '4': false,
+        '5': false,
+        count: 0,
+      },
     };
+
+    //todo: Dont forget to bind them functions buddy
+    this.toggleRatingFilter = this.toggleRatingFilter.bind(this);
   }
 
   // ? Do I actually need this?
   componentDidMount() {}
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps, prevState) {
     // Temporarily just getting that data in
     if (this.props.productId !== prevProps.productId) {
       this.getReviews()
@@ -167,6 +178,11 @@ export class ReviewsWidget extends Component {
             filteredReviews: reviews,
           });
         });
+    }
+
+    // If filters change re-filter the product reviews
+    if (prevState.reviewFilters !== this.state.reviewFilters) {
+      this.updateFilteredReviews();
     }
   }
 
@@ -214,12 +230,53 @@ export class ReviewsWidget extends Component {
     });
   }
 
-  // Input: Array of reviews
-  // Ouput: Array of reviews filtered
-  // todo: Apply filters in the filteredReviews function
-  // For now this just returns all the passed in reviews
+  /*************************
+   * ===== FILTERING ===== *
+  *************************/
+
   filterReviews(reviews) {
+    // If there are filters toggled to true
+    if (this.state.reviewFilters.count > 0) {
+      reviews = reviews.filter((review) => {
+        return this.state.reviewFilters[review.rating];
+      });
+    }
     return reviews;
+  }
+
+  toggleRatingFilter(rating) {
+    let newState = Object.assign({}, this.state.reviewFilters);
+
+    newState[rating] = !newState[rating];
+
+    if (newState[rating]) {
+      newState.count += 1;
+    } else {
+      newState.count -= 1;
+    }
+
+    // If all filter toggles are on reset to all filters off
+    if (newState.count === 5) {
+      newState = {
+        '1': false,
+        '2': false,
+        '3': false,
+        '4': false,
+        '5': false,
+        count: 0,
+      };
+    }
+    this.setState({
+      reviewFilters: newState
+    });
+  }
+
+  updateFilteredReviews() {
+    let reviews = this.state.productReviews;
+    let filteredReviews = this.filterReviews(reviews);
+    this.setState({
+      filteredReviews
+    });
   }
 
   render() {
@@ -231,6 +288,7 @@ export class ReviewsWidget extends Component {
             reviewMetaData={this.props.reviewMetaData}
             reviewAverage={this.props.reviewAverage}
             reviewCount={this.props.reviewCount}
+            toggleRatingFilter = {this.toggleRatingFilter}
           />
           <ReviewList
             reviews={

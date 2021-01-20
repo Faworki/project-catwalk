@@ -67,6 +67,8 @@
 
 .HRComp {
   position: relative;
+  max-height: 50vh;
+  overflow: auto;
 }
 
 .searchBar {

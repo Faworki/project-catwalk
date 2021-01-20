@@ -59,20 +59,12 @@ class Outfit extends React.Component {
   }
 
   componentDidMount() {
-<<<<<<< HEAD
-=======
-    // console.log(this.props.product);
->>>>>>> master
     this.getImage(this.props.product.id);
     this.buildCarousel();
   }
 
   componentDidUpdate(prevProps) {
-<<<<<<< HEAD
     if (this.props.yourOutfit.length !== prevProps.yourOutfit.length) {
-=======
-    if (this.props.yourOutfit !== prevProps.yourOutfit) {
->>>>>>> master
       this.getImage(this.props.product.id);
       this.buildCarousel();
     }

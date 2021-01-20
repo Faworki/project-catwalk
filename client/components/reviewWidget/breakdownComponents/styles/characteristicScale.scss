@@ -22,9 +22,16 @@
 
 .pointer {
   position: absolute;
-  top: -2px;
+  top: -3px;
   left: 0;
   margin-right: auto;
   margin-left: 50%;
   width: fit-content;
+}
+
+.char-labels {
+  display: flex;
+  flex-flow: nowrap row;
+  justify-content: space-between;
+  padding-top: 5px;
 }

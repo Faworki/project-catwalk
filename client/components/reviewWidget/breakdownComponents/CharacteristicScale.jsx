@@ -6,9 +6,8 @@ const CharacteristicScale = ({ valuePercent, name, labels }) => {
   const [pointerWidth, setPointerWidth] = useState(0);
 
   useEffect(() => {
-    console.log('width', pointerRef.current ? pointerRef.current.offsetWidth : 0);
     setPointerWidth(pointerRef.current.offsetWidth);
-  }), [];
+  }, [pointerRef.current]);
 
   return (
     <article className="char-scale">
@@ -23,9 +22,9 @@ const CharacteristicScale = ({ valuePercent, name, labels }) => {
         <span ref={pointerRef} className="pointer"
         style={{marginLeft: `calc(${valuePercent}% - ${pointerWidth / 2}px)`}}>▼</span>
       </div>
-      <div>
+      <div className="char-labels">
         {labels.map((label) => (
-          <h6 key={name + label}>{label}</h6>
+          <span key={name + label}>{label}</span>
         ))}
       </div>
     </article>

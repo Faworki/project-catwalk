@@ -67,7 +67,7 @@ class HelpfulReport extends React.Component {
 
   render() {
     //declaring a variable that will control the "report" text that should appear ONLY in answer HR instances
-    var answerText;
+    var answerText, yesText;
     if (this.props.answerUsage) {
       if (!this.state.reported) {
         answerText = <button className='reportAnswer' onClick={this.report}>{this.state.reportText}</button>;
@@ -76,12 +76,11 @@ class HelpfulReport extends React.Component {
       }
     }
 
-    var yesText;
-      if(!this.state.helpfulClicked){
-        yesText = <button className='reportAnswer' onClick={this.clickHelpful}> Yes ({this.state.helpVotes}) </button>;
-      } else {
-        yesText = <p className='reported'> Yes ({this.state.helpVotes})</p>;
-      }
+    if (!this.state.helpfulClicked) {
+      yesText = <button className='reportAnswer' onClick={this.clickHelpful}> Yes ({this.state.helpVotes}) </button>;
+    } else {
+      yesText = <p className='reported'> Yes ({this.state.helpVotes})</p>;
+    }
 
 
 

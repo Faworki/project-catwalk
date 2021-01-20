@@ -43,7 +43,6 @@ class AddToCart extends React.Component {
     }
 
     if (this.props.selectedStyle !== prevProps.selectedStyle) {
-      console.log('styles: ', this.state.styles);
       const newSelectedStyleData = this.state.styles.filter((style) => {
         return style.style_id === parseInt(this.props.selectedStyle);
       });

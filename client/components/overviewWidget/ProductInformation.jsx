@@ -7,11 +7,7 @@ class ProductInformation extends React.Component {
     super(props);
 
     this.state = {
-      // product: null,
-      // reviewMetaData: null,
-      // reviewAverage: null,
       reviewCount: 0,
-      // styles: []
       defaultPrice: null,
       salePrice: null
     };

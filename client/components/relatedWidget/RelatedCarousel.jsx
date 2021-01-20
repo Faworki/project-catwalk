@@ -87,10 +87,14 @@ class RelatedCarousel extends React.Component {
   }
 
   componentDidMount() {
+    // console.log('componentDidMount');
+    // console.log(this.props.product)
     this.buildCarousel();
   }
 
   componentDidUpdate(prevProps) {
+    // console.log('componentDidUpdate');
+    // console.log('state:', this.state);
     if (this.props.product.id !== prevProps.product.id) {
       this.getRelatedProduct(this.props.product.id);
     }
@@ -98,6 +102,7 @@ class RelatedCarousel extends React.Component {
   }
 
   render() {
+    // console.log('render');
     return (
       <div>
         Related Products Carousel

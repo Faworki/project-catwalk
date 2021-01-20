@@ -71,9 +71,11 @@ class HelpfulReport extends React.Component {
         <div>
           Helpful?
           <a onClick={this.clickHelpful}> | Yes ({this.state.helpVotes}) | </a>
-          {this.props.answerUsage && (
-            <a onClick={this.report}>{this.state.reportText}</a>
-          )}
+          {this.props.answerUsage && !this.state.reported ?
+          (<button onClick={this.report}>{this.state.reportText}</button>)
+          :
+          (<div>{this.state.reportText}</div>)
+          }
           {!this.props.answerUsage && (
             <div>
               <a onClick={this.addAnswer}>Add Answer</a>

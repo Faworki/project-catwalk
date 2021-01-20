@@ -51,13 +51,21 @@ class Question extends React.Component {
       if (answer.length === 0) {
         return null;
       } else {
+        var author = answer.answerer_name;
+        //this test is able to find if the answerer is the seller,
+        //must revisit this once I have a grasp on styling to bold the name,
+        //not change the value
+        if (answer.answerer_name === 'Seller') {
+          var author = 'BOLD THIS TEXT';
+        }
         return (
           <div key={answer.id}>
             <h4>
               A<div>{answer.body}</div>
             </h4>
             <div>
-              by {answer.answerer_name}, {answer.date.substring(0, 10)}
+              by  {author}
+              , {answer.date.substring(0, 10)}
             </div>
             {/* //controls the question instances of helpfulReport*/}
             <HelpfulReport

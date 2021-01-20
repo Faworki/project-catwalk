@@ -56,7 +56,7 @@ class Question extends React.Component {
         //must revisit this once I have a grasp on styling to bold the name,
         //not change the value
         if (answer.answerer_name === 'Seller') {
-          var author = 'BOLD THIS TEXT';
+          var author = <div class='seller'>Seller</div>;
         }
         return (
           <div key={answer.id}>

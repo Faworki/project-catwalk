@@ -1,6 +1,15 @@
-import React from "react";
+import React, {useRef, useEffect, useState} from 'react';
 
 const CharacteristicScale = ({ valuePercent, name, labels }) => {
+  const pointerRef = useRef(null);
+
+  const [pointerWidth, setPointerWidth] = useState(0);
+
+  useEffect(() => {
+    console.log('width', pointerRef.current ? pointerRef.current.offsetWidth : 0);
+    setPointerWidth(pointerRef.current.offsetWidth);
+  }), [];
+
   return (
     <article className="char-scale">
       <h5>{name}</h5>
@@ -11,7 +20,8 @@ const CharacteristicScale = ({ valuePercent, name, labels }) => {
           <div></div>
           <div></div>
         </div>
-        <span className="pointer">▼</span>
+        <span ref={pointerRef} className="pointer"
+        style={{marginLeft: `calc(${valuePercent}% - ${pointerWidth / 2}px)`}}>▼</span>
       </div>
       <div>
         {labels.map((label) => (

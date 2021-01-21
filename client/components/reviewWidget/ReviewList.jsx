@@ -1,12 +1,14 @@
 import React from 'react';
 import ReviewCard from './ReviewCard';
 
-const ReviewList = ({reviews, reviewCount}) => {
+// todo: Look in to making select element accessible friendly
+
+const ReviewList = ({reviews, reviewCount, sortOrder, handleSortChange}) => {
   return (
     <main>
       <div className="list-controls">
         {`${reviewCount} reviews, sorted by`}
-        <select defaultValue={'Relevant'}>
+        <select value={sortOrder} onChange={handleSortChange}>
           <option value='relevant'>relevance</option>
           <option value='helpful'>helpfulness</option>
           <option value='newest'>newest</option>

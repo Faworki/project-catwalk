@@ -109,7 +109,6 @@ export class ReviewsWidget extends Component {
     // While there are not enough reviews to display
     while (filteredReviews.length < numToDisplay && !allReviewsFetched) {
       // Get some more reviews
-      // todo: add a try catch block?
       let newReviews = await this.getReviews(page, sortOrder);
       page += 1;
 
@@ -198,6 +197,8 @@ export class ReviewsWidget extends Component {
   *************************/
 
   handleSortChange(event) {
+    // Resets relevant parts of state to reset the review list view
+    // based off of the newly selected sort
     let sortOrder = event.target.value;
     let page = stateDefaults.page;
     let numToDisplay = stateDefaults.numToDisplay;

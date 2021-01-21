@@ -10,6 +10,8 @@ const ReviewList = ({
   handleSortChange,
   handleMoreReviewsClick,
   showMoreReviewsButton,
+  markReviewHelpful,
+  reportReview,
 }) => {
   return (
     <main>
@@ -24,7 +26,7 @@ const ReviewList = ({
       <div className="card-container">
         {reviews.map((review, index) => {
           return (
-            <ReviewCard key={review.review_id} review={review} index={index} />
+            <ReviewCard key={review.review_id} review={review} index={index} markReviewHelpful={markReviewHelpful} reportReview={reportReview}/>
           );
         })}
       </div>

@@ -15,7 +15,9 @@ const stateDefaults = {
     '4': false,
     '5': false,
     count: 0,
-  }
+  },
+  showMoreReviewsButton: true,
+  allReviewsFetched: false,
 };
 
 // Good product id for tests: 11975
@@ -30,6 +32,8 @@ export class ReviewsWidget extends Component {
       numToDisplay: stateDefaults.numToDisplay,
       sortOrder: stateDefaults.sortOrder,
       reviewFilters: stateDefaults.reviewFilters,
+      showMoreReviewsButton: stateDefaults.showMoreReviewsButton,
+      allReviewsFetched: stateDefaults.allReviewsFetched,
     };
 
     //todo: Dont forget to bind them functions buddy
@@ -43,8 +47,19 @@ export class ReviewsWidget extends Component {
       this.updateReviewList(
         stateDefaults.page,
         stateDefaults.numToDisplay,
-        []
+        [],
+        stateDefaults.allReviewsFetched,
+        stateDefaults.sortOrder,
       );
+
+      // let sortOrder = stateDefaults.sortOrder;
+      // let page = stateDefaults.page;
+      // let numToDisplay = stateDefaults.numToDisplay;
+      // let productReviews = [];
+      // let allReviewsFetched = stateDefaults.allReviewsFetched;
+      // this.setState({ sortOrder, page, numToDisplay, productReviews, allReviewsFetched });
+      // this.updateReviewList();
+
     }
 
     if (this.state.sortOrder !== prevState.sortOrder) {
@@ -89,42 +104,48 @@ export class ReviewsWidget extends Component {
    * state then immedietly rellying on those values to update
    * the reviews.
    **/
-  async updateReviewList(page, numToDisplay, productReviews) {
+  async updateReviewList(page, numToDisplay, productReviews, allReviewsFetched, sortOrder) {
     productReviews = productReviews || this.state.productReviews;
     page = page || this.state.page;
     numToDisplay = numToDisplay || this.state.numToDisplay;
+    allReviewsFetched = allReviewsFetched !== undefined ? allReviewsFetched : this.state.allReviewsFetched;
 
     // Apply filters to reviewstore (they may have changed)
     let filteredReviews = this.filterReviews(productReviews);
 
     // While there are not enough reviews to display
-    debugger;
-    while (filteredReviews.length < numToDisplay) {
+    while (filteredReviews.length < numToDisplay && !allReviewsFetched) {
       // Get some more reviews
       // todo: add a try catch block?
       let newReviews = await this.getReviews((page));
-      debugger;
       page += 1;
 
       // Exit loop if there are no more reviews from API
-      if (newReviews.length === 0) {
-        break;
-        // todo: Is this a good place to make the 'Add Review' button dissapear?
-        // todo: Does anything else have to happen here?
+      if (newReviews.length < this.state.count) {
+        allReviewsFetched = true;
+        if (newReviews.length === 0) {
+          break;
+        }
       }
 
       // Add the new reviews to review storage
       productReviews = [...productReviews, ...newReviews];
       // Filter all the reviews
       filteredReviews = this.filterReviews(productReviews);
+
     }
-    debugger;
+
+    // Test if we should hide the More Reviews button
+    let showMoreReviewsButton = filteredReviews.length <= numToDisplay && allReviewsFetched ? false : true;
+
     // Update the state
     this.setState({
       filteredReviews,
       productReviews,
       page,
       numToDisplay,
+      showMoreReviewsButton,
+      allReviewsFetched,
     });
   }
 
@@ -133,7 +154,6 @@ export class ReviewsWidget extends Component {
   *************************/
 
   handleAddReviewsClick(event) {
-    console.log('Clicked')
     let numToDisplay = this.state.numToDisplay + 2;
     this.setState({numToDisplay})
   }
@@ -188,7 +208,8 @@ export class ReviewsWidget extends Component {
     let page = stateDefaults.page;
     let numToDisplay = stateDefaults.numToDisplay;
     let productReviews = [];
-    this.setState({ sortOrder, page, numToDisplay, productReviews });
+    let allReviewsFetched = stateDefaults.allReviewsFetched;
+    this.setState({ sortOrder, page, numToDisplay, productReviews, allReviewsFetched });
   }
 
   render() {
@@ -211,6 +232,7 @@ export class ReviewsWidget extends Component {
             sortOrder={this.state.sortOrder}
             handleSortChange={this.handleSortChange}
             handleAddReviewsClick={this.handleAddReviewsClick}
+            showMoreReviewsButton={this.state.showMoreReviewsButton}
           />
         </div>
       </div>

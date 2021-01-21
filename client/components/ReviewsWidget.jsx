@@ -3,24 +3,32 @@ import RatingBreakdown from './reviewWidget/RatingBreakdown';
 import ReviewList from './reviewWidget/ReviewList';
 import axios from 'axios';
 
+const stateDefaults = {
+  page: 1,
+  count: 5,
+  numToDisplay: 2,
+  sortOrder: 'relevant',
+  reviewFilters: {
+    '1': false,
+    '2': false,
+    '3': false,
+    '4': false,
+    '5': false,
+    count: 0,
+  }
+};
+
 export class ReviewsWidget extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filteredReviews: [],
       productReviews: [],
-      page: 1,
-      count: 5,
-      numToDisplay: 2,
-      sortOrder: 'relevant',
-      reviewFilters: {
-        '1': false,
-        '2': false,
-        '3': false,
-        '4': false,
-        '5': false,
-        count: 0,
-      },
+      page: stateDefaults.page,
+      count: stateDefaults.count,
+      numToDisplay: stateDefaults.numToDisplay,
+      sortOrder: stateDefaults.sortOrder,
+      reviewFilters: stateDefaults.reviewFilters,
     };
 
     //todo: Dont forget to bind them functions buddy
@@ -46,6 +54,7 @@ export class ReviewsWidget extends Component {
     // If filters change re-filter the product reviews
     if (prevState.reviewFilters !== this.state.reviewFilters) {
       this.updateFilteredReviews();
+      // this.updateReviewList();
     }
   }
 
@@ -66,14 +75,22 @@ export class ReviewsWidget extends Component {
 
   // todo: Make this function async/await
   updateReviewList() {
+    debugger;
     let productReviews = this.state.productReviews;
     let page = this.state.page;
-    let filteredReviews = this.state.filteredReviews;
+    // let filteredReviews = this.state.filteredReviews;
+    let filteredReviews = this.filterReviews(productReviews);
+
+    // If filter was toggled filter the reviews first
 
     // while there are not enough reviews to display
     while (filteredReviews.length < this.state.numToDisplay) {
       // Get some more reviews
-      let newReviews = this.getReviews((page += 1));
+      // todo: add a try catch block?
+      let newReviews = await this.getReviews((page));
+      debugger;
+      page += 1;
+
       // ** EXIT LOOP IF NO MORE REVIEWS **
       if (newReviews.length === 0) {
         break;
@@ -148,7 +165,9 @@ export class ReviewsWidget extends Component {
 
   handleSortChange(event) {
     let sortOrder = event.target.value;
-    this.setState({ sortOrder });
+    let page = stateDefaults.page;
+    let numToDisplay = stateDefaults.numToDisplay;
+    this.setState({ sortOrder, page, numToDisplay });
   }
 
   render() {

@@ -1,8 +1,7 @@
 import React from 'react';
 import ReviewCard from './ReviewCard';
 
-const ReviewList = ({reviews, reviewCount, numToDisplay}) => {
-  reviews = reviews.slice(0, numToDisplay);
+const ReviewList = ({reviews, reviewCount}) => {
   return (
     <main>
       <div className="list-controls">

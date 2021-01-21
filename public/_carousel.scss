@@ -6,7 +6,12 @@
   user-select: none;
   cursor: pointer;
   border: 5px black solid;
+
+  button {
+    font-size: 100px;
+  }
 }
+
 // .menu-item-wrapper.active {
 //   border: 1px blue solid;
 // }

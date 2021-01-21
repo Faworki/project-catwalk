@@ -75,9 +75,17 @@ class App extends React.Component {
   }
 
   addToOutfit() {
-    let outfitArray = this.state.yourOutfit;
-    outfitArray.push(this.state.product);
-    this.setState({yourOutfit: outfitArray});
+    let productAlreadyInOutfit = false;
+    let outfitArray = this.state.yourOutfit.slice();
+    for (let x = 0; x < outfitArray.length; x++) {
+      if (outfitArray[x].id === this.state.product.id) {
+        productAlreadyInOutfit = true;
+      }
+    }
+    if (!productAlreadyInOutfit) {
+      outfitArray.push(this.state.product);
+      this.setState({yourOutfit: outfitArray});
+    }
   }
 
   render () {

@@ -3,48 +3,55 @@ import RatingBreakdown from './reviewWidget/RatingBreakdown';
 import ReviewList from './reviewWidget/ReviewList';
 import axios from 'axios';
 
+const stateDefaults = {
+  page: 1,
+  count: 5,
+  numToDisplay: 2,
+  sortOrder: 'relevant',
+  reviewFilters: {
+    '1': false,
+    '2': false,
+    '3': false,
+    '4': false,
+    '5': false,
+    count: 0,
+  }
+};
+
+// Good product id for tests: 11975
 export class ReviewsWidget extends Component {
   constructor(props) {
     super(props);
     this.state = {
       filteredReviews: [],
       productReviews: [],
-      page: 1,
-      count: 5,
-      numToDisplay: 2,
-      sortOrder: 'relevant',
-      reviewFilters: {
-        '1': false,
-        '2': false,
-        '3': false,
-        '4': false,
-        '5': false,
-        count: 0,
-      },
+      page: stateDefaults.page,
+      count: stateDefaults.count,
+      numToDisplay: stateDefaults.numToDisplay,
+      sortOrder: stateDefaults.sortOrder,
+      reviewFilters: stateDefaults.reviewFilters,
     };
 
     //todo: Dont forget to bind them functions buddy
     this.toggleRatingFilter = this.toggleRatingFilter.bind(this);
+    this.handleSortChange = this.handleSortChange.bind(this);
   }
 
-  // ? Do I actually need this?
-  componentDidMount() {}
-
   componentDidUpdate(prevProps, prevState) {
-    // Temporarily just getting that data in
     if (this.props.productId !== prevProps.productId) {
-      this.getReviews()
-        .then((reviews) => {
-          this.setState({
-            productReviews: reviews,
-            filteredReviews: reviews,
-          });
-        });
+      this.updateReviewList(
+        stateDefaults.page,
+        stateDefaults.numToDisplay,
+        []
+      );
     }
 
-    // If filters change re-filter the product reviews
+    if (this.state.sortOrder !== prevState.sortOrder) {
+      this.updateReviewList();
+    }
+
     if (prevState.reviewFilters !== this.state.reviewFilters) {
-      this.updateFilteredReviews();
+      this.updateReviewList();
     }
   }
 
@@ -63,32 +70,52 @@ export class ReviewsWidget extends Component {
       });
   }
 
-  // todo: Make this function async/await
-  updateReviewList() {
-    let productReviews = this.state.productReviews;
-    let page = this.state.page;
-    let filteredReviews = this.state.filteredReviews;
+  /** ----- updateReviewList -------
+   * This function handles updating what reviews are visible
+   * based on user interaction.
+   *
+   * Uses async/await to allow for a while loop that will fetch
+   * more reviews if after filtering the reviews there are not
+   * as many reviews to display as the user would like.
+   *
+   * The input parameters are all optional but are used as a way
+   * to hard reset the review list. This was implemented mainly
+   * for use when the product id changes to avoid setting the
+   * state then immedietly rellying on those values to update
+   * the reviews.
+   **/
+  async updateReviewList(page, numToDisplay, productReviews) {
+    productReviews = productReviews || this.state.productReviews;
+    page = page || this.state.page;
+    numToDisplay = numToDisplay || this.state.numToDisplay;
 
-    // while there are not enough reviews to display
-    while (filteredReviews.length < this.state.numToDisplay) {
+    // Apply filters to reviewstore (they may have changed)
+    let filteredReviews = this.filterReviews(productReviews);
+
+    // While there are not enough reviews to display
+    while (filteredReviews.length < numToDisplay) {
       // Get some more reviews
-      let newReviews = this.getReviews((page += 1));
-      // ** EXIT LOOP IF NO MORE REVIEWS **
+      // todo: add a try catch block?
+      let newReviews = await this.getReviews((page));
+      page += 1;
+
+      // Exit loop if there are no more reviews from API
       if (newReviews.length === 0) {
         break;
         // todo: Is this a good place to make the 'Add Review' button dissapear?
         // todo: Does anything else have to happen here?
       }
-      // add reviews to reivew store
+      // Add the new reviews to review storage
       productReviews = [...productReviews, ...newReviews];
-      // filter reviews store
+      // Filter all the reviews
       filteredReviews = this.filterReviews(productReviews);
     }
-    // update the state
+    // Update the state
     this.setState({
       filteredReviews,
       productReviews,
       page,
+      numToDisplay,
     });
   }
 
@@ -133,12 +160,16 @@ export class ReviewsWidget extends Component {
     });
   }
 
-  updateFilteredReviews() {
-    let reviews = this.state.productReviews;
-    let filteredReviews = this.filterReviews(reviews);
-    this.setState({
-      filteredReviews
-    });
+  /*************************
+   * ===== SORTING ======= *
+  *************************/
+
+  handleSortChange(event) {
+    let sortOrder = event.target.value;
+    let page = stateDefaults.page;
+    let numToDisplay = stateDefaults.numToDisplay;
+    let productReviews = [];
+    this.setState({ sortOrder, page, numToDisplay, productReviews });
   }
 
   render() {
@@ -158,7 +189,8 @@ export class ReviewsWidget extends Component {
               .slice(0, this.state.numToDisplay)
             }
             reviewCount={this.props.reviewCount}
-            numToDisplay={this.state.numToDisplay}
+            sortOrder={this.state.sortOrder}
+            handleSortChange={this.handleSortChange}
           />
         </div>
       </div>

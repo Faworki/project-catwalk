@@ -176,7 +176,6 @@ class ImageGallery extends React.Component {
             />
             );
           })}
-          <br />
           <button
             onClick={this.upArrowClickHandler}
             style={this.state.upButtonEnd === true ? {display: 'none'} : null}
@@ -185,7 +184,6 @@ class ImageGallery extends React.Component {
             onClick={this.downArrowClickHandler}
             style={this.state.downButtonEnd === true ? {display: 'none'} : null}
           ><i className="fas fa-arrow-down"></i></button>
-          <br />
         </div>
         <div>
           <img
@@ -203,7 +201,7 @@ class ImageGallery extends React.Component {
             style={this.state.rightButtonEnd === true ? {display: 'none'} : null}
           ><i className="fas fa-arrow-right"></i></button>
           <button onClick={this.resizePictureClickHandler}><i className="fas fa-expand"></i></button>
-          <br /><br />
+
         </div>
       </div>
     );

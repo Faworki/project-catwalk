@@ -32,14 +32,10 @@ class RelatedCarousel extends React.Component {
         images: this.state.relatedImages
       },
       this.props.getNewProduct);
-
-      console.log('building carousel')
   }
 
   async componentDidUpdate(prevProps) {
     if (this.props.product.id !== prevProps.product.id) {
-
-      console.log('product ID has changed')
 
       //get array of related ID's
       const relatedIds = await axios.get(`/api/fec2/hrnyc/products/${this.props.product.id}/related`)

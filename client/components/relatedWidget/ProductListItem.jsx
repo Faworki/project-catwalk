@@ -11,7 +11,7 @@ class ProductListItem extends React.Component {
       onClick={()=>{
         this.props.getNewProduct(this.props.text.id);
       }}
-      className={`menu-item`}
+      className={'menu-item'}
       >
         <h4>{this.props.text.category}</h4>
         <h4>{this.props.text.name}</h4>

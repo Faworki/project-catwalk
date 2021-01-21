@@ -79,16 +79,16 @@ class HelpfulReport extends React.Component {
     if (!this.state.helpfulClicked) {
       yesText = <button className='reportAnswer' onClick={this.clickHelpful}> Yes ({this.state.helpVotes}) </button>;
     } else {
-      yesText = <p className='reported'> Yes ({this.state.helpVotes})</p>;
+      yesText = <p className='reported'> Yes  ({this.state.helpVotes})</p>;
     }
 
     var hrType = (this.props.answerUsage ? 'answerHR' : 'questionHR');
 
     return (
-      <div className={hrType} className='HRComp'>
+      <div className={hrType} >
       {/* <div className={hrType}> */}
         {/* <div> */}
-          Helpful?  | {yesText}  | {answerText}
+          Helpful?   {yesText}    |    {answerText}
           {/* this logic asks if this IS NOT an answer instance, i.e. is this for a question */}
           {!this.props.answerUsage && (
             <div className='addAnswer'>

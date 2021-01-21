@@ -1,7 +1,6 @@
 import React from 'react';
 import StarAverage from '../shared/StarAverage.jsx';
 import axios from 'axios';
-import './styles/OverviewStyles.scss';
 
 class ProductInformation extends React.Component {
   constructor(props) {

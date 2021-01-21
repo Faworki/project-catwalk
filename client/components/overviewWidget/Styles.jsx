@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles/OverviewStyles.scss';
 
 class Styles extends React.Component {
   constructor(props) {

@@ -1,5 +1,7 @@
 import React from 'react';
 import axios from 'axios';
+import './styles/OverviewStyles.scss';
+
 
 class AddToCart extends React.Component {
   constructor(props) {
@@ -82,28 +84,29 @@ class AddToCart extends React.Component {
     }
   }
 
-  addToBagHandler() {
+  addToBagHandler(e) {
+    e.preventDefault();
     console.log('Item added to bag!');
   }
 
   render () {
     return (
-      <div>
+      <div className="add-to-cart">
         <br />
         <form>
-          <select id="select-size" name="select-size" onChange={this.sizeSelectorClickHandler}>
+          <select className="btn" id="select-size" name="select-size" onChange={this.sizeSelectorClickHandler}>
             <option value="select-size">SELECT SIZE</option>
             {this.state.sizes.map((size, index) => {
               return <option key={index} value={size}>{size}</option>;
             })}
           </select>{' '}
-          <select id="quantity" name="quantity">
+          <select className="btn" id="quantity" name="quantity">
             <option value="-"> - </option>
             {this.state.selectedSizeQuantities.map((quantity, index) => {
               return <option key={index} value={quantity}>{quantity}</option>;
             })}
           </select><br /><br />
-          <button type="button" onClick={this.addToBagHandler}>ADD TO BAG &#43;</button>{' '}
+          <button className="btn" onClick={this.addToBagHandler}><span className="add-to-bag-span">ADD TO BAG</span><span>&#43;</span></button>{' '}
         </form><br />
       </div>
     );

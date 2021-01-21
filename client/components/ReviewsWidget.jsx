@@ -15,7 +15,9 @@ const stateDefaults = {
     '4': false,
     '5': false,
     count: 0,
-  }
+  },
+  showMoreReviewsButton: true,
+  allReviewsFetched: false,
 };
 
 // Good product id for tests: 11975
@@ -30,20 +32,27 @@ export class ReviewsWidget extends Component {
       numToDisplay: stateDefaults.numToDisplay,
       sortOrder: stateDefaults.sortOrder,
       reviewFilters: stateDefaults.reviewFilters,
+      showMoreReviewsButton: stateDefaults.showMoreReviewsButton,
+      allReviewsFetched: stateDefaults.allReviewsFetched,
     };
 
     //todo: Dont forget to bind them functions buddy
     this.toggleRatingFilter = this.toggleRatingFilter.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
+    this.handleMoreReviewsClick = this.handleMoreReviewsClick.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.productId !== prevProps.productId) {
+
       this.updateReviewList(
         stateDefaults.page,
         stateDefaults.numToDisplay,
-        []
+        [],
+        stateDefaults.allReviewsFetched,
+        stateDefaults.sortOrder
       );
+
     }
 
     if (this.state.sortOrder !== prevState.sortOrder) {
@@ -53,18 +62,21 @@ export class ReviewsWidget extends Component {
     if (prevState.reviewFilters !== this.state.reviewFilters) {
       this.updateReviewList();
     }
+
+    if (prevState.numToDisplay !== this.state.numToDisplay) {
+      this.updateReviewList();
+    }
   }
 
   // Input: page
   // Output: promise that resolves to array of reviews
-  getReviews(page = 1) {
-    let requestURL = `/api/fec2/hrnyc/reviews/?product_id=${this.props.productId}&page=${page}&sort=${this.state.sortOrder}&count=5`;
+  getReviews(page = 1, sort = this.state.sortOrder) {
+    let requestURL = `/api/fec2/hrnyc/reviews/?product_id=${this.props.productId}&page=${page}&sort=${sort}&count=5`;
 
     return axios.get(requestURL)
       .then(({ data }) => {
         return data.results;
       })
-      // ? is this the right place to error handle?
       .catch(err => {
         console.error(err);
       });
@@ -84,39 +96,59 @@ export class ReviewsWidget extends Component {
    * state then immedietly rellying on those values to update
    * the reviews.
    **/
-  async updateReviewList(page, numToDisplay, productReviews) {
+  async updateReviewList(page, numToDisplay, productReviews, allReviewsFetched, sortOrder) {
     productReviews = productReviews || this.state.productReviews;
     page = page || this.state.page;
     numToDisplay = numToDisplay || this.state.numToDisplay;
+    sortOrder = sortOrder || this.state.sortOrder;
+    allReviewsFetched = allReviewsFetched !== undefined ? allReviewsFetched : this.state.allReviewsFetched;
 
     // Apply filters to reviewstore (they may have changed)
     let filteredReviews = this.filterReviews(productReviews);
 
     // While there are not enough reviews to display
-    while (filteredReviews.length < numToDisplay) {
+    while (filteredReviews.length < numToDisplay && !allReviewsFetched) {
       // Get some more reviews
-      // todo: add a try catch block?
-      let newReviews = await this.getReviews((page));
+      let newReviews = await this.getReviews(page, sortOrder);
       page += 1;
 
       // Exit loop if there are no more reviews from API
-      if (newReviews.length === 0) {
-        break;
-        // todo: Is this a good place to make the 'Add Review' button dissapear?
-        // todo: Does anything else have to happen here?
+      if (newReviews.length < this.state.count) {
+        allReviewsFetched = true;
+        if (newReviews.length === 0) {
+          break;
+        }
       }
+
       // Add the new reviews to review storage
       productReviews = [...productReviews, ...newReviews];
       // Filter all the reviews
       filteredReviews = this.filterReviews(productReviews);
+
     }
+
+    // Test if we should hide the More Reviews button
+    let showMoreReviewsButton = filteredReviews.length <= numToDisplay && allReviewsFetched ? false : true;
+
     // Update the state
     this.setState({
       filteredReviews,
       productReviews,
       page,
       numToDisplay,
+      showMoreReviewsButton,
+      allReviewsFetched,
+      sortOrder,
     });
+  }
+
+  /*************************
+   * ==== ADD REVIEWS ===== *
+  *************************/
+
+  handleMoreReviewsClick(event) {
+    let numToDisplay = this.state.numToDisplay + 2;
+    this.setState({numToDisplay})
   }
 
   /*************************
@@ -165,11 +197,14 @@ export class ReviewsWidget extends Component {
   *************************/
 
   handleSortChange(event) {
+    // Resets relevant parts of state to reset the review list view
+    // based off of the newly selected sort
     let sortOrder = event.target.value;
     let page = stateDefaults.page;
     let numToDisplay = stateDefaults.numToDisplay;
     let productReviews = [];
-    this.setState({ sortOrder, page, numToDisplay, productReviews });
+    let allReviewsFetched = stateDefaults.allReviewsFetched;
+    this.setState({ sortOrder, page, numToDisplay, productReviews, allReviewsFetched });
   }
 
   render() {
@@ -191,6 +226,8 @@ export class ReviewsWidget extends Component {
             reviewCount={this.props.reviewCount}
             sortOrder={this.state.sortOrder}
             handleSortChange={this.handleSortChange}
+            handleMoreReviewsClick={this.handleMoreReviewsClick}
+            showMoreReviewsButton={this.state.showMoreReviewsButton}
           />
         </div>
       </div>

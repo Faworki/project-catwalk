@@ -7,6 +7,7 @@ import ProductOverview from './overviewWidget/ProductOverview.jsx';
 import axios from 'axios';
 import './overviewWidget/styles/OverviewStyles.scss';
 
+
 class Overview extends React.Component {
   constructor(props) {
     super(props);

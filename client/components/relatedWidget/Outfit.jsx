@@ -19,7 +19,6 @@ class Outfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      outfit: [],
       image: [],
       selected: selected
     };
@@ -29,14 +28,16 @@ class Outfit extends React.Component {
         images: this.state.image
       },
         this.state.selected,
-        this.props.addToOutfit);
+        this.props.getNewProduct);
     this.onSelect = this.onSelect.bind(this);
   }
 
   getImage (productId) {
     axios.get(`/api/fec2/hrnyc/products/${productId}/styles`)
     .then(results=>{
-      this.setState({image: results.data});
+      let imageArray = this.state.image.slice();
+      imageArray.push(results.data.results[0].photos[0].thumbnail_url);
+      this.setState({image: imageArray});
     })
     .catch(err=>{
       console.log(err);
@@ -54,17 +55,16 @@ class Outfit extends React.Component {
       images: this.state.image
     },
       this.state.selected,
-      this.props.addToOutfit);
+      this.props.getNewProduct);
   }
 
   componentDidMount() {
-    // console.log(this.props.product);
     this.getImage(this.props.product.id);
     this.buildCarousel();
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.yourOutfit !== prevProps.yourOutfit) {
+    if (this.props.yourOutfit.length !== prevProps.yourOutfit.length) {
       this.getImage(this.props.product.id);
       this.buildCarousel();
     }
@@ -74,12 +74,15 @@ class Outfit extends React.Component {
     return (
       <div>
         Outfit Carousel
-        <AddButton
-        yourOutfit={this.props.outfit}
-        addToOutfit={this.props.addToOutfit}
-        />
         <ScrollMenu
-          data={this.productItems}
+          data={[
+            <AddButton
+              product={this.props.product}
+              yourOutfit={this.props.yourOutfit}
+              addToOutfit={this.props.addToOutfit}
+            />,
+            ...this.productItems
+          ]}
           arrowLeft={ArrowLeft}
           arrowRight={ArrowRight}
           selected={selected}

@@ -53,7 +53,6 @@ class RelatedCarousel extends React.Component {
       };
     })
     .then(results=>{
-      // console.log('unresolved results:', results);
           Promise.all(results.products)
           .then(results=>{
             return results.map((res)=>{
@@ -83,18 +82,13 @@ class RelatedCarousel extends React.Component {
       },
       this.state.selected,
       this.props.getNewProduct);
-      // console.log('inside buildCarousel');
   }
 
   componentDidMount() {
-    // console.log('componentDidMount');
-    // console.log(this.props.product)
     this.buildCarousel();
   }
 
   componentDidUpdate(prevProps) {
-    // console.log('componentDidUpdate');
-    // console.log('state:', this.state);
     if (this.props.product.id !== prevProps.product.id) {
       this.getRelatedProduct(this.props.product.id);
     }
@@ -102,7 +96,6 @@ class RelatedCarousel extends React.Component {
   }
 
   render() {
-    // console.log('render');
     return (
       <div>
         Related Products Carousel

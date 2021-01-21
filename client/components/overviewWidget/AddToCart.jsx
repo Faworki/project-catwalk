@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import './styles/OverviewStyles.scss';
 
+
 class AddToCart extends React.Component {
   constructor(props) {
     super(props);

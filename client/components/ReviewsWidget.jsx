@@ -39,7 +39,7 @@ export class ReviewsWidget extends Component {
     //todo: Dont forget to bind them functions buddy
     this.toggleRatingFilter = this.toggleRatingFilter.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
-    this.handleAddReviewsClick = this.handleAddReviewsClick.bind(this);
+    this.handleMoreReviewsClick = this.handleMoreReviewsClick.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -146,7 +146,7 @@ export class ReviewsWidget extends Component {
    * ==== ADD REVIEWS ===== *
   *************************/
 
-  handleAddReviewsClick(event) {
+  handleMoreReviewsClick(event) {
     let numToDisplay = this.state.numToDisplay + 2;
     this.setState({numToDisplay})
   }
@@ -226,7 +226,7 @@ export class ReviewsWidget extends Component {
             reviewCount={this.props.reviewCount}
             sortOrder={this.state.sortOrder}
             handleSortChange={this.handleSortChange}
-            handleAddReviewsClick={this.handleAddReviewsClick}
+            handleMoreReviewsClick={this.handleMoreReviewsClick}
             showMoreReviewsButton={this.state.showMoreReviewsButton}
           />
         </div>

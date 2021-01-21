@@ -8,7 +8,7 @@ const ReviewList = ({
   reviewCount,
   sortOrder,
   handleSortChange,
-  handleAddReviewsClick,
+  handleMoreReviewsClick,
   showMoreReviewsButton,
 }) => {
   return (
@@ -29,7 +29,7 @@ const ReviewList = ({
         })}
       </div>
       <div>
-        {showMoreReviewsButton ? <button onClick={handleAddReviewsClick}>More Reviews</button> : null}
+        {showMoreReviewsButton ? <button onClick={handleMoreReviewsClick}>More Reviews</button> : null}
         <button>Add A Review</button>
       </div>
     </main>

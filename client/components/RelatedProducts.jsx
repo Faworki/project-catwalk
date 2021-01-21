@@ -27,6 +27,7 @@ class RelatedProducts extends React.Component {
         product={this.props.product}
         yourOutfit={this.props.yourOutfit}
         addToOutfit={this.props.addToOutfit}
+        getNewProduct={this.props.getNewProduct}
         />
       </div>
     );

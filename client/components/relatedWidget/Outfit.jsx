@@ -19,17 +19,9 @@ class Outfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: [],
-      selected: selected
+      image: []
     };
-    this.productItems = ProductList(
-      {
-        products: this.props.yourOutfit,
-        images: this.state.image
-      },
-        this.state.selected,
-        this.props.getNewProduct);
-    this.onSelect = this.onSelect.bind(this);
+    this.productItems = [];
   }
 
   getImage (productId) {
@@ -44,30 +36,20 @@ class Outfit extends React.Component {
     });
   }
 
-  onSelect(key) {
-    this.setState({ selected: key });
-  }
-
   buildCarousel() {
   this.productItems = new ProductList(
     {
       products: this.props.yourOutfit,
       images: this.state.image
     },
-      this.state.selected,
       this.props.getNewProduct);
   }
 
-  componentDidMount() {
-    this.getImage(this.props.product.id);
-    this.buildCarousel();
-  }
-
   componentDidUpdate(prevProps) {
-    if (this.props.yourOutfit.length !== prevProps.yourOutfit.length) {
+    if (this.props.product.id !== prevProps.product.id) {
       this.getImage(this.props.product.id);
-      this.buildCarousel();
     }
+    this.buildCarousel();
   }
 
   render() {
@@ -86,7 +68,6 @@ class Outfit extends React.Component {
           arrowLeft={ArrowLeft}
           arrowRight={ArrowRight}
           selected={selected}
-          onSelect={this.onSelect}
           alignCenter={false}
           wheel={false}
           hideArrows={true}

@@ -135,6 +135,7 @@ class RelatedCarousel extends React.Component {
   // }
 
   async componentDidUpdate(prevProps) {
+    console.log('component is updating')
     //get array of related ID's
     if (this.props.product.id !== prevProps.product.id) {
       const relatedIds = await axios.get(`/api/fec2/hrnyc/products/${this.props.product.id}/related`)
@@ -184,13 +185,11 @@ class RelatedCarousel extends React.Component {
       //resolve those promises
       const relatedProducts = await Promise.all(relatedProductsPromises);
 
-      this.setState({
-        relatedProducts: relatedProducts})
-
       const relatedImages = await Promise.all(relatedImagesPromises);
 
       //only after they have resolved, store them as state
-      this.setState({
+      await this.setState({
+        relatedProducts: relatedProducts,
         relatedImages: relatedImages
       })
       // this.getRelatedIds(this.props.product.id);

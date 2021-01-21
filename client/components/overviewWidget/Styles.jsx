@@ -1,5 +1,5 @@
 import React from 'react';
-// import axios from 'axios';
+import './styles/OverviewStyles.scss';
 
 class Styles extends React.Component {
   constructor(props) {
@@ -14,11 +14,12 @@ class Styles extends React.Component {
     return (
       <span>
         <img
+          className="styles"
           id={this.props.styleId}
           src={this.props.thumbnail}
           alt="Thumbnail"
-          width="60"
-          height="90"
+          width="70"
+          height="70"
           onClick={this.props.clickedStyleHandler}
         />{' '}
       </span>

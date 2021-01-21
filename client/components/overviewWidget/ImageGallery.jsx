@@ -1,6 +1,7 @@
 import React from 'react';
 import Thumbnails from './Thumbnails.jsx';
 import axios from 'axios';
+import './styles/OverviewStyles.scss';
 
 class ImageGallery extends React.Component {
   constructor(props) {
@@ -164,42 +165,44 @@ class ImageGallery extends React.Component {
 
   render() {
     return (
-      <div>
-        {this.state.thumbnails.map((thumbnail, index) => {
-          return (
-          <Thumbnails
-            key={index}
-            thumbnail={thumbnail.thumbnail_url}
-            thumbnailClickHandler={this.thumbnailClickHandler}
-          />
-          );
-        })}
-        <br />
-        <button
-          onClick={this.upArrowClickHandler}
-          style={this.state.upButtonEnd === true ? {display: 'none'} : null}
-        ><i className="fas fa-arrow-up"></i></button>
-        <button
-          onClick={this.downArrowClickHandler}
-          style={this.state.downButtonEnd === true ? {display: 'none'} : null}
-        ><i className="fas fa-arrow-down"></i></button>
-        <button onClick={this.resizePictureClickHandler}><i className="fas fa-expand"></i></button>
-        <br />
-        <img
-          src={this.state.mainPhotoUrl}
-          alt="Description"
-          width={this.state.mainPhotoExpanded ? '450' : '300'}
-          height={this.state.mainPhotoExpanded ? '675' : '450'}
-        /><br />
-        <button
-          onClick={this.leftArrowClickHandler}
-          style={this.state.leftButtonEnd === true ? {display: 'none'} : null}
-        ><i className="fas fa-arrow-left"></i></button>
-        <button
-          onClick={this.rightArrowClickHandler}
-          style={this.state.rightButtonEnd === true ? {display: 'none'} : null}
-        ><i className="fas fa-arrow-right"></i></button>
-        <br /><br />
+      <div className="image-gallery image-gallery-grid">
+        <div>
+          {this.state.thumbnails.map((thumbnail, index) => {
+            return (
+            <Thumbnails
+              key={index}
+              thumbnail={thumbnail.thumbnail_url}
+              thumbnailClickHandler={this.thumbnailClickHandler}
+            />
+            );
+          })}
+          <button
+            onClick={this.upArrowClickHandler}
+            style={this.state.upButtonEnd === true ? {display: 'none'} : null}
+          ><i className="fas fa-arrow-up"></i></button>
+          <button
+            onClick={this.downArrowClickHandler}
+            style={this.state.downButtonEnd === true ? {display: 'none'} : null}
+          ><i className="fas fa-arrow-down"></i></button>
+        </div>
+        <div>
+          <img
+            src={this.state.mainPhotoUrl}
+            alt="Description"
+            width={this.state.mainPhotoExpanded ? '450' : '300'}
+            height={this.state.mainPhotoExpanded ? '675' : '450'}
+          /><br />
+          <button
+            onClick={this.leftArrowClickHandler}
+            style={this.state.leftButtonEnd === true ? {display: 'none'} : null}
+          ><i className="fas fa-arrow-left"></i></button>
+          <button
+            onClick={this.rightArrowClickHandler}
+            style={this.state.rightButtonEnd === true ? {display: 'none'} : null}
+          ><i className="fas fa-arrow-right"></i></button>
+          <button onClick={this.resizePictureClickHandler}><i className="fas fa-expand"></i></button>
+
+        </div>
       </div>
     );
   }

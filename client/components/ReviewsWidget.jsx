@@ -25,6 +25,7 @@ export class ReviewsWidget extends Component {
 
     //todo: Dont forget to bind them functions buddy
     this.toggleRatingFilter = this.toggleRatingFilter.bind(this);
+    this.handleSortChange = this.handleSortChange.bind(this);
   }
 
   // ? Do I actually need this?
@@ -141,6 +142,15 @@ export class ReviewsWidget extends Component {
     });
   }
 
+  /*************************
+   * ===== SORTING ======= *
+  *************************/
+
+  handleSortChange(event) {
+    let sortOrder = event.target.value;
+    this.setState({ sortOrder });
+  }
+
   render() {
     return (
       <div className="reviews-widget">
@@ -158,7 +168,8 @@ export class ReviewsWidget extends Component {
               .slice(0, this.state.numToDisplay)
             }
             reviewCount={this.props.reviewCount}
-            numToDisplay={this.state.numToDisplay}
+            sortOrder={this.state.sortOrder}
+            handleSortChange={this.handleSortChange}
           />
         </div>
       </div>

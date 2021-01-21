@@ -1,5 +1,4 @@
 import React from 'react';
-// import axios from 'axios';
 
 class Thumbnails extends React.Component {
   constructor(props) {
@@ -26,12 +25,12 @@ class Thumbnails extends React.Component {
     return (
       <div>
         <img
+        className="thumbnails"
           src={this.props.thumbnail}
           alt="Thumbnail"
           width="60"
           height="90"
           onClick={this.props.thumbnailClickHandler}
-          style={styles}
         />{' '}
       </div>
     );
@@ -39,7 +38,3 @@ class Thumbnails extends React.Component {
 }
 
 export default Thumbnails;
-
-const styles = {
-  borderRadius: '100%'
-};

@@ -66,17 +66,33 @@ class HelpfulReport extends React.Component {
   }
 
   render() {
+    //declaring a variable that will control the "report" text that should appear ONLY in answer HR instances
+    var answerText, yesText;
+    if (this.props.answerUsage) {
+      if (!this.state.reported) {
+        answerText = <button className='reportAnswer' onClick={this.report}>{this.state.reportText}</button>;
+      } else {
+        answerText = <p className='reported'>{this.state.reportText}</p>;
+      }
+    }
+
+    if (!this.state.helpfulClicked) {
+      yesText = <button className='reportAnswer' onClick={this.clickHelpful}> Yes ({this.state.helpVotes}) </button>;
+    } else {
+      yesText = <p className='reported'> Yes  ({this.state.helpVotes})</p>;
+    }
+
+    var hrType = (this.props.answerUsage ? 'answerHR' : 'questionHR');
+
     return (
-      <div>
-        <div>
-          Helpful?
-          <a onClick={this.clickHelpful}> | Yes ({this.state.helpVotes}) | </a>
-          {this.props.answerUsage && (
-            <a onClick={this.report}>{this.state.reportText}</a>
-          )}
+      <div className={hrType} >
+      {/* <div className={hrType}> */}
+        {/* <div> */}
+          Helpful?   {yesText}    |    {answerText}
+          {/* this logic asks if this IS NOT an answer instance, i.e. is this for a question */}
           {!this.props.answerUsage && (
-            <div>
-              <a onClick={this.addAnswer}>Add Answer</a>
+            <div className='addAnswer'>
+              <button className='addAnswer' onClick={this.addAnswer}>Add Answer</button>
               <div>
                 {/* this modal is for submitting a new answer */}
                 <ModalComp
@@ -91,7 +107,7 @@ class HelpfulReport extends React.Component {
               </div>
             </div>
           )}
-        </div>
+        {/* </div> */}
       </div>
     );
   }

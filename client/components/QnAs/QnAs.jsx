@@ -59,10 +59,11 @@ class QnAs extends React.Component {
   render() {
     // console.log('product data', this.props.product);
     return (
-      <div>
-        <h1>Quesions and Answers</h1>
-        <SearchQs updateSearchTerm={this.updateSearchTerm}/>
+      <div className='QnAsComp'>
+        <h1>Questions and Answers</h1>
+        <SearchQs className='SearchQsComp' updateSearchTerm={this.updateSearchTerm}/>
         <QAList
+          className='QAListcomp'
           id={this.props.product.id}
           searchTerm={this.state.searchTerm}
           prodName={this.props.product.name}
@@ -77,12 +78,12 @@ class QnAs extends React.Component {
             prodName={this.props.product.name}
           />
         {(this.state.allQsQuanity > 2 && this.state.visibleQsQuant < this.state.allQsQuanity) ?
-        <button onClick={this.addQuestions}>
+        <button className='QnABtn' onClick={this.addQuestions}>
           MORE ANSWERED QUESTIONS
         </button>
         : <div/>
         }
-        <button onClick={this.handleOpenModal}>
+        <button className='QnABtn' onClick={this.handleOpenModal}>
           ADD A QUESTION +
         </button>
       </div>

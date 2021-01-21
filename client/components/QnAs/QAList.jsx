@@ -45,6 +45,7 @@ class QAList extends React.Component {
         return (
           <div key={question.question_id}>
             <Question
+              className='questionComp'
               id={this.props.id}
               question={question}
               prodName={this.props.prodName}
@@ -56,7 +57,7 @@ class QAList extends React.Component {
     }).slice(0, this.props.visibleQsQuant);
 
     return (
-      <div>
+      <div className='QAItemArr'>
         <div>{QAItemArr}</div>
       </div>
     );

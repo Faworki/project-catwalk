@@ -105,17 +105,16 @@ class ModalComp extends React.Component {
   }
 
   testForm(e) {
-    //set a fields object with current state values
-    var fieldsObj = {
-      Question: this.state.formBody,
-      Nickname: this.state.formNickname,
-      Email: this.state.formEmail,
-    };
-    if (!this.props.question) {
-      delete fieldsObj['Question'];
+
+    var fieldsObj = {};
+    if (this.props.question) {
+      fieldsObj['Question'] = this.state.formBody;
+    } else {
       fieldsObj['Answer'] = this.state.formBody;
     }
-    //empty array, to capture the names of empty fields
+    fieldsObj['Nickname'] = this.state.formNickname;
+    fieldsObj['Email'] = this.state.formEmail;
+
     var emptyFields = [];
     for (var key in fieldsObj) {
       if (fieldsObj[key].length === 0) {

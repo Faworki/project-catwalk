@@ -51,15 +51,19 @@ class Question extends React.Component {
       if (answer.length === 0) {
         return null;
       } else {
+        var author = answer.answerer_name;
+        if (answer.answerer_name === 'Seller') {
+          var author = <b>Seller</b>;
+        }
         return (
-          <div key={answer.id}>
+          <div className='answerPkg' key={answer.id}>
             <h4>
-              A<div>{answer.body}</div>
+              A: {answer.body}
             </h4>
             <div>
-              by {answer.answerer_name}, {answer.date.substring(0, 10)}
+              by {author}, {answer.date.substring(0, 10)}
             </div>
-            {/* //controls the question instances of helpfulReport*/}
+            {/* //controls the answer instances of helpfulReport*/}
             <HelpfulReport
               id={this.props.id}
               helpVotes={answer.helpfulness}
@@ -73,28 +77,26 @@ class Question extends React.Component {
     });
 
     return (
-      <div>
+      <div className='QuestionSet'>
         <h4>
-          Q<div>{this.props.question.question_body}</div>
+          Q: {this.props.question.question_body}
         </h4>
         {answersArr}
-        <br></br>
-        <div>
+        {/* <br></br> */}
+        <div className='loadMoreLess'>
           {this.props.answers.length > 2 ? (
             <a onClick={this.toggleMoreFewer}>{this.state.loadMoreLess}</a>
           ) : null}
         </div>
-        <div>
-          {/* //controls the answer instances of helpfulReport*/}
-          <HelpfulReport
-            id={this.props.id}
-            helpVotes={this.props.question.question_helpfulness}
-            answerUsage={false}
-            question_body={this.props.question.question_body}
-            question_id={this.props.question.question_id}
-            prodName={this.props.prodName}
-          />
-        </div>
+        {/* //controls the question instances of helpfulReport*/}
+        <HelpfulReport
+          id={this.props.id}
+          helpVotes={this.props.question.question_helpfulness}
+          answerUsage={false}
+          question_body={this.props.question.question_body}
+          question_id={this.props.question.question_id}
+          prodName={this.props.prodName}
+        />
       </div>
     );
   }

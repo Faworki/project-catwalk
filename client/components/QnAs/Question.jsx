@@ -57,20 +57,22 @@ class Question extends React.Component {
         }
         return (
           <div className='answerPkg' key={answer.id}>
-            <h4>
+            <div className='answerBody'>
               A: {answer.body}
-            </h4>
-            <div>
-              by {author}, {answer.date.substring(0, 10)}
             </div>
-            {/* //controls the answer instances of helpfulReport*/}
-            <HelpfulReport
-              id={this.props.id}
-              helpVotes={answer.helpfulness}
-              answerUsage={true}
-              question_body={this.props.question_body}
-              prodName={this.props.prodName}
-            />
+            <div className='answerMeta'>
+              <div className='authorDate'>
+                by {author}, {answer.date.substring(0, 10)}  |
+              </div>
+              {/* //controls the answer instances of helpfulReport*/}
+              <HelpfulReport
+                id={this.props.id}
+                helpVotes={answer.helpfulness}
+                answerUsage={true}
+                question_body={this.props.question_body}
+                prodName={this.props.prodName}
+              />
+            </div>
           </div>
         );
       }

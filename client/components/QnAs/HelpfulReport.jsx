@@ -85,7 +85,7 @@ class HelpfulReport extends React.Component {
     var hrType = (this.props.answerUsage ? 'answerHR' : 'questionHR');
 
     return (
-      <div className={hrType}>
+      <div className={hrType} className='HRComp'>
       {/* <div className={hrType}> */}
         {/* <div> */}
           Helpful?  | {yesText}  | {answerText}

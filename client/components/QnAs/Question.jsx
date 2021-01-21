@@ -65,7 +65,6 @@ class Question extends React.Component {
             </div>
             {/* //controls the answer instances of helpfulReport*/}
             <HelpfulReport
-              className='questionHR'
               id={this.props.id}
               helpVotes={answer.helpfulness}
               answerUsage={true}
@@ -78,13 +77,13 @@ class Question extends React.Component {
     });
 
     return (
-      <div className='HRComp'>
+      <div className='QuestionSet'>
         <h4>
           Q: {this.props.question.question_body}
         </h4>
         {answersArr}
         {/* <br></br> */}
-        <div>
+        <div className='loadMoreLess'>
           {this.props.answers.length > 2 ? (
             <a onClick={this.toggleMoreFewer}>{this.state.loadMoreLess}</a>
           ) : null}

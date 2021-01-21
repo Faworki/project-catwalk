@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import ReviewCard from './ReviewCard';
 
 // todo: Look in to making select element accessible friendly

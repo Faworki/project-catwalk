@@ -38,7 +38,6 @@ export class ReviewsWidget extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    // Temporarily just getting that data in
     if (this.props.productId !== prevProps.productId) {
       this.updateReviewList(
         stateDefaults.page,

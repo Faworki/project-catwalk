@@ -1,6 +1,7 @@
 import React from 'react';
 import Styles from './Styles.jsx';
 import axios from 'axios';
+import './styles/OverviewStyles.scss';
 
 class StyleSelector extends React.Component {
   constructor(props) {
@@ -38,16 +39,18 @@ class StyleSelector extends React.Component {
 
   render () {
     return (
-      <div>
-        <span><small>STYLE &gt; </small></span><span>{this.state.selectedStyle}</span><br />
-        {this.state.styles.map((style) => {
-          return (<Styles
-            key={style.style_id}
-            styleId={style.style_id}
-            thumbnail={style.photos[0].thumbnail_url}
-            clickedStyleHandler={this.props.clickedStyleHandler}
-          />);
-        })}
+      <div className="style-selector">
+        <span><small><b>STYLE &gt;</b></small></span>{' '}<span>{this.state.selectedStyle}</span>
+        <div className="styles-container">
+          {this.state.styles.map((style) => {
+            return (<Styles
+              key={style.style_id}
+              styleId={style.style_id}
+              thumbnail={style.photos[0].thumbnail_url}
+              clickedStyleHandler={this.props.clickedStyleHandler}
+            />);
+          })}
+        </div>
       </div>
     );
   }

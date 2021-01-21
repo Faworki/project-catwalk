@@ -5,6 +5,7 @@ import StyleSelector from './overviewWidget/StyleSelector.jsx';
 import AddToCart from './overviewWidget/AddToCart.jsx';
 import ProductOverview from './overviewWidget/ProductOverview.jsx';
 import axios from 'axios';
+import './overviewWidget/styles/OverviewStyles.scss';
 
 class Overview extends React.Component {
   constructor(props) {
@@ -40,27 +41,29 @@ class Overview extends React.Component {
 
   render () {
     return (
-      <div>
+      <div className="main-grid">
         <ImageGallery
           product={this.props.product}
           selectedStyle={this.state.selectedStyle}
         />
-        <ProductInformation
-          product={this.props.product}
-          reviewMetaData={this.props.reviewMetaData}
-          reviewAverage={this.props.reviewAverage}
-          styles={this.state.styles}
-          selectedStyle={this.state.selectedStyle}
-        />
-        <StyleSelector
-          product={this.props.product}
-          selectedStyle={this.state.selectedStyle}
-          clickedStyleHandler={this.clickedStyleHandler}
-        />
-        <AddToCart
-          product={this.props.product}
-          selectedStyle={this.state.selectedStyle}
-        />
+        <div className="nested-overview-grid">
+          <ProductInformation
+            product={this.props.product}
+            reviewMetaData={this.props.reviewMetaData}
+            reviewAverage={this.props.reviewAverage}
+            styles={this.state.styles}
+            selectedStyle={this.state.selectedStyle}
+          />
+          <StyleSelector
+            product={this.props.product}
+            selectedStyle={this.state.selectedStyle}
+            clickedStyleHandler={this.clickedStyleHandler}
+          />
+          <AddToCart
+            product={this.props.product}
+            selectedStyle={this.state.selectedStyle}
+          />
+        </div>
         <ProductOverview
           product={this.props.product}
         />

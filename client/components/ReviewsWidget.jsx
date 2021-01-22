@@ -40,6 +40,8 @@ export class ReviewsWidget extends Component {
     this.toggleRatingFilter = this.toggleRatingFilter.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
     this.handleMoreReviewsClick = this.handleMoreReviewsClick.bind(this);
+    this.markReviewHelpful = this.markReviewHelpful.bind(this);
+    this.reportReview = this.reportReview.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -143,7 +145,7 @@ export class ReviewsWidget extends Component {
   }
 
   /*************************
-   * ==== ADD REVIEWS ===== *
+   * ==== MORE REVIEWS ===== *
   *************************/
 
   handleMoreReviewsClick(event) {
@@ -207,6 +209,81 @@ export class ReviewsWidget extends Component {
     this.setState({ sortOrder, page, numToDisplay, productReviews, allReviewsFetched });
   }
 
+  /******************************
+   * ===== MARK HELPFUL ======= *
+  ******************************/
+
+  markReviewHelpful(reviewId, index) {
+    let prefix = 'review';
+
+    // Check browser storage to see if this user has marked this
+    // review as helpful before.
+    let reviewsMarked = localStorage.getItem(prefix + reviewId);
+
+    // If they have not previously marked this review
+    if (!reviewsMarked) {
+
+      this.apiMarkHelpful(reviewId)
+      .then(()=>{
+      // Update hepfulness number in local filtered review list
+      let filteredReviews = this.state.filteredReviews.slice();
+      let review = filteredReviews[index];
+      review.helpfulness += 1;
+      review = Object.assign({}, review); // Copy so React knows it changed
+      filteredReviews[index] = review;
+
+      localStorage.setItem(prefix + reviewId, true);
+      this.setState({
+        filteredReviews
+      })
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  }
+}
+
+  apiMarkHelpful(reviewId) {
+    return axios.put(`/api/fec2/hrnyc/reviews/${reviewId}/helpful`)
+    .catch((err) => {
+      console.error(err);
+    });
+  }
+
+
+  /******************************
+   * ===== REPORT REVIEW ====== *
+  ******************************/
+
+  reportReview(reviewId, index) {
+
+    this.apiReportReview(reviewId)
+      .then(()=>{
+      // Update review with reported parameter
+      let filteredReviews = this.state.filteredReviews.slice();
+      let review = filteredReviews[index];
+      review.report = true;
+      review = Object.assign({}, review); // Copy so React knows it changed
+      filteredReviews[index] = review;
+
+      this.setState({
+        filteredReviews
+      })
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+
+
+  }
+
+  apiReportReview(reviewId) {
+    return axios.put(`/api/fec2/hrnyc/reviews/${reviewId}/report`)
+    .catch((err) => {
+      console.error(err);
+    });
+  }
+
   render() {
     return (
       <div className="reviews-widget">
@@ -228,6 +305,8 @@ export class ReviewsWidget extends Component {
             handleSortChange={this.handleSortChange}
             handleMoreReviewsClick={this.handleMoreReviewsClick}
             showMoreReviewsButton={this.state.showMoreReviewsButton}
+            markReviewHelpful={this.markReviewHelpful}
+            reportReview={this.reportReview}
           />
         </div>
       </div>

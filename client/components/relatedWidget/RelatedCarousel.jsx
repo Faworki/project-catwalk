@@ -18,60 +18,11 @@ class RelatedCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      selected: selected,
       relatedIds: [],
       relatedProducts: [],
       relatedImages: []
     };
-    this.productItems = ProductList(
-      {
-        products: this.state.relatedProducts,
-        images: this.state.relatedImages
-      },
-      this.state.selected,
-      this.props.getNewProduct);
-    this.onSelect = this.onSelect.bind(this);
-  }
-
-  onSelect(key) {
-    this.setState({ selected: key });
-  }
-
-  getRelatedProduct(productId) {
-    axios.get(`/api/fec2/hrnyc/products/${productId}/related`)
-    .then(results=>{
-      this.setState({relatedIds: results.data});
-      let products = results.data.map(relatedId=>{
-        return axios.get(`/api/fec2/hrnyc/products/${relatedId}`);
-      });
-      let images = results.data.map(relatedId=>{
-        return axios.get(`/api/fec2/hrnyc/products/${relatedId}/styles`);
-      });
-      return {
-        products: products,
-        images: images
-      };
-    })
-    .then(results=>{
-          Promise.all(results.products)
-          .then(results=>{
-            return results.map((res)=>{
-              return res.data;
-            });
-          })
-          .then(results=>{ this.setState({relatedProducts: results}); })
-          .catch(err=>{ console.log(err); });
-
-          Promise.all(results.images)
-          .then(results=>{
-            return results.map((res)=>{
-              return res.data.results[0].photos[0].thumbnail_url;
-            });
-          })
-          .then(results=>{ this.setState({relatedImages: results}); })
-          .catch(err=>{ console.log(err); });
-    })
-    .catch(err=>{ console.log(err); });
+    this.productItems = [];
   }
 
   buildCarousel() {
@@ -80,17 +31,42 @@ class RelatedCarousel extends React.Component {
         products: this.state.relatedProducts,
         images: this.state.relatedImages
       },
-      this.state.selected,
       this.props.getNewProduct);
   }
 
-  componentDidMount() {
-    this.buildCarousel();
-  }
-
-  componentDidUpdate(prevProps) {
+  async componentDidUpdate(prevProps) {
     if (this.props.product.id !== prevProps.product.id) {
-      this.getRelatedProduct(this.props.product.id);
+
+      //get array of related ID's
+      const relatedIds = await axios.get(`/api/fec2/hrnyc/products/${this.props.product.id}/related`)
+      const ids = relatedIds.data
+      // this.setState({relatedIds: ids});
+
+      //only when that has finished, get the product objects
+      const relatedProductsPromises = ids.map(id=>{
+        return axios.get(`/api/fec2/hrnyc/products/${id}`)
+        .then(productPromise=>{
+          return productPromise.data
+        })
+      })
+
+      //and then the images
+      const relatedImagesPromises = ids.map(id=>{
+        return axios.get(`/api/fec2/hrnyc/products/${id}/styles`)
+        .then(imagePromise=>{
+          return imagePromise.data.results[0].photos[0].thumbnail_url
+        })
+      })
+
+      //resolve those promises
+      const relatedProducts = await Promise.all(relatedProductsPromises);
+      const relatedImages = await Promise.all(relatedImagesPromises);
+
+      //only after they have resolved, store them as state
+      this.setState({
+        relatedProducts: relatedProducts,
+        relatedImages: relatedImages
+      })
     }
     this.buildCarousel();
   }
@@ -104,7 +80,6 @@ class RelatedCarousel extends React.Component {
           arrowLeft={ArrowLeft}
           arrowRight={ArrowRight}
           selected={selected}
-          onSelect={this.onSelect}
           alignCenter={false}
           wheel={false}
           hideArrows={true}

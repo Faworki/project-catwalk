@@ -17,7 +17,7 @@ const ReviewsSummary = ({reviewAverage, recommended, reviewCount}) => {
   return (
     <section>
       <article>
-        <h2 className="review-average">{reviewAverage}</h2>
+        <h2 className="review-average">{parseFloat(reviewAverage).toFixed(1)}</h2>
         <StarAverage reviewAverage={reviewAverage}/>
         <p>Based on {reviewCount} reviews</p>
       </article>

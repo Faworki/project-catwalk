@@ -2,6 +2,7 @@ import React from 'react';
 import ScrollMenu from 'react-horizontal-scrolling-menu';
 import ProductList from './ProductList.jsx';
 import ArrowButton from './ArrowButton.jsx';
+import Comparison from './Comparison.jsx';
 import axios from 'axios';
 
 const selected = null;
@@ -20,18 +21,28 @@ class RelatedCarousel extends React.Component {
     this.state = {
       relatedIds: [],
       relatedProducts: [],
-      relatedImages: []
+      relatedImages: [],
+      display: false,
+      productIndex: null
     };
     this.productItems = [];
+    this.showModal = this.showModal.bind(this);
+  }
+
+  showModal() {
+    this.setState({display: !this.state.display});
   }
 
   buildCarousel() {
-    this.productItems = new ProductList(
+    this.productItems = ProductList(
       {
         products: this.state.relatedProducts,
         images: this.state.relatedImages
       },
-      this.props.getNewProduct);
+      this.props.getNewProduct,
+      this.showModal,
+      this.props.reviewAverage
+      );
   }
 
   async componentDidUpdate(prevProps) {
@@ -40,7 +51,6 @@ class RelatedCarousel extends React.Component {
       //get array of related ID's
       const relatedIds = await axios.get(`/api/fec2/hrnyc/products/${this.props.product.id}/related`)
       const ids = relatedIds.data
-      // this.setState({relatedIds: ids});
 
       //only when that has finished, get the product objects
       const relatedProductsPromises = ids.map(id=>{
@@ -85,6 +95,11 @@ class RelatedCarousel extends React.Component {
           hideArrows={true}
           arrowDisabledClass='scroll-menu-arrow--disabled'
           hideSingleArrow={true}
+        />
+        <Comparison
+        product={this.props.product}
+        showModal={this.showModal}
+        isOpen={this.state.display}
         />
       </div>
     );

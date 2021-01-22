@@ -9,7 +9,7 @@ class AddButton extends React.Component {
     return (
       <div className="menu-item-wrapper">
         <div className="menu-item">
-          <button onClick={this.props.addToOutfit}>
+          <button className="add-button" onClick={this.props.addToOutfit}>
             +
           </button>
         </div>

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-import { RadioGroup, RadioButton } from 'react-radio-buttons';
 
 export class AddReviewModal extends Component {
   constructor(props) {
@@ -79,12 +78,12 @@ export class AddReviewModal extends Component {
             <span style={{color: charCountCol}}>{this.state.body.length}</span>
           </div>
 
-          {/* <div id="review-submit-img">
+          <div id="review-submit-img">
             <label htmlFor="images">Add Product Images</label>
             <input type="file" name="images" accept=".jpg, .jpeg, .png" multiple></input>
             <div className="image-preview">
             </div>
-          </div> */}
+          </div>
 
           <div id="review-nickname">
             <label htmlFor="nickname">Nickname:</label>

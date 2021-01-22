@@ -13,7 +13,22 @@ const ReviewCard = ({ review, index, markReviewHelpful, reportReview }) => {
     );
   }
 
+  // Conditionally render the report button
+  let report = <a>Reported</a>;
+  if (!review.report) {
+    report = (
+      <a
+        onClick={() => {
+          reportReview(review.review_id, index);
+        }}
+      >
+        Report
+      </a>
+    );
+  }
+
   let dateString = new Date(Date.parse(review.date)).toDateString();
+
 
   return (
     <section className="review-card">
@@ -54,13 +69,7 @@ const ReviewCard = ({ review, index, markReviewHelpful, reportReview }) => {
           {`(${review.helpfulness})`}
         </div>
         <div>
-          <a
-            onClick={() => {
-              reportReview(review.review_id, index);
-            }}
-          >
-            Report
-          </a>
+          {report}
         </div>
       </div>
     </section>

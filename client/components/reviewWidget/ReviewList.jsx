@@ -26,12 +26,20 @@ const ReviewList = ({
       <div className="card-container">
         {reviews.map((review, index) => {
           return (
-            <ReviewCard key={review.review_id} review={review} index={index} markReviewHelpful={markReviewHelpful} reportReview={reportReview}/>
+            <ReviewCard
+              key={review.review_id}
+              review={review}
+              index={index}
+              markReviewHelpful={markReviewHelpful}
+              reportReview={reportReview}
+            />
           );
         })}
       </div>
       <div>
-        {showMoreReviewsButton ? <button onClick={handleMoreReviewsClick}>More Reviews</button> : null}
+        {showMoreReviewsButton ? (
+          <button onClick={handleMoreReviewsClick}>More Reviews</button>
+        ) : null}
         <button>Add A Review</button>
       </div>
     </main>

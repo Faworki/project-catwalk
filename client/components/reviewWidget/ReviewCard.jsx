@@ -48,7 +48,8 @@ const ReviewCard = ({ review, index, markReviewHelpful, reportReview }) => {
                 src={photo.url}
                 alt="Reviewer product image"
                 key={photo.id}
-                // height="100px"
+                height="100px"
+                width="100px"
               />
             );
           })}

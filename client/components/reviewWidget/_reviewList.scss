@@ -44,3 +44,9 @@ $light-grey: #e2e2e2;
 .card-container section{
   margin-top: 40px;
 }
+
+.card-container {
+  max-height: 50vh;
+  overflow: hidden;
+  overflow-y: scroll;
+}

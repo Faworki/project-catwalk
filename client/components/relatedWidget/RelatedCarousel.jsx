@@ -26,12 +26,15 @@ class RelatedCarousel extends React.Component {
   }
 
   buildCarousel() {
-    this.productItems = new ProductList(
+    this.productItems = ProductList(
       {
         products: this.state.relatedProducts,
         images: this.state.relatedImages
       },
-      this.props.getNewProduct);
+      this.props.getNewProduct,
+      ()=>{console.log('carousel callback')},
+      this.props.reviewAverage
+      );
   }
 
   async componentDidUpdate(prevProps) {
@@ -72,6 +75,8 @@ class RelatedCarousel extends React.Component {
   }
 
   render() {
+    //try this
+    // const carousel = this.productItems;
     return (
       <div>
         Related Products Carousel

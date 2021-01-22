@@ -8,7 +8,11 @@ class ActionButton extends React.Component {
   render() {
     return (
       <div>
-        ActionButton
+        <button onClick={()=>{
+          this.props.buttonCallback(this.props.productId);
+          }}>
+          ActionButton
+        </button>
       </div>
     );
   }

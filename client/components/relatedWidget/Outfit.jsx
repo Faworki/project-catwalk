@@ -28,7 +28,7 @@ class Outfit extends React.Component {
     axios.get(`/api/fec2/hrnyc/products/${productId}/styles`)
     .then(results=>{
       let imageArray = this.state.image.slice();
-      imageArray.push(results.data.results[0].photos[0].thumbnail_url);
+      imageArray.push(this.props.styles[0].photos[0].thumbnail_url);
       this.setState({image: imageArray});
     })
     .catch(err=>{
@@ -37,12 +37,15 @@ class Outfit extends React.Component {
   }
 
   buildCarousel() {
-  this.productItems = new ProductList(
+  this.productItems = ProductList(
     {
       products: this.props.yourOutfit,
       images: this.state.image
     },
-      this.props.getNewProduct);
+      this.props.getNewProduct,
+      this.props.removeFromOutfit,
+      this.props.reviewAverage
+      );
   }
 
   componentDidUpdate(prevProps) {

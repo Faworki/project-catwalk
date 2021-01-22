@@ -22,12 +22,16 @@ class RelatedProducts extends React.Component {
         <RelatedCarousel
         product={this.props.product}
         getNewProduct={this.props.getNewProduct}
+        reviewAverage={this.props.reviewAverage}
         />
         <Outfit
         product={this.props.product}
         yourOutfit={this.props.yourOutfit}
         addToOutfit={this.props.addToOutfit}
         getNewProduct={this.props.getNewProduct}
+        removeFromOutfit = {this.props.removeFromOutfit}
+        styles = {this.props.styles}
+        reviewAverage={this.props.reviewAverage}
         />
       </div>
     );

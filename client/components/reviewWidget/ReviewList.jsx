@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ReviewCard from './ReviewCard';
+import AddReviewModal from './AddReviewModal.jsx';
 
 // todo: Look in to making select element accessible friendly
 
@@ -13,6 +14,9 @@ const ReviewList = ({
   markReviewHelpful,
   reportReview,
 }) => {
+
+  const [showModal, setShowModal] = useState(false);
+
   return (
     <main>
       <div className="list-controls">
@@ -40,8 +44,14 @@ const ReviewList = ({
         {showMoreReviewsButton ? (
           <button onClick={handleMoreReviewsClick}>More Reviews</button>
         ) : null}
-        <button>Add A Review</button>
+        <button
+          onClick={() => { setShowModal(true); }}
+        >Add A Review +</button>
       </div>
+      <AddReviewModal
+        showModal={showModal}
+        closeModal={()=>{ setShowModal(false); }}
+      />
     </main>
   );
 };

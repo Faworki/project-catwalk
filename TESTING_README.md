@@ -3,7 +3,7 @@
 Run all jest test: `npm test`
 
 ### Test File Naming
-Test files should be named accorind to the following convention: <filebeingtested>.test.js.
+Test files should be named according to the following convention: <filebeingtested>.test.js.
 ex. If you are testing App.jsx the test file should be called: App.test.js.
 
 Test files should be in the directory as the file they are testing or alternatively they can be kept in a directory called '__test__'.

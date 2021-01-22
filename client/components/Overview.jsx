@@ -5,8 +5,6 @@ import StyleSelector from './overviewWidget/StyleSelector.jsx';
 import AddToCart from './overviewWidget/AddToCart.jsx';
 import ProductOverview from './overviewWidget/ProductOverview.jsx';
 import axios from 'axios';
-import './overviewWidget/styles/OverviewStyles.scss';
-
 
 class Overview extends React.Component {
   constructor(props) {
@@ -14,7 +12,7 @@ class Overview extends React.Component {
 
     this.state = {
       styles: [],
-      selectedStyle: null
+      selectedStyle: null,
     };
 
     this.clickedStyleHandler = this.clickedStyleHandler.bind(this);
@@ -22,10 +20,11 @@ class Overview extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.product !== prevProps.product) {
-      axios.get(`/api/fec2/hrnyc/products/${this.props.product.id}/styles`)
-        .then(({data}) => {
+      axios
+        .get(`/api/fec2/hrnyc/products/${this.props.product.id}/styles`)
+        .then(({ data }) => {
           this.setState({
-            styles: data.results
+            styles: data.results,
           });
         })
         .catch((err) => {
@@ -36,11 +35,11 @@ class Overview extends React.Component {
 
   clickedStyleHandler(e) {
     this.setState({
-      selectedStyle: e.target.id
+      selectedStyle: e.target.id,
     });
   }
 
-  render () {
+  render() {
     return (
       <div className="main-grid">
         <ImageGallery
@@ -65,9 +64,7 @@ class Overview extends React.Component {
             selectedStyle={this.state.selectedStyle}
           />
         </div>
-        <ProductOverview
-          product={this.props.product}
-        />
+        <ProductOverview product={this.props.product} />
       </div>
     );
   }

@@ -1,7 +1,6 @@
 import React from 'react';
 import Styles from './Styles.jsx';
 import axios from 'axios';
-import './styles/OverviewStyles.scss';
 
 class StyleSelector extends React.Component {
   constructor(props) {

@@ -8,11 +8,14 @@ class ActionButton extends React.Component {
   render() {
     return (
       <div>
-        <button onClick={()=>{
+        <img
+        src='https://static.thenounproject.com/png/2854151-200.png'
+         onClick={()=>{
           this.props.buttonCallback(this.props.productId);
-          }}>
-          ActionButton
-        </button>
+          }}
+          width='25px'
+          height='25px'
+          />
       </div>
     );
   }

@@ -25,15 +25,9 @@ class Outfit extends React.Component {
   }
 
   getImage (productId) {
-    axios.get(`/api/fec2/hrnyc/products/${productId}/styles`)
-    .then(results=>{
       let imageArray = this.state.image.slice();
       imageArray.push(this.props.styles[0].photos[0].thumbnail_url);
       this.setState({image: imageArray});
-    })
-    .catch(err=>{
-      console.log(err);
-    });
   }
 
   buildCarousel() {
@@ -48,9 +42,16 @@ class Outfit extends React.Component {
       );
   }
 
+  componentDidUpdate(prevState) {
+    if (this.state.images.length !== prevState.images.length) {
+      this.getImage(this.props.product.id);
+    }
+    this.buildCarousel();
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.product.id !== prevProps.product.id) {
-      this.getImage(this.props.product.id);
+      this.getImage();
     }
     this.buildCarousel();
   }

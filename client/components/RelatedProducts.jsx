@@ -1,19 +1,14 @@
 import React from 'react';
 import RelatedCarousel from './relatedWidget/RelatedCarousel.jsx';
 import Outfit from './relatedWidget/Outfit.jsx';
+import Comparison from './relatedWidget/Comparison.jsx';
 import axios from 'axios';
 
 class RelatedProducts extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      relatedIDs: [],
-      relatedProducts: []
-    };
   }
 
-  componentDidMount() {}
 
   render () {
     return (

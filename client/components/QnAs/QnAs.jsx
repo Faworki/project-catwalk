@@ -60,7 +60,7 @@ class QnAs extends React.Component {
     // console.log('product data', this.props.product);
     return (
       <div className='QnAsComp'>
-        <h1>Questions and Answers</h1>
+        <div className='eric'>Questions and Answers</div>
         <SearchQs className='SearchQsComp' updateSearchTerm={this.updateSearchTerm}/>
         <QAList
           className='QAListcomp'

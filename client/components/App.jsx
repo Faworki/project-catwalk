@@ -34,28 +34,34 @@ class App extends React.Component {
       },
       reviewAverage: 0,
       reviewCount: null,
-      yourOutfit: []
+      yourOutfit: [],
+      style: []
     };
     this.getNewProduct = this.getNewProduct.bind(this);
     this.addToOutfit = this.addToOutfit.bind(this);
+    this.removeFromOutfit = this.removeFromOutfit.bind(this);
   }
 
   getNewProduct(productId) {
     let getProduct = axios.get(`/api/fec2/hrnyc/products/${productId}`);
     let getReviewMetaData = axios.get(`/api/fec2/hrnyc/reviews/meta?product_id=${productId}`);
-    Promise.all([getProduct, getReviewMetaData])
+    let getStyle = axios.get(`/api/fec2/hrnyc/products/${productId}/styles`);
+
+    Promise.all([getProduct, getReviewMetaData, getStyle])
       .then((results) => {
         let product = results[0].data;
         let reviewMetaData = results[1].data;
         let reviewAverage = this.reviewAverage(reviewMetaData.ratings);
         let reviewCount = this.sumReviewCount(reviewMetaData.ratings);
+        let styles = results[2].data.results;
 
 
         this.setState({
           product,
           reviewMetaData,
           reviewAverage,
-          reviewCount
+          reviewCount,
+          styles
         });
       })
       .catch((err) => console.error(err));
@@ -93,6 +99,16 @@ class App extends React.Component {
       outfitArray.push(this.state.product);
       this.setState({yourOutfit: outfitArray});
     }
+  }
+
+  removeFromOutfit(productId) {
+    let outfitArray = this.state.yourOutfit.slice();
+    for (let x = 0; x < outfitArray.length; x++) {
+      if (outfitArray[x].id === productId) {
+        outfitArray.splice(x, 1);
+      }
+    }
+    this.setState({yourOutfit: outfitArray});
   }
 
   render () {

@@ -10,3 +10,19 @@ body {
 #app {
   width: 100%;
 }
+
+body {
+  margin: 0;
+}
+
+header {
+  color: goldenrod;
+  font-family: "Open Sans", sans-serif;
+  font-size: 3.5em;
+  font-weight: 200;
+  background-color: rgb(28, 40, 36);
+  height: 80px;
+  margin-bottom: 20px;
+  padding: 10px 20px;
+  box-shadow: 1px 5px 5px rgba($color: #000000, $alpha: .3);
+}

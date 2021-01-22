@@ -1,6 +1,10 @@
 $medium-grey: #9d9d9d;
 $light-grey: #e2e2e2;
 
+.list-controls {
+  margin-bottom: 20px;
+}
+
 .list-controls label {
   font-weight: 800;
   font-size: 1em;
@@ -41,8 +45,12 @@ $light-grey: #e2e2e2;
 }
 
 // Card List
-.card-container section{
+.card-container section {
   margin-top: 40px;
+}
+
+.card-container section:first-child {
+  margin-top: 0;
 }
 
 .card-container {

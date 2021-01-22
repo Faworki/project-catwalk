@@ -4,6 +4,13 @@ import Overview from './Overview.jsx';
 import RelatedProducts from './RelatedProducts.jsx';
 import QnAs from './QnAs/QnAs.jsx';
 import RatingsAndReviews from './ReviewsWidget.jsx';
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+
 
 class App extends React.Component {
   constructor() {
@@ -90,34 +97,36 @@ class App extends React.Component {
 
   render () {
     return (
-      <div>
-        <div>HEADER FOR OUR WEBSITE</div>
-        <br />
-        <Overview
-          product={this.state.product}
-          reviewMetaData={this.state.reviewMetaData}
-          reviewAverage={this.state.reviewAverage}
-          yourOutfit={this.state.yourOutfit}
-        />
-        <br />
-        <RelatedProducts
-          product={this.state.product}
-          reviewMetaData={this.state.reviewMetaData}
-          reviewAverage={this.state.reviewAverage}
-          yourOutfit={this.state.yourOutfit}
-          getNewProduct={this.getNewProduct}
-          addToOutfit={this.addToOutfit}
-        /><br />
-        <QnAs
-          product={this.state.product}
-        /><br />
-        <RatingsAndReviews
-          productId={this.state.product.id}
-          reviewMetaData={this.state.reviewMetaData}
-          reviewAverage={this.state.reviewAverage}
-          reviewCount={this.state.reviewCount}
-        /><br />
-      </div>
+      <BrowserRouter>
+        <div>
+          <div>HEADER FOR OUR WEBSITE</div>
+          <br />
+          <Overview
+            product={this.state.product}
+            reviewMetaData={this.state.reviewMetaData}
+            reviewAverage={this.state.reviewAverage}
+            yourOutfit={this.state.yourOutfit}
+          />
+          <br />
+          <RelatedProducts
+            product={this.state.product}
+            reviewMetaData={this.state.reviewMetaData}
+            reviewAverage={this.state.reviewAverage}
+            yourOutfit={this.state.yourOutfit}
+            getNewProduct={this.getNewProduct}
+            addToOutfit={this.addToOutfit}
+          /><br />
+          <QnAs
+            product={this.state.product}
+          /><br />
+          <RatingsAndReviews
+            productId={this.state.product.id}
+            reviewMetaData={this.state.reviewMetaData}
+            reviewAverage={this.state.reviewAverage}
+            reviewCount={this.state.reviewCount}
+          /><br />
+        </div>
+      </BrowserRouter>
     );
   }
 }

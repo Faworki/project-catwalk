@@ -1,7 +1,6 @@
 import React from 'react';
 import axios from 'axios';
 import ProductFeatures from './ProductFeatures.jsx';
-import './styles/OverviewStyles.scss';
 
 class ProductOverview extends React.Component {
   constructor(props) {

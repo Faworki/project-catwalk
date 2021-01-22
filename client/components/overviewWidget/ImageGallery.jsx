@@ -1,7 +1,6 @@
 import React from 'react';
 import Thumbnails from './Thumbnails.jsx';
 import axios from 'axios';
-import './styles/OverviewStyles.scss';
 
 class ImageGallery extends React.Component {
   constructor(props) {

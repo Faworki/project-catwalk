@@ -32,7 +32,7 @@ class App extends React.Component {
         recommended: {},
         characteristics: {},
       },
-      reviewAverage: null,
+      reviewAverage: 0,
       reviewCount: null,
       yourOutfit: []
     };

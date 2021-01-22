@@ -68,5 +68,9 @@ describe('QnAs should ', () => {
     expect(app.find(SearchQs)).toHaveLength (1);
   });
 
+  test('contains a certain className', () => {
+    expect(app.hasClass('QnAsComp')).toEqual(true);
+  });
+
 
 });

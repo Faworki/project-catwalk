@@ -2,6 +2,13 @@ import React from 'react'; // Test files must import react
 import { shallow } from 'enzyme'; // import any functions you are using from enzyme
 // import { mount, shallow, render } from 'enzyme';
 import QnAs from './QnAs.jsx';
+import QAList from './QAList.jsx';
+import SearchQs from './SearchQs.jsx';
+import Question from './Question.jsx';
+import ModalComp from './ModalComp.jsx';
+import HelpfulReport from './HelpfulReport.jsx';
+
+
 
 var sampleProduct = {
   id: 11055,
@@ -34,32 +41,32 @@ describe('QnAs should ', () => {
     expect(app.state()).toEqual(expect.objectContaining(productState));
   });
 
-  // test('intialize state with all reviewMetaData keys', () => {
+  test('render the SearchQs Widget', () => {
+    expect(app.containsAnyMatchingElements([SearchQs])).toEqual(true);
+  });
 
-  //   let reviewMetaData = {
-  //       'product_id': null,
-  //       ratings: {},
-  //       recommended: {},
-  //       characteristics: {},
-  //     };
+  test('render the Question Widget', () => {
+    expect(app.containsAnyMatchingElements([Question])).toEqual(true);
+  });
 
-  //   expect(app.state().reviewMetaData).toEqual(expect.objectContaining(reviewMetaData));
+  test('render the HelpfulReport Widget', () => {
+    expect(app.containsAnyMatchingElements([HelpfulReport])).toEqual(true);
+  });
 
-  // });
+  test('render the QAList Widget', () => {
+    expect(app.containsAnyMatchingElements([QAList])).toEqual(true);
+  });
 
-  // test('render the Overview Widget', () => {
-  //   expect(app.containsAnyMatchingElements([Overview])).toEqual(true);
-  // });
+  test('render the ModalComp Widget', () => {
+    expect(app.containsAnyMatchingElements([ModalComp])).toEqual(true);
+  });
 
-  // test('render the Related Products Widget', () => {
-  //   expect(app.containsAnyMatchingElements([RelatedProducts])).toEqual(true);
-  // });
+  // test('hold the correct props value', () => {
+  // }
 
-  // test('render the Questions & Answers Widget', () => {
-  //   expect(app.containsAnyMatchingElements([QnAs])).toEqual(true);
-  // });
+  test('render one SearchQs component', () => {
+    expect(app.find(SearchQs)).toHaveLength (1);
+  });
 
-  // test('render the Reviews Widget', () => {
-  //   expect(app.containsAnyMatchingElements([ReviewsWidget])).toEqual(true);
-  // });
+
 });

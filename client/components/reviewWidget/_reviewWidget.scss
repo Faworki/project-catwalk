@@ -1,0 +1,102 @@
+.reviews-widget {
+  font-family: "Open Sans", sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 1200px;
+  min-width: 900px;
+  width: 80%;
+}
+
+.reviews-widget h3 {
+  text-transform: uppercase;
+  font-weight: 200;
+  font-size: 1.12em;
+  margin-bottom: 0.5em;
+}
+
+.reviews-container {
+  display: flex;
+}
+
+.reviews-container aside {
+  flex: 1 1 auto;
+}
+
+.reviews-container main {
+  flex: 0 1 70%;
+  padding-left: 60px;
+}
+
+
+//===============================
+// ---- BUTTON RESET
+//===============================
+
+.reviews-widget button,
+.reviews-widget [type="button"],
+.reviews-widget [type="reset"],
+.reviews-widget [type="submit"] {
+  -webkit-appearance: button;
+}
+
+.reviews-widget button:hover,
+.reviews-widget button:focus {
+    background: #fff;
+}
+
+button:focus {
+    outline: 2px solid #fff;
+    outline-offset: -4px;
+}
+
+button:active {
+    transform: scale(0.99);
+}
+
+//===============================
+// ---- BREAKDOWN
+//===============================
+
+.breakdown-container section {
+  padding-top: 10px;
+}
+
+.breakdown-container section article {
+  padding-bottom: 10px;
+}
+
+.breakdown-container section article:last-child {
+  padding-bottom: 0px;
+}
+
+
+.review-summary article {
+  vertical-align: text-top;
+}
+
+.review-summary article:first-child {
+  display: flex;
+}
+
+.review-summary article:last-child {
+  padding-top: 20px;
+}
+
+#review-average {
+  color: #555;
+  display: inline-block;
+  font-size: 3.5em;
+  font-weight: 700;
+  line-height: 1em;
+  margin: 0;
+  padding-right: 20px;
+}
+
+.review-summary p {
+  font-size: .8em;
+  margin: 0;
+}
+
+//===============================
+// ----
+//===============================

@@ -11,15 +11,17 @@ const ReviewsSummary = ({reviewAverage, recommended, reviewCount}) => {
   let percentRecommend;
   if (recommended) {
     let percent = calcPercentRecommended(recommended);
-    percentRecommend = (<p>{percent} of reviewers recommend this product</p>);
+    percentRecommend = (<p>{percent} of reviews recommend this product</p>);
   }
 
   return (
-    <section>
+    <section className="review-summary">
       <article>
-        <h2 className="review-average">{parseFloat(reviewAverage).toFixed(1)}</h2>
+        <h2 id="review-average">{parseFloat(reviewAverage).toFixed(1)}</h2>
+        <div>
         <StarAverage reviewAverage={reviewAverage}/>
         <p>Based on {reviewCount} reviews</p>
+        </div>
       </article>
       <article>
       {recommended ? percentRecommend : null}

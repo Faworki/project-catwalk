@@ -12,7 +12,7 @@ const labelDict = {
 
 const CharacteristicsBreakdown = ({characteristics}) => {
   return (
-    <section>
+    <section className="char-breakdown">
       {Object.entries(characteristics).map(([name, data]) => {
         return (
           <CharacteristicsScale

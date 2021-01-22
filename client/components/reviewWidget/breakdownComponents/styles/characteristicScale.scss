@@ -1,6 +1,23 @@
+// Text formating
+.char-scale h5{
+  margin: 0;
+  font-size: .9em;
+  font-weight: 400;
+  margin-bottom: 5px;
+}
+
+.char-labels span{
+  font-size: .8em
+}
+// Scale and layout
+
 .char-scale {
   display: flex;
   flex-flow: column nowrap;
+}
+
+.char-scale div{
+  // padding-top: 5px;
 }
 
 .scale {
@@ -22,7 +39,7 @@
 
 .pointer {
   position: absolute;
-  top: -3px;
+  top: -5px;
   left: 0;
   margin-right: auto;
   margin-left: 50%;
@@ -33,5 +50,5 @@
   display: flex;
   flex-flow: nowrap row;
   justify-content: space-between;
-  padding-top: 5px;
+  padding-top: 8px;
 }

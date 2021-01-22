@@ -36,11 +36,11 @@ const ReviewList = ({
           );
         })}
       </div>
-      <div>
+      <div className="list-footer">
         {showMoreReviewsButton ? (
           <button onClick={handleMoreReviewsClick}>More Reviews</button>
         ) : null}
-        <button>Add A Review</button>
+        <button>Add A Review +</button>
       </div>
     </main>
   );

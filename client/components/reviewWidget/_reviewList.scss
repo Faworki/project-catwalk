@@ -1,0 +1,46 @@
+$medium-grey: #9d9d9d;
+$light-grey: #e2e2e2;
+
+.list-controls label {
+  font-weight: 800;
+  font-size: 1em;
+}
+
+.list-footer {
+  padding-top: 20px;
+}
+
+// -- SELECT --
+
+.list-controls select {
+  background-color: -internal-light-dark(#FFF);
+  border: none;
+  border-bottom: 3px solid black;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 800;
+  font-size: 1em;
+}
+
+.list-controls select:focus {
+  border: none;
+}
+
+// -- Buttons --
+.list-footer button {
+  color: $medium-grey;
+  background-color: #fff;
+  border: 2px solid $medium-grey;
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 1.1em;
+  padding: 10px;
+}
+
+.list-footer button:first-child {
+  margin-right: 10px;
+}
+
+// Card List
+.card-container section{
+  margin-top: 40px;
+}

@@ -11,19 +11,21 @@ class QAList extends React.Component {
     };
   }
 
-  componentDidMount() {
-    //why can't i use a template literal here?
-    axios
-      .get('/api/fec2/hrnyc/qa/questions?product_id=11001')
-      .then((productInfo) => {
-        this.setState({
-          questionData: productInfo.data.results,
-        });
-      })
-      .then(()=>{
-        this.props.getQuestionQuantity(this.state.questionData.length);
-      })
-      .catch((err) => console.error(err));
+  componentDidUpdate(prevProps) {
+    // Typical usage (don't forget to compare props):
+    if (this.props.id !== prevProps.id) {
+      axios
+        .get(`/api/fec2/hrnyc/qa/questions?product_id=${this.props.id}`)
+        .then((productInfo) => {
+          this.setState({
+            questionData: productInfo.data.results,
+          });
+        })
+        .then(()=>{
+          this.props.getQuestionQuantity(this.state.questionData.length);
+        })
+        .catch((err) => console.error(err));
+    }
   }
 
   render() {

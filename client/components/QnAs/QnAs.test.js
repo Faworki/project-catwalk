@@ -21,13 +21,13 @@ var sampleProduct = {
 };
 
 describe('QnAs should ', () => {
-  let app;
+  let QnAs;
   beforeAll(() => {
-    app = shallow(<QnAs product={sampleProduct} />, { disableLifecycleMethods: true });
+    QnAs = shallow(<QnAs product={sampleProduct} />, { disableLifecycleMethods: true });
   });
 
   afterAll(() => {
-    app.unMount();
+    QnAs.unMount();
   });
 
   test('intialize state with all keys', () => {
@@ -38,38 +38,35 @@ describe('QnAs should ', () => {
       showModal: false,
       showMoreQsBtn: true,
     };
-    expect(app.state()).toEqual(expect.objectContaining(productState));
+    expect(QnAs.state()).toEqual(expect.objectContaining(productState));
   });
 
   test('render the SearchQs Widget', () => {
-    expect(app.containsAnyMatchingElements([SearchQs])).toEqual(true);
+    expect(QnAs.containsAnyMatchingElements([SearchQs])).toEqual(true);
   });
 
   test('render the Question Widget', () => {
-    expect(app.containsAnyMatchingElements([Question])).toEqual(true);
+    expect(QnAs.containsAnyMatchingElements([Question])).toEqual(true);
   });
 
   test('render the HelpfulReport Widget', () => {
-    expect(app.containsAnyMatchingElements([HelpfulReport])).toEqual(true);
+    expect(QnAs.containsAnyMatchingElements([HelpfulReport])).toEqual(true);
   });
 
   test('render the QAList Widget', () => {
-    expect(app.containsAnyMatchingElements([QAList])).toEqual(true);
+    expect(QnAs.containsAnyMatchingElements([QAList])).toEqual(true);
   });
 
   test('render the ModalComp Widget', () => {
-    expect(app.containsAnyMatchingElements([ModalComp])).toEqual(true);
+    expect(QnAs.containsAnyMatchingElements([ModalComp])).toEqual(true);
   });
 
-  // test('hold the correct props value', () => {
-  // }
-
   test('render one SearchQs component', () => {
-    expect(app.find(SearchQs)).toHaveLength (1);
+    expect(QnAs.find(SearchQs)).toHaveLength (1);
   });
 
   test('contains a certain className', () => {
-    expect(app.hasClass('QnAsComp')).toEqual(true);
+    expect(QnAs.hasClass('QnAsComp')).toEqual(true);
   });
 
 

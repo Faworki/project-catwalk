@@ -1,5 +1,5 @@
 .menu-item {
-  height: 450px;
+  height: 500px;
   width: 250px;
   padding: 0 40px;
   margin: 10px 10px;
@@ -7,7 +7,7 @@
   cursor: pointer;
   border: 5px black solid;
 
-  button {
+  .add-button {
     font-size: 100px;
   }
 }

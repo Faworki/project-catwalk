@@ -36,6 +36,14 @@
   padding-top: 10px;
 }
 
+.breakdown-container section article {
+  padding-bottom: 10px;
+}
+
+.breakdown-container section article:last-child {
+  padding-bottom: 0px;
+}
+
 
 .review-summary article {
   vertical-align: text-top;

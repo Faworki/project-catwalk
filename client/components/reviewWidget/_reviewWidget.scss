@@ -19,10 +19,51 @@
 }
 
 .reviews-container aside {
-  flex: 0 1 auto;
+  flex: 1 1 auto;
 }
 
 .reviews-container main {
-  flex: 0 1 80%;
+  flex: 0 1 70%;
   padding-left: 60px;
 }
+
+
+//===============================
+// ---- BREAKDOWN
+//===============================
+
+.breakdown-container section {
+  padding-top: 10px;
+}
+
+
+.review-summary article {
+  vertical-align: text-top;
+}
+
+.review-summary article:first-child {
+  display: flex;
+}
+
+.review-summary article:last-child {
+  padding-top: 20px;
+}
+
+#review-average {
+  color: #555;
+  display: inline-block;
+  font-size: 3.5em;
+  font-weight: 700;
+  line-height: 1em;
+  margin: 0;
+  padding-right: 20px;
+}
+
+.review-summary p {
+  font-size: .8em;
+  margin: 0;
+}
+
+//===============================
+// ----
+//===============================

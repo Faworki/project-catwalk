@@ -34,10 +34,10 @@ const ReviewCard = ({ review, index, markReviewHelpful, reportReview }) => {
     <section className="review-card">
       <div className="review-header">
         <StarAverage reviewAverage={review.rating} />
-        <p>{`${review.reviewer_name}, ${dateString}`}</p>
+        <span className="review-user">{`${review.reviewer_name}, ${dateString}`}</span>
       </div>
       <div className="review-summary">
-        <h5>{review.summary}</h5>
+        <h4>{review.summary}</h4>
       </div>
       <div className="review-body">
         <p>{review.body}</p>
@@ -48,7 +48,7 @@ const ReviewCard = ({ review, index, markReviewHelpful, reportReview }) => {
                 src={photo.url}
                 alt="Reviewer product image"
                 key={photo.id}
-                height="100px"
+                // height="100px"
               />
             );
           })}

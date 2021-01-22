@@ -42,13 +42,6 @@ class Outfit extends React.Component {
       );
   }
 
-  componentDidUpdate(prevState) {
-    if (this.state.images.length !== prevState.images.length) {
-      this.getImage(this.props.product.id);
-    }
-    this.buildCarousel();
-  }
-
   componentDidUpdate(prevProps) {
     if (this.props.product.id !== prevProps.product.id) {
       this.getImage();

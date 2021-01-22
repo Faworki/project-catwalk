@@ -35,7 +35,7 @@ class App extends React.Component {
       reviewAverage: 0,
       reviewCount: null,
       yourOutfit: [],
-      style: []
+      styles: []
     };
     this.getNewProduct = this.getNewProduct.bind(this);
     this.addToOutfit = this.addToOutfit.bind(this);
@@ -131,6 +131,7 @@ class App extends React.Component {
             yourOutfit={this.state.yourOutfit}
             getNewProduct={this.getNewProduct}
             addToOutfit={this.addToOutfit}
+            styles={this.state.styles}
           /><br />
           <QnAs
             product={this.state.product}

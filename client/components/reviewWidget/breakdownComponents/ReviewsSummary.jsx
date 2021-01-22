@@ -13,8 +13,6 @@ const ReviewsSummary = ({reviewAverage, recommended, reviewCount}) => {
     let percent = calcPercentRecommended(recommended);
     percentRecommend = (<p>{percent} of reviewers recommend this product</p>);
   }
-  console.log('Review Average: ', reviewAverage);
-
 
   return (
     <section>

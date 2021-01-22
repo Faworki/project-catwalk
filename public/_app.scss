@@ -1,8 +1,12 @@
 body {
   h1 {
-    color: $primary-color;
-    background-color: $primary-background-color;
-    border: $border;
-    font-style: $primary-font-style;
+    // color: $primary-color;
+    // background-color: $primary-background-color;
+    // border: $border;
+    // font-style: $primary-font-style;
   }
+}
+
+#app {
+  width: 100%;
 }

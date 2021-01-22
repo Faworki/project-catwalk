@@ -16,8 +16,8 @@ const ReviewList = ({
   return (
     <main>
       <div className="list-controls">
-        {`${reviewCount} reviews, sorted by`}
-        <select value={sortOrder} onChange={handleSortChange}>
+        <label htmlFor="sort">{`${reviewCount} reviews, sorted by`}</label>
+        <select value={sortOrder} onChange={handleSortChange} name="sort">
           <option value="relevant">relevance</option>
           <option value="helpful">helpfulness</option>
           <option value="newest">newest</option>

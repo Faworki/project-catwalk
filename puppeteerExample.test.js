@@ -15,9 +15,9 @@ describe('Project Catwalk', () => {
     await page.goto('http://localhost:3000/');
   })
 
-  afterAll(async () => {
-    await page.close();
-  })
+  // afterAll(async () => {
+  //   await page.close();
+  // })
 
   test('should have title "Project Catwalk"', async () => {
     const title = await page.title();
@@ -25,10 +25,18 @@ describe('Project Catwalk', () => {
     expect(title).toBe('Project Catwalk');
   })
 
-  test('should display 4 reviews after clicking "More Reveiws"', async () => {
+  xtest('should display 2 review on load', async () => {
+
+    expect(page.$eval('.card-container'), e => {
+      return e.childElementCount;
+    }).toEqual(2)
+  })
+
+  xtest('should display 4 reviews after clicking "More Reveiws"', async () => {
     let click = await page.click('data-test=moreReviews');
-    debugger;
-    expect(1).toEqual(1)
+    expect(page.$eval('.card-container'), e => {
+      return e.childElementCount;
+    }).toEqual(4)
   })
 
 

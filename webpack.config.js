@@ -38,7 +38,8 @@ module.exports = {
       }
     ]
   },
-  mode: 'development',
+  mode: 'production',
+  // mode: 'development',
   resolve: {
     extensions: ['.js', '.jsx']
   }

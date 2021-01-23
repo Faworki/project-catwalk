@@ -147,11 +147,11 @@ class ImageGallery extends React.Component {
           /><br />
           <button
             onClick={() => this.arrowClickHandler('left')}
-            style={this.state.leftButtonEnd === true ? {display: 'none'} : null}
+            style={this.state.leftButtonEnd ? {display: 'none'} : null}
           ><i className="fas fa-arrow-left"></i></button>
           <button
             onClick={() => this.arrowClickHandler('right')}
-            style={this.state.rightButtonEnd === true ? {display: 'none'} : null}
+            style={this.state.rightButtonEnd ? {display: 'none'} : null}
           ><i className="fas fa-arrow-right"></i></button>
           <button onClick={this.resizePictureClickHandler}><i className="fas fa-expand"></i></button>
         </div>

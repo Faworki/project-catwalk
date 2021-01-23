@@ -1,19 +1,29 @@
+$sphinxGreen: #467c46;
+
 body {
-  h1 {
-    // color: $primary-color;
-    // background-color: $primary-background-color;
-    // border: $border;
-    // font-style: $primary-font-style;
-  }
+  // h1 {
+  //   // color: $primary-color;
+  //   // background-color: $primary-background-color;
+  //   // border: $border;
+  //   // font-style: $primary-font-style;
+  // }
+  font-family: "Open Sans", sans-serif;
+  margin: 0;
+  margin-bottom: 100px;
+  color: rgb(82, 82, 82);
+}
+
+a {
+  color: $sphinxGreen;
+}
+.widgetHeader {
+  font-size: 24px;
+  font-weight: bolder;
+  text-transform: uppercase;
 }
 
 #app {
   width: 100%;
-}
-
-body {
-  margin: 0;
-  margin-bottom: 100px;
 }
 
 header {
@@ -39,7 +49,7 @@ header {
 button {
   background-color: white;
   color: black;
-  border: 2px solid #1c2824; /* Green */
+  border: 2px solid $sphinxGreen; /* Green */
   margin: 10px;
   margin-left: 0%;
   padding: 18px;

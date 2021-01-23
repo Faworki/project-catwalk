@@ -286,7 +286,7 @@ export class ReviewsWidget extends Component {
 
   render() {
     return (
-      <div className="reviews-widget">
+      <div className="reviews-widget widget">
         <a name="anchor"><h3>{'Ratings & Reviews'}</h3></a>
         <div className="reviews-container">
           <RatingBreakdown

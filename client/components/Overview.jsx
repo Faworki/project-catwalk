@@ -46,7 +46,7 @@ class Overview extends React.Component {
           product={this.props.product}
           selectedStyle={this.state.selectedStyle}
         />
-        <div className="nested-overview-grid">
+        <div>
           <ProductInformation
             product={this.props.product}
             reviewMetaData={this.props.reviewMetaData}
@@ -56,6 +56,7 @@ class Overview extends React.Component {
           />
           <StyleSelector
             product={this.props.product}
+            styles={this.state.styles}
             selectedStyle={this.state.selectedStyle}
             clickedStyleHandler={this.clickedStyleHandler}
           />

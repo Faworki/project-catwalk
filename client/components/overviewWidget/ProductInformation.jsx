@@ -43,10 +43,21 @@ class ProductInformation extends React.Component {
   render () {
     return (
       <div className="product-information">
-        <StarAverage reviewAverage={this.props.reviewAverage}/>{' '}<a href="#anchor"><small>{`Read all ${this.state.reviewCount} reviews`}</small></a>
+        <StarAverage
+          reviewAverage={this.props.reviewAverage}
+        />
+        {' '}
+        <a href="#anchor"><small>{`Read all ${this.state.reviewCount} reviews`}</small></a>
         <div className="item-category">{this.props.product.category}</div>
         <div className="product-name">{this.props.product.name}</div>
-        {this.state.salePrice ? <div><span style={{textDecoration: 'line-through'}}>${this.state.defaultPrice}</span><span style={{color: 'red'}}> ${this.state.salePrice}</span></div> : <div>${this.state.defaultPrice}</div>}
+        {
+        this.state.salePrice ?
+          <div>
+            <span style={{textDecoration: 'line-through'}}>${this.state.defaultPrice}</span>{' '}
+            <span style={{color: 'red'}}>${this.state.salePrice}</span>
+          </div> :
+          <div>${this.state.defaultPrice}</div>
+        }
         <div>
           <button className="social-media-btn"><i className="fab fa-facebook"></i></button>{' '}
           <button className="social-media-btn"><i className="fab fa-twitter"></i></button>{' '}

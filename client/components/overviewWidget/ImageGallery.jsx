@@ -17,10 +17,7 @@ class ImageGallery extends React.Component {
       mainPhotoExpanded: false
     };
 
-    this.upArrowClickHandler = this.upArrowClickHandler.bind(this);
-    this.downArrowClickHandler = this.downArrowClickHandler.bind(this);
-    this.leftArrowClickHandler = this.leftArrowClickHandler.bind(this);
-    this.rightArrowClickHandler = this.rightArrowClickHandler.bind(this);
+    this.arrowClickHandler = this.arrowClickHandler.bind(this);
     this.thumbnailClickHandler = this.thumbnailClickHandler.bind(this);
     this.resizePictureClickHandler = this.resizePictureClickHandler.bind(this);
   }
@@ -51,69 +48,104 @@ class ImageGallery extends React.Component {
     }
   }
 
-  upArrowClickHandler() {
-    this.state.downButtonEnd = false;
-    this.state.rightButtonEnd = false;
-    const originalMainPhotoUrl = this.state.mainPhotoUrl;
-    for (let i = 0; i < this.state.thumbnails.length; i++) {
-      if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
+  arrowClickHandler(arrowDirection) {
+    // Up-arrow button clicked
+    if (arrowDirection === 'up') {
+      if (this.state.downButtonEnd === true) {
         this.setState({
-          mainPhotoUrl: this.state.thumbnails[i - 1].url
+          downButtonEnd: false
         });
-        if (i - 2 < 0) {
-          this.state.upButtonEnd = true;
-          this.state.leftButtonEnd = true;
+      }
+      if (this.state.rightButtonEnd === true) {
+        this.setState({
+          rightButtonEnd: false
+        });
+      }
+      const originalMainPhotoUrl = this.state.mainPhotoUrl;
+      for (let i = 0; i < this.state.thumbnails.length; i++) {
+        if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
+          this.setState({
+            mainPhotoUrl: this.state.thumbnails[i - 1].url
+          });
+          if (i - 2 < 0) {
+            this.state.upButtonEnd = true;
+            this.state.leftButtonEnd = true;
+          }
         }
       }
     }
-  }
-
-  downArrowClickHandler() {
-    this.state.upButtonEnd = false;
-    this.state.leftButtonEnd = false;
-    const originalMainPhotoUrl = this.state.mainPhotoUrl;
-    for (let i = 0; i < this.state.thumbnails.length; i++) {
-      if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
+    // Down-arrow button clicked
+    if (arrowDirection === 'down') {
+      if (this.state.upButtonEnd === true) {
         this.setState({
-          mainPhotoUrl: this.state.thumbnails[i + 1].url
+          upButtonEnd: false
         });
-        if (i + 2 >= this.state.thumbnails.length) {
-          this.state.downButtonEnd = true;
-          this.state.rightButtonEnd = true;
+      }
+      if (this.state.leftButtonEnd === true) {
+        this.setState({
+          leftButtonEnd: false
+        });
+      }
+      const originalMainPhotoUrl = this.state.mainPhotoUrl;
+      for (let i = 0; i < this.state.thumbnails.length; i++) {
+        if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
+          this.setState({
+            mainPhotoUrl: this.state.thumbnails[i + 1].url
+          });
+          if (i + 2 >= this.state.thumbnails.length) {
+            this.state.downButtonEnd = true;
+            this.state.rightButtonEnd = true;
+          }
         }
       }
     }
-  }
-
-  leftArrowClickHandler() {
-    this.state.rightButtonEnd = false;
-    this.state.downButtonEnd = false;
-    const originalMainPhotoUrl = this.state.mainPhotoUrl;
-    for (let i = 0; i < this.state.thumbnails.length; i++) {
-      if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
+    // Left-arrow button clicked
+    if (arrowDirection === 'left') {
+      if (this.state.rightButtonEnd === true) {
         this.setState({
-          mainPhotoUrl: this.state.thumbnails[i - 1].url
+          rightButtonEnd: false
         });
-        if (i - 2 < 0) {
-          this.state.leftButtonEnd = true;
-          this.state.upButtonEnd = true;
+      }
+      if (this.state.downButtonEnd === true) {
+        this.setState({
+          downButtonEnd: false
+        });
+      }
+      const originalMainPhotoUrl = this.state.mainPhotoUrl;
+      for (let i = 0; i < this.state.thumbnails.length; i++) {
+        if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
+          this.setState({
+            mainPhotoUrl: this.state.thumbnails[i - 1].url
+          });
+          if (i - 2 < 0) {
+            this.state.leftButtonEnd = true;
+            this.state.upButtonEnd = true;
+          }
         }
       }
     }
-  }
-
-  rightArrowClickHandler() {
-    this.state.leftButtonEnd = false;
-    this.state.upButtonEnd = false;
-    const originalMainPhotoUrl = this.state.mainPhotoUrl;
-    for (let i = 0; i < this.state.thumbnails.length; i++) {
-      if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
+    // Right-arrow button clicked
+    if (arrowDirection === 'right') {
+      if (this.state.leftButtonEnd === true) {
         this.setState({
-          mainPhotoUrl: this.state.thumbnails[i + 1].url
+          leftButtonEnd: false
         });
-        if (i + 2 >= this.state.thumbnails.length) {
-          this.state.rightButtonEnd = true;
-          this.state.downButtonEnd = true;
+      }
+      if (this.state.upButtonEnd === true) {
+        this.setState({
+          upButtonEnd: false
+        });
+      }
+      const originalMainPhotoUrl = this.state.mainPhotoUrl;
+      for (let i = 0; i < this.state.thumbnails.length; i++) {
+        if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
+          this.setState({
+            mainPhotoUrl: this.state.thumbnails[i + 1].url
+          });
+          if (i + 2 >= this.state.thumbnails.length) {
+            this.state.rightButtonEnd = true;
+            this.state.downButtonEnd = true;
+          }
         }
       }
     }
@@ -176,11 +208,11 @@ class ImageGallery extends React.Component {
             );
           })}
           <button
-            onClick={this.upArrowClickHandler}
+            onClick={() => this.arrowClickHandler('up')}
             style={this.state.upButtonEnd === true ? {display: 'none'} : null}
           ><i className="fas fa-arrow-up"></i></button>
           <button
-            onClick={this.downArrowClickHandler}
+            onClick={() => this.arrowClickHandler('down')}
             style={this.state.downButtonEnd === true ? {display: 'none'} : null}
           ><i className="fas fa-arrow-down"></i></button>
         </div>
@@ -192,11 +224,11 @@ class ImageGallery extends React.Component {
             height={this.state.mainPhotoExpanded ? '675' : '450'}
           /><br />
           <button
-            onClick={this.leftArrowClickHandler}
+            onClick={() => this.arrowClickHandler('left')}
             style={this.state.leftButtonEnd === true ? {display: 'none'} : null}
           ><i className="fas fa-arrow-left"></i></button>
           <button
-            onClick={this.rightArrowClickHandler}
+            onClick={() => this.arrowClickHandler('right')}
             style={this.state.rightButtonEnd === true ? {display: 'none'} : null}
           ><i className="fas fa-arrow-right"></i></button>
           <button onClick={this.resizePictureClickHandler}><i className="fas fa-expand"></i></button>

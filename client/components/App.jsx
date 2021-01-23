@@ -68,7 +68,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getNewProduct(11986);
+    this.getNewProduct(11001);
   }
 
   reviewAverage(ratings) {

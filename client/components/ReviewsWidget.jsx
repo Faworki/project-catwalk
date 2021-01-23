@@ -287,7 +287,7 @@ export class ReviewsWidget extends Component {
   render() {
     return (
       <div className="reviews-widget widget">
-        <a name="anchor"><h3>{'Ratings & Reviews'}</h3></a>
+        <h3 id="anchor">{'Ratings & Reviews'}</h3>
         <div className="reviews-container">
           <RatingBreakdown
             reviewMetaData={this.props.reviewMetaData}

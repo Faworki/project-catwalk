@@ -13,6 +13,7 @@ class Overview extends React.Component {
     this.state = {
       styles: [],
       selectedStyle: null,
+      selectedStyleName: ''
     };
 
     this.clickedStyleHandler = this.clickedStyleHandler.bind(this);
@@ -25,6 +26,7 @@ class Overview extends React.Component {
         .then(({ data }) => {
           this.setState({
             styles: data.results,
+            selectedStyleName: data.results[0].name
           });
         })
         .catch((err) => {
@@ -34,8 +36,12 @@ class Overview extends React.Component {
   }
 
   clickedStyleHandler(e) {
+    const newStyle = this.state.styles.filter((style) => {
+      return style.style_id === parseInt(e.target.id);
+    });
     this.setState({
       selectedStyle: e.target.id,
+      selectedStyleName: newStyle[0].name
     });
   }
 
@@ -58,6 +64,7 @@ class Overview extends React.Component {
             product={this.props.product}
             styles={this.state.styles}
             selectedStyle={this.state.selectedStyle}
+            selectedStyleName={this.state.selectedStyleName}
             clickedStyleHandler={this.clickedStyleHandler}
           />
           <AddToCart

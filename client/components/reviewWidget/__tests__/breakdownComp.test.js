@@ -26,7 +26,8 @@ describe('ReviewSummary', () => {
   });
 
   test('should display reviewAverage with 1 decimal place', () => {
-    let renderedAverage = component.find('.review-average').render()[0].children[0].data;
+    debugger;
+    let renderedAverage = component.find('#review-average').render()[0].children[0].data;
     expect(renderedAverage).toEqual('3.5');
   });
 

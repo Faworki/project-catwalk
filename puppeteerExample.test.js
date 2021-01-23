@@ -9,3 +9,27 @@ describe('Google', () => {
     await expect(page).toMatch('google')
   })
 })
+
+describe('Project Catwalk', () => {
+  beforeAll(async () => {
+    await page.goto('http://localhost:3000/');
+  })
+
+  afterAll(async () => {
+    await page.close();
+  })
+
+  test('should have title "Project Catwalk"', async () => {
+    const title = await page.title();
+
+    expect(title).toBe('Project Catwalk');
+  })
+
+  test('should display 4 reviews after clicking "More Reveiws"', async () => {
+    let click = await page.click('data-test=moreReviews');
+    debugger;
+    expect(1).toEqual(1)
+  })
+
+
+})

@@ -1,12 +1,10 @@
+// ********* (CATEGORIZE THESE) ********* //
+
 .main-grid {
   display: grid;
   grid-template-columns: 2fr 2fr 1fr;
   grid-gap: 1em;
 }
-
-// .nested-overview-grid {
-//   display: grid;
-// }
 
 .image-gallery-grid {
   display: grid;
@@ -14,7 +12,6 @@
   grid-template-columns: 1fr 4fr;
 }
 
-//==============================================
 .product-slogan-and-description {
   margin: 5px;
 }

@@ -10,8 +10,6 @@ class ImageGallery extends React.Component {
       mainPhotoUrl: '',
       thumbnails: [],
       styles: [],
-      upButtonEnd: true,
-      downButtonEnd: false,
       leftButtonEnd: true,
       rightButtonEnd: false,
       mainPhotoExpanded: false
@@ -23,6 +21,7 @@ class ImageGallery extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    // state update if product changes
     if (this.props.product !== prevProps.product) {
       axios.get(`/api/fec2/hrnyc/products/${this.props.product.id}/styles`)
         .then(({data}) => {
@@ -37,6 +36,7 @@ class ImageGallery extends React.Component {
         });
     }
 
+    // state update if selected style for given product changes
     if (this.props.selectedStyle !== prevProps.selectedStyle) {
       const newStyle = this.state.styles.filter((style) => {
         return style.style_id === parseInt(this.props.selectedStyle);
@@ -49,68 +49,12 @@ class ImageGallery extends React.Component {
   }
 
   arrowClickHandler(arrowDirection) {
-    // Up-arrow button clicked
-    if (arrowDirection === 'up') {
-      if (this.state.downButtonEnd === true) {
-        this.setState({
-          downButtonEnd: false
-        });
-      }
-      if (this.state.rightButtonEnd === true) {
-        this.setState({
-          rightButtonEnd: false
-        });
-      }
-      const originalMainPhotoUrl = this.state.mainPhotoUrl;
-      for (let i = 0; i < this.state.thumbnails.length; i++) {
-        if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
-          this.setState({
-            mainPhotoUrl: this.state.thumbnails[i - 1].url
-          });
-          if (i - 2 < 0) {
-            this.state.upButtonEnd = true;
-            this.state.leftButtonEnd = true;
-          }
-        }
-      }
-    }
-    // Down-arrow button clicked
-    if (arrowDirection === 'down') {
-      if (this.state.upButtonEnd === true) {
-        this.setState({
-          upButtonEnd: false
-        });
-      }
-      if (this.state.leftButtonEnd === true) {
-        this.setState({
-          leftButtonEnd: false
-        });
-      }
-      const originalMainPhotoUrl = this.state.mainPhotoUrl;
-      for (let i = 0; i < this.state.thumbnails.length; i++) {
-        if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
-          this.setState({
-            mainPhotoUrl: this.state.thumbnails[i + 1].url
-          });
-          if (i + 2 >= this.state.thumbnails.length) {
-            this.state.downButtonEnd = true;
-            this.state.rightButtonEnd = true;
-          }
-        }
-      }
-    }
-    // Left-arrow button clicked
     if (arrowDirection === 'left') {
       if (this.state.rightButtonEnd === true) {
         this.setState({
           rightButtonEnd: false
         });
       }
-      if (this.state.downButtonEnd === true) {
-        this.setState({
-          downButtonEnd: false
-        });
-      }
       const originalMainPhotoUrl = this.state.mainPhotoUrl;
       for (let i = 0; i < this.state.thumbnails.length; i++) {
         if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
@@ -119,7 +63,6 @@ class ImageGallery extends React.Component {
           });
           if (i - 2 < 0) {
             this.state.leftButtonEnd = true;
-            this.state.upButtonEnd = true;
           }
         }
       }
@@ -131,11 +74,6 @@ class ImageGallery extends React.Component {
           leftButtonEnd: false
         });
       }
-      if (this.state.upButtonEnd === true) {
-        this.setState({
-          upButtonEnd: false
-        });
-      }
       const originalMainPhotoUrl = this.state.mainPhotoUrl;
       for (let i = 0; i < this.state.thumbnails.length; i++) {
         if (this.state.thumbnails[i].url === originalMainPhotoUrl) {
@@ -144,7 +82,6 @@ class ImageGallery extends React.Component {
           });
           if (i + 2 >= this.state.thumbnails.length) {
             this.state.rightButtonEnd = true;
-            this.state.downButtonEnd = true;
           }
         }
       }
@@ -153,7 +90,7 @@ class ImageGallery extends React.Component {
 
   thumbnailClickHandler(e) {
     const clickedThumbnailUrl = e.target.src;
-    let clickedIndex = null;
+    let clickedIndex;
     let thumbnail = this.state.thumbnails.filter((thumbnail, index) => {
       if (thumbnail.thumbnail_url === clickedThumbnailUrl) {
         clickedIndex = index;
@@ -165,27 +102,20 @@ class ImageGallery extends React.Component {
     });
     if (clickedIndex === 0) {
       this.setState({
-        upButtonEnd: true,
-        downButtonEnd: false,
         leftButtonEnd: true,
         rightButtonEnd: false,
       });
     } else if (clickedIndex === this.state.thumbnails.length - 1) {
       this.setState({
-        upButtonEnd: false,
-        downButtonEnd: true,
         leftButtonEnd: false,
         rightButtonEnd: true,
       });
     } else {
       this.setState({
-        upButtonEnd: false,
-        downButtonEnd: false,
         leftButtonEnd: false,
         rightButtonEnd: false,
       });
     }
-
   }
 
   resizePictureClickHandler() {
@@ -196,7 +126,7 @@ class ImageGallery extends React.Component {
 
   render() {
     return (
-      <div className="image-gallery image-gallery-grid">
+      <div className="image-gallery-grid">
         <div>
           {this.state.thumbnails.map((thumbnail, index) => {
             return (
@@ -207,14 +137,6 @@ class ImageGallery extends React.Component {
             />
             );
           })}
-          <button
-            onClick={() => this.arrowClickHandler('up')}
-            style={this.state.upButtonEnd === true ? {display: 'none'} : null}
-          ><i className="fas fa-arrow-up"></i></button>
-          <button
-            onClick={() => this.arrowClickHandler('down')}
-            style={this.state.downButtonEnd === true ? {display: 'none'} : null}
-          ><i className="fas fa-arrow-down"></i></button>
         </div>
         <div>
           <img
@@ -232,7 +154,6 @@ class ImageGallery extends React.Component {
             style={this.state.rightButtonEnd === true ? {display: 'none'} : null}
           ><i className="fas fa-arrow-right"></i></button>
           <button onClick={this.resizePictureClickHandler}><i className="fas fa-expand"></i></button>
-
         </div>
       </div>
     );

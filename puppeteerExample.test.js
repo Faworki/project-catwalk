@@ -1,42 +1,59 @@
-import 'expect-puppeteer'
+const puppeteer = require('puppeteer');
 
-describe('Google', () => {
-  beforeAll(async () => {
-    await page.goto('https://google.com')
-  })
+let browser;
+let page;
 
-  it('should display "google" text on page', async () => {
-    await expect(page).toMatch('google')
-  })
+beforeAll(async () => {
+  // Switch with line below will run the tests and actually open a browser you can see
+  // browser = await puppeteer.launch({headless: false, slowMo: 100});
+  browser = await puppeteer.launch();
+})
+
+afterAll(async () => {
+  await browser.close();
 })
 
 describe('Project Catwalk', () => {
-  beforeAll(async () => {
-    await page.goto('http://localhost:3000/');
+
+  beforeEach(async () => {
+    page = await browser.newPage();
+
   })
 
-  // afterAll(async () => {
-  //   await page.close();
-  // })
+  afterEach(async () => {
+    await page.close();
+  })
 
   test('should have title "Project Catwalk"', async () => {
+
+    await page.goto('http://localhost:3000/');
     const title = await page.title();
 
     expect(title).toBe('Project Catwalk');
   })
 
-  xtest('should display 2 review on load', async () => {
+  test('should display 2 review on load', async () => {
 
-    expect(page.$eval('.card-container'), e => {
+    await page.goto('http://localhost:3000/', {waitUntil: 'networkidle0'});
+
+    let revNum = await page.$eval('.card-container', e => {
       return e.childElementCount;
-    }).toEqual(2)
+    })
+
+    expect(revNum).toEqual(2)
   })
 
-  xtest('should display 4 reviews after clicking "More Reveiws"', async () => {
-    let click = await page.click('data-test=moreReviews');
-    expect(page.$eval('.card-container'), e => {
+  test('should display 4 reviews after clicking "More Reveiws"', async () => {
+
+    await page.goto('http://localhost:3000/', {waitUntil: 'networkidle0'});
+
+    /* let click =  */await page.click('[data-test="moreReviews"]');
+
+    let revNum = await page.$eval('.card-container', e => {
       return e.childElementCount;
-    }).toEqual(4)
+    })
+
+    expect(revNum).toEqual(4)
   })
 
 

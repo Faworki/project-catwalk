@@ -38,6 +38,7 @@ module.exports = {
       }
     ]
   },
+
   mode: 'development',
   // mode: 'production',
   resolve: {

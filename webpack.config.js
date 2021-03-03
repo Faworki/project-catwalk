@@ -38,8 +38,9 @@ module.exports = {
       }
     ]
   },
-  mode: 'production',
-  // mode: 'development',
+
+  mode: 'development',
+  // mode: 'production',
   resolve: {
     extensions: ['.js', '.jsx']
   }

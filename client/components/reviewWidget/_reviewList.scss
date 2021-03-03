@@ -1,6 +1,10 @@
 $medium-grey: #9d9d9d;
 $light-grey: #e2e2e2;
 
+.list-controls {
+  margin-bottom: 20px;
+}
+
 .list-controls label {
   font-weight: 800;
   font-size: 1em;
@@ -27,13 +31,13 @@ $light-grey: #e2e2e2;
 
 // -- Buttons --
 .list-footer button {
-  color: $medium-grey;
-  background-color: #fff;
-  border: 2px solid $medium-grey;
-  font-family: inherit;
-  font-weight: 800;
-  font-size: 1.1em;
-  padding: 10px;
+  // color: $medium-grey;
+  // background-color: #fff;
+  // border: 2px solid $medium-grey;
+  // font-family: inherit;
+  // font-weight: 800;
+  // font-size: 1.1em;
+  // padding: 10px;
 }
 
 .list-footer button:first-child {
@@ -41,12 +45,16 @@ $light-grey: #e2e2e2;
 }
 
 // Card List
-.card-container section{
+.card-container section {
   margin-top: 40px;
 }
 
+.card-container section:first-child {
+  margin-top: 0;
+}
+
 .card-container {
-  max-height: 50vh;
+  max-height: 80vh;
   overflow: hidden;
   overflow-y: scroll;
 }

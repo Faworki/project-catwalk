@@ -12,8 +12,7 @@ class RelatedProducts extends React.Component {
 
   render () {
     return (
-      <div>
-        <strong>RELATED PRODUCTS WIDGET</strong>
+      <div className="widget">
         <RelatedCarousel
         product={this.props.product}
         getNewProduct={this.props.getNewProduct}

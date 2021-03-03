@@ -115,15 +115,12 @@ class App extends React.Component {
     return (
       <BrowserRouter>
         <div>
-          <div>HEADER FOR OUR WEBSITE</div>
-          <br />
           <Overview
             product={this.state.product}
             reviewMetaData={this.state.reviewMetaData}
             reviewAverage={this.state.reviewAverage}
             yourOutfit={this.state.yourOutfit}
           />
-          <br />
           <RelatedProducts
             product={this.state.product}
             reviewMetaData={this.state.reviewMetaData}
@@ -132,16 +129,16 @@ class App extends React.Component {
             getNewProduct={this.getNewProduct}
             addToOutfit={this.addToOutfit}
             styles={this.state.styles}
-          /><br />
+          />
           <QnAs
             product={this.state.product}
-          /><br />
+          />
           <RatingsAndReviews
             productId={this.state.product.id}
             reviewMetaData={this.state.reviewMetaData}
             reviewAverage={this.state.reviewAverage}
             reviewCount={this.state.reviewCount}
-          /><br />
+          />
         </div>
       </BrowserRouter>
     );

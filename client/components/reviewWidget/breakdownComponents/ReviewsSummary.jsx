@@ -4,7 +4,7 @@ import StarAverage from '../../shared/StarAverage.jsx';
 const calcPercentRecommended = (recommended) => {
   let recomend = parseInt(recommended.true);
   let total = recomend + parseInt(recommended.false);
-  return recomend / total * 100 + '%';
+  return Math.trunc(recomend / total * 100) + '%';
 };
 
 const ReviewsSummary = ({reviewAverage, recommended, reviewCount}) => {

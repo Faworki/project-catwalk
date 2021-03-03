@@ -41,7 +41,7 @@ class Overview extends React.Component {
 
   render() {
     return (
-      <div className="main-grid">
+      <div className="main-grid widget">
         <ImageGallery
           product={this.props.product}
           selectedStyle={this.state.selectedStyle}

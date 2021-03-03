@@ -42,7 +42,7 @@ const ReviewList = ({
       </div>
       <div className="list-footer">
         {showMoreReviewsButton ? (
-          <button onClick={handleMoreReviewsClick}>More Reviews</button>
+          <button onClick={handleMoreReviewsClick} data-test="moreReviews">More Reviews</button>
         ) : null}
         <button
           onClick={() => { setShowModal(true); }}

@@ -7,6 +7,7 @@ import ReviewsWidget from './ReviewsWidget.jsx';
 import Overview from './Overview';
 import QnAs from './QnAs/QnAs.jsx';
 import RelatedProducts from './RelatedProducts';
+import BrowserRouter from 'react-router-dom';
 
 describe('App should ', () => {
   let app;
@@ -48,19 +49,19 @@ describe('App should ', () => {
   });
 
   test('render the Overview Widget', () => {
-    expect(app.containsAnyMatchingElements([Overview])).toEqual(true);
+    expect(app.find('Overview').length).toEqual(1);
   });
 
   test('render the Related Products Widget', () => {
-    expect(app.containsAnyMatchingElements([RelatedProducts])).toEqual(true);
+    expect(app.find('RelatedProducts').length).toEqual(1);
   });
 
   test('render the Questions & Answers Widget', () => {
-    expect(app.containsAnyMatchingElements([QnAs])).toEqual(true);
+    expect(app.find('QnAs').length).toEqual(1);
   });
 
   test('render the Reviews Widget', () => {
-    expect(app.containsAnyMatchingElements([ReviewsWidget])).toEqual(true);
+    expect(app.find('ReviewsWidget').length).toEqual(1);
   });
 
 });

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RatingBreakdown from './reviewWidget/RatingBreakdown';
 import ReviewList from './reviewWidget/ReviewList';
 import axios from 'axios';
-import { DEFAULT_STATE, getReviews } from '../helpers/reviewsHelpers';
+import { DEFAULT_STATE, api } from '../helpers/reviewsHelpers';
 
 // Good product id for tests: 11975
 export class ReviewsWidget extends Component {
@@ -75,7 +75,7 @@ export class ReviewsWidget extends Component {
     // While there are not enough reviews to display
     while (filteredReviews.length < numToDisplay && !allReviewsFetched) {
       // Get some more reviews
-      let newReviews = await getReviews(this.props.productId, page, sortOrder);
+      let newReviews = await api.getReviews(this.props.productId, page, sortOrder);
       page += 1;
 
       // Exit loop if there are no more reviews from API
@@ -187,7 +187,7 @@ export class ReviewsWidget extends Component {
     // If they have not previously marked this review
     if (!reviewsMarked) {
 
-      this.apiMarkHelpful(reviewId)
+      api.reviewHelpful(reviewId)
       .then(()=>{
       // Update hepfulness number in local filtered review list
       let filteredReviews = this.state.filteredReviews.slice();
@@ -206,14 +206,6 @@ export class ReviewsWidget extends Component {
     })
   }
 }
-
-  apiMarkHelpful(reviewId) {
-    return axios.put(`/api/fec2/hrnyc/reviews/${reviewId}/helpful`)
-    .catch((err) => {
-      console.error(err);
-    });
-  }
-
 
   /******************************
    * ===== REPORT REVIEW ====== *

@@ -4,12 +4,13 @@ import Overview from './Overview.jsx';
 import RelatedProducts from './RelatedProducts.jsx';
 import QnAs from './QnAs/QnAs.jsx';
 import RatingsAndReviews from './ReviewsWidget.jsx';
+import { sumReviewCount, calculateReviewAverage } from '../helpers/reviewsHelpers';
 import {
   BrowserRouter,
   Switch,
   Route,
   Link
-} from "react-router-dom";
+} from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -51,8 +52,8 @@ class App extends React.Component {
       .then((results) => {
         let product = results[0].data;
         let reviewMetaData = results[1].data;
-        let reviewAverage = this.reviewAverage(reviewMetaData.ratings);
-        let reviewCount = this.sumReviewCount(reviewMetaData.ratings);
+        let reviewAverage = calculateReviewAverage(reviewMetaData.ratings);
+        let reviewCount = sumReviewCount(reviewMetaData.ratings);
         let styles = results[2].data.results;
 
 
@@ -69,22 +70,6 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getNewProduct(11001);
-  }
-
-  reviewAverage(ratings) {
-    let totalStars = 0;
-    let totalVotes = 0;
-    for (let rating in ratings) {
-      totalStars += parseInt(rating) * parseInt(ratings[rating]);
-      totalVotes += parseInt(ratings[rating]);
-    }
-    return (totalStars / totalVotes).toFixed(2);
-  }
-
-  sumReviewCount(ratings) {
-    return Object.values(ratings).reduce((sum, num) => {
-      return sum + parseInt(num);
-    }, 0);
   }
 
   addToOutfit() {

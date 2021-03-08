@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import RatingBreakdown from './reviewWidget/RatingBreakdown';
 import ReviewList from './reviewWidget/ReviewList';
-import axios from 'axios';
-import { DEFAULT_STATE, api } from '../helpers/reviewsHelpers';
+import { DEFAULT_STATE, api, updateFilters } from '../helpers/reviewsHelpers';
 
 // Good product id for tests: 11975
 export class ReviewsWidget extends Component {
@@ -132,27 +131,7 @@ export class ReviewsWidget extends Component {
   }
 
   toggleRatingFilter(rating) {
-    let newState = Object.assign({}, this.state.reviewFilters);
-
-    newState[rating] = !newState[rating];
-
-    if (newState[rating]) {
-      newState.count += 1;
-    } else {
-      newState.count -= 1;
-    }
-
-    // If all filter toggles are on reset to all filters off
-    if (newState.count === 5) {
-      newState = {
-        '1': false,
-        '2': false,
-        '3': false,
-        '4': false,
-        '5': false,
-        count: 0,
-      };
-    }
+    let newState = updateFilters(this.state.reviewFilters, rating);
     this.setState({
       reviewFilters: newState
     });

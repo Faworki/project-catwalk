@@ -20,6 +20,32 @@ export const DEFAULT_STATE = {
   allReviewsFetched: false,
 };
 
+export const updateFilters = (filtersState, rating) => {
+  let updatedFilters = Object.assign({}, filtersState);
+
+  updatedFilters[rating] = !updatedFilters[rating];
+
+  if (updatedFilters[rating]) {
+    updatedFilters.count += 1;
+  } else {
+    updatedFilters.count -= 1;
+  }
+
+  // If all filter toggles are on reset to all filters off
+  if (updatedFilters.count === 5) {
+    updatedFilters = {
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+      count: 0,
+    };
+  }
+
+  return updateFilters;
+};
+
 export const api = {
   reviewHelpful(reviewId) {
     return axios.put(`${urlPrefix}/${reviewId}/helpful`)

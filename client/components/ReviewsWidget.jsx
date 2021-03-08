@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import RatingBreakdown from './reviewWidget/RatingBreakdown';
 import ReviewList from './reviewWidget/ReviewList';
 import axios from 'axios';
-import { DEFAULT_STATE } from '../helpers/reviewsHelpers';
+import { DEFAULT_STATE, getReviews } from '../helpers/reviewsHelpers';
 
 // Good product id for tests: 11975
 export class ReviewsWidget extends Component {
@@ -30,7 +30,7 @@ export class ReviewsWidget extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.productId !== prevProps.productId) {
-
+      // If the productId some parameters need to be reset to defaults
       this.updateReviewList(
         DEFAULT_STATE.page,
         DEFAULT_STATE.numToDisplay,
@@ -38,34 +38,14 @@ export class ReviewsWidget extends Component {
         DEFAULT_STATE.allReviewsFetched,
         DEFAULT_STATE.sortOrder
       );
-
     }
-
-    if (this.state.sortOrder !== prevState.sortOrder) {
+    if (
+      this.state.sortOrder !== prevState.sortOrder ||
+      prevState.reviewFilters !== this.state.reviewFilters ||
+      prevState.numToDisplay !== this.state.numToDisplay
+    ) {
       this.updateReviewList();
     }
-
-    if (prevState.reviewFilters !== this.state.reviewFilters) {
-      this.updateReviewList();
-    }
-
-    if (prevState.numToDisplay !== this.state.numToDisplay) {
-      this.updateReviewList();
-    }
-  }
-
-  // Input: page
-  // Output: promise that resolves to array of reviews
-  getReviews(page = 1, sort = this.state.sortOrder) {
-    let requestURL = `/api/fec2/hrnyc/reviews/?product_id=${this.props.productId}&page=${page}&sort=${sort}&count=5`;
-
-    return axios.get(requestURL)
-      .then(({ data }) => {
-        return data.results;
-      })
-      .catch(err => {
-        console.error(err);
-      });
   }
 
   /** ----- updateReviewList -------
@@ -95,7 +75,7 @@ export class ReviewsWidget extends Component {
     // While there are not enough reviews to display
     while (filteredReviews.length < numToDisplay && !allReviewsFetched) {
       // Get some more reviews
-      let newReviews = await this.getReviews(page, sortOrder);
+      let newReviews = await getReviews(this.props.productId, page, sortOrder);
       page += 1;
 
       // Exit loop if there are no more reviews from API

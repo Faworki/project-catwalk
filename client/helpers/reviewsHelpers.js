@@ -1,4 +1,6 @@
 'use strict';
+import axios from 'axios';
+
 
 export const DEFAULT_STATE = {
   page: 1,
@@ -15,4 +17,16 @@ export const DEFAULT_STATE = {
   },
   showMoreReviewsButton: true,
   allReviewsFetched: false,
+};
+
+export const getReviews = (productId, page = 1, sort = DEFAULT_STATE.sortOrder) => {
+  let requestURL = `/api/fec2/hrnyc/reviews/?product_id=${productId}&page=${page}&sort=${sort}&count=5`;
+
+  return axios.get(requestURL)
+    .then(({ data }) => {
+      return data.results;
+    })
+    .catch(err => {
+      console.error(err);
+    });
 };

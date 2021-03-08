@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import RatingBreakdown from './reviewWidget/RatingBreakdown';
 import ReviewList from './reviewWidget/ReviewList';
-import { DEFAULT_STATE, api, updateFilters, filterReviews } from '../helpers/reviewsHelpers';
+import {
+  DEFAULT_STATE,
+  api,
+  updateFilters,
+  filterReviews,
+} from '../helpers/reviewsHelpers';
 
 // Good product id for tests: 11975
 export class ReviewsWidget extends Component {
@@ -19,7 +24,6 @@ export class ReviewsWidget extends Component {
       allReviewsFetched: DEFAULT_STATE.allReviewsFetched,
     };
 
-    //todo: Dont forget to bind them functions buddy
     this.toggleRatingFilter = this.toggleRatingFilter.bind(this);
     this.handleSortChange = this.handleSortChange.bind(this);
     this.handleMoreReviewsClick = this.handleMoreReviewsClick.bind(this);
@@ -29,7 +33,7 @@ export class ReviewsWidget extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (this.props.productId !== prevProps.productId) {
-      // If the productId some parameters need to be reset to defaults
+      // If the productId changes some parameters need to be reset to their defaults
       this.updateReviewList(
         DEFAULT_STATE.page,
         DEFAULT_STATE.numToDisplay,
@@ -58,23 +62,39 @@ export class ReviewsWidget extends Component {
    * The input parameters are all optional but are used as a way
    * to hard reset the review list. This was implemented mainly
    * for use when the product id changes to avoid setting the
-   * state then immedietly rellying on those values to update
+   * state then immediately relying on those values to update
    * the reviews.
    **/
-  async updateReviewList(page, numToDisplay, productReviews, allReviewsFetched, sortOrder) {
+  async updateReviewList(
+    page,
+    numToDisplay,
+    productReviews,
+    allReviewsFetched,
+    sortOrder
+  ) {
     productReviews = productReviews || this.state.productReviews;
     page = page || this.state.page;
     numToDisplay = numToDisplay || this.state.numToDisplay;
     sortOrder = sortOrder || this.state.sortOrder;
-    allReviewsFetched = allReviewsFetched !== undefined ? allReviewsFetched : this.state.allReviewsFetched;
+    allReviewsFetched =
+      allReviewsFetched !== undefined
+        ? allReviewsFetched
+        : this.state.allReviewsFetched;
 
     // Apply filters to reviewstore (they may have changed)
-    let filteredReviews = filterReviews(productReviews, this.state.reviewFilters);
+    let filteredReviews = filterReviews(
+      productReviews,
+      this.state.reviewFilters
+    );
 
     // While there are not enough reviews to display
     while (filteredReviews.length < numToDisplay && !allReviewsFetched) {
       // Get some more reviews
-      let newReviews = await api.getReviews(this.props.productId, page, sortOrder);
+      let newReviews = await api.getReviews(
+        this.props.productId,
+        page,
+        sortOrder
+      );
       page += 1;
 
       // Exit loop if there are no more reviews from API
@@ -89,11 +109,13 @@ export class ReviewsWidget extends Component {
       productReviews = [...productReviews, ...newReviews];
       // Filter all the reviews
       filteredReviews = filterReviews(productReviews, this.state.reviewFilters);
-
     }
 
     // Test if we should hide the More Reviews button
-    let showMoreReviewsButton = filteredReviews.length <= numToDisplay && allReviewsFetched ? false : true;
+    let showMoreReviewsButton =
+      filteredReviews.length <= numToDisplay && allReviewsFetched
+        ? false
+        : true;
 
     // Update the state
     this.setState({
@@ -109,27 +131,27 @@ export class ReviewsWidget extends Component {
 
   /*************************
    * ==== MORE REVIEWS ===== *
-  *************************/
+   *************************/
 
   handleMoreReviewsClick(event) {
     let numToDisplay = this.state.numToDisplay + 2;
-    this.setState({numToDisplay})
+    this.setState({ numToDisplay });
   }
 
   /*************************
    * ===== FILTERING ===== *
-  *************************/
+   *************************/
 
   toggleRatingFilter(rating) {
     let newState = updateFilters(this.state.reviewFilters, rating);
     this.setState({
-      reviewFilters: newState
+      reviewFilters: newState,
     });
   }
 
   /*************************
    * ===== SORTING ======= *
-  *************************/
+   *************************/
 
   handleSortChange(event) {
     // Resets relevant parts of state to reset the review list view
@@ -139,12 +161,18 @@ export class ReviewsWidget extends Component {
     let numToDisplay = DEFAULT_STATE.numToDisplay;
     let productReviews = [];
     let allReviewsFetched = DEFAULT_STATE.allReviewsFetched;
-    this.setState({ sortOrder, page, numToDisplay, productReviews, allReviewsFetched });
+    this.setState({
+      sortOrder,
+      page,
+      numToDisplay,
+      productReviews,
+      allReviewsFetched,
+    });
   }
 
   /******************************
    * ===== MARK HELPFUL ======= *
-  ******************************/
+   ******************************/
 
   markReviewHelpful(reviewId, index) {
     let prefix = 'review';
@@ -155,48 +183,49 @@ export class ReviewsWidget extends Component {
 
     // If they have not previously marked this review
     if (!reviewsMarked) {
+      api
+        .reviewHelpful(reviewId)
+        .then(() => {
+          // Update hepfulness number in local filtered review list
+          let filteredReviews = this.state.filteredReviews.slice();
+          let review = filteredReviews[index];
+          review.helpfulness += 1;
+          review = Object.assign({}, review); // Copy so React knows it changed
+          filteredReviews[index] = review;
 
-      api.reviewHelpful(reviewId)
-      .then(()=>{
-      // Update hepfulness number in local filtered review list
-      let filteredReviews = this.state.filteredReviews.slice();
-      let review = filteredReviews[index];
-      review.helpfulness += 1;
-      review = Object.assign({}, review); // Copy so React knows it changed
-      filteredReviews[index] = review;
-
-      localStorage.setItem(prefix + reviewId, true);
-      this.setState({
-        filteredReviews
-      })
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+          localStorage.setItem(prefix + reviewId, true);
+          this.setState({
+            filteredReviews,
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }
-}
 
   /******************************
    * ===== REPORT REVIEW ====== *
-  ******************************/
+   ******************************/
 
   reportReview(reviewId, index) {
-    api.reviewReport(reviewId)
-      .then(()=>{
-      // Update review with reported parameter
-      let filteredReviews = this.state.filteredReviews.slice();
-      let review = filteredReviews[index];
-      review.report = true;
-      review = Object.assign({}, review); // Copy so React knows it changed
-      filteredReviews[index] = review;
+    api
+      .reviewReport(reviewId)
+      .then(() => {
+        // Update review with reported parameter
+        let filteredReviews = this.state.filteredReviews.slice();
+        let review = filteredReviews[index];
+        review.report = true;
+        review = Object.assign({}, review); // Copy so React knows it changed
+        filteredReviews[index] = review;
 
-      this.setState({
-        filteredReviews
+        this.setState({
+          filteredReviews,
+        });
       })
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   render() {
@@ -208,13 +237,13 @@ export class ReviewsWidget extends Component {
             reviewMetaData={this.props.reviewMetaData}
             reviewAverage={this.props.reviewAverage}
             reviewCount={this.props.reviewCount}
-            toggleRatingFilter = {this.toggleRatingFilter}
+            toggleRatingFilter={this.toggleRatingFilter}
           />
           <ReviewList
-            reviews={
-              this.state.filteredReviews
-              .slice(0, this.state.numToDisplay)
-            }
+            reviews={this.state.filteredReviews.slice(
+              0,
+              this.state.numToDisplay
+            )}
             reviewCount={this.props.reviewCount}
             sortOrder={this.state.sortOrder}
             handleSortChange={this.handleSortChange}

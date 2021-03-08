@@ -2,23 +2,7 @@ import React, { Component } from 'react';
 import RatingBreakdown from './reviewWidget/RatingBreakdown';
 import ReviewList from './reviewWidget/ReviewList';
 import axios from 'axios';
-
-const stateDefaults = {
-  page: 1,
-  count: 5,
-  numToDisplay: 2,
-  sortOrder: 'relevant',
-  reviewFilters: {
-    '1': false,
-    '2': false,
-    '3': false,
-    '4': false,
-    '5': false,
-    count: 0,
-  },
-  showMoreReviewsButton: true,
-  allReviewsFetched: false,
-};
+import { DEFAULT_STATE } from '../helpers/reviewsHelpers';
 
 // Good product id for tests: 11975
 export class ReviewsWidget extends Component {
@@ -27,13 +11,13 @@ export class ReviewsWidget extends Component {
     this.state = {
       filteredReviews: [],
       productReviews: [],
-      page: stateDefaults.page,
-      count: stateDefaults.count,
-      numToDisplay: stateDefaults.numToDisplay,
-      sortOrder: stateDefaults.sortOrder,
-      reviewFilters: stateDefaults.reviewFilters,
-      showMoreReviewsButton: stateDefaults.showMoreReviewsButton,
-      allReviewsFetched: stateDefaults.allReviewsFetched,
+      page: DEFAULT_STATE.page,
+      count: DEFAULT_STATE.count,
+      numToDisplay: DEFAULT_STATE.numToDisplay,
+      sortOrder: DEFAULT_STATE.sortOrder,
+      reviewFilters: DEFAULT_STATE.reviewFilters,
+      showMoreReviewsButton: DEFAULT_STATE.showMoreReviewsButton,
+      allReviewsFetched: DEFAULT_STATE.allReviewsFetched,
     };
 
     //todo: Dont forget to bind them functions buddy
@@ -48,11 +32,11 @@ export class ReviewsWidget extends Component {
     if (this.props.productId !== prevProps.productId) {
 
       this.updateReviewList(
-        stateDefaults.page,
-        stateDefaults.numToDisplay,
+        DEFAULT_STATE.page,
+        DEFAULT_STATE.numToDisplay,
         [],
-        stateDefaults.allReviewsFetched,
-        stateDefaults.sortOrder
+        DEFAULT_STATE.allReviewsFetched,
+        DEFAULT_STATE.sortOrder
       );
 
     }
@@ -202,10 +186,10 @@ export class ReviewsWidget extends Component {
     // Resets relevant parts of state to reset the review list view
     // based off of the newly selected sort
     let sortOrder = event.target.value;
-    let page = stateDefaults.page;
-    let numToDisplay = stateDefaults.numToDisplay;
+    let page = DEFAULT_STATE.page;
+    let numToDisplay = DEFAULT_STATE.numToDisplay;
     let productReviews = [];
-    let allReviewsFetched = stateDefaults.allReviewsFetched;
+    let allReviewsFetched = DEFAULT_STATE.allReviewsFetched;
     this.setState({ sortOrder, page, numToDisplay, productReviews, allReviewsFetched });
   }
 

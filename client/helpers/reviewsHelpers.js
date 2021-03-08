@@ -50,5 +50,12 @@ export const api = {
       .catch(err => {
         console.error(err);
       });
+  },
+
+  reviewReport(reviewId) {
+    return axios.put(`${urlPrefix}/${reviewId}/report`)
+    .catch((err) => {
+      console.error(err);
+    });
   }
 };

@@ -212,8 +212,7 @@ export class ReviewsWidget extends Component {
   ******************************/
 
   reportReview(reviewId, index) {
-
-    this.apiReportReview(reviewId)
+    api.reviewReport(reviewId)
       .then(()=>{
       // Update review with reported parameter
       let filteredReviews = this.state.filteredReviews.slice();
@@ -229,15 +228,6 @@ export class ReviewsWidget extends Component {
     .catch((err) => {
       console.error(err);
     })
-
-
-  }
-
-  apiReportReview(reviewId) {
-    return axios.put(`/api/fec2/hrnyc/reviews/${reviewId}/report`)
-    .catch((err) => {
-      console.error(err);
-    });
   }
 
   render() {

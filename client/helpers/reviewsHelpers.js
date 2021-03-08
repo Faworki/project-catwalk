@@ -20,18 +20,6 @@ export const DEFAULT_STATE = {
   allReviewsFetched: false,
 };
 
-export const getReviews = (productId, page = 1, sort = DEFAULT_STATE.sortOrder) => {
-  let requestURL = `${urlPrefix}/?product_id=${productId}&page=${page}&sort=${sort}&count=5`;
-
-  return axios.get(requestURL)
-    .then(({ data }) => {
-      return data.results;
-    })
-    .catch(err => {
-      console.error(err);
-    });
-};
-
 export const api = {
   reviewHelpful(reviewId) {
     return axios.put(`${urlPrefix}/${reviewId}/helpful`)
@@ -59,3 +47,5 @@ export const api = {
     });
   }
 };
+
+

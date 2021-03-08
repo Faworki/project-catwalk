@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import RatingBreakdown from './reviewWidget/RatingBreakdown';
 import ReviewList from './reviewWidget/ReviewList';
-import { DEFAULT_STATE, api, updateFilters } from '../helpers/reviewsHelpers';
+import { DEFAULT_STATE, api, updateFilters, filterReviews } from '../helpers/reviewsHelpers';
 
 // Good product id for tests: 11975
 export class ReviewsWidget extends Component {
@@ -69,7 +69,7 @@ export class ReviewsWidget extends Component {
     allReviewsFetched = allReviewsFetched !== undefined ? allReviewsFetched : this.state.allReviewsFetched;
 
     // Apply filters to reviewstore (they may have changed)
-    let filteredReviews = this.filterReviews(productReviews);
+    let filteredReviews = filterReviews(productReviews, this.state.reviewFilters);
 
     // While there are not enough reviews to display
     while (filteredReviews.length < numToDisplay && !allReviewsFetched) {
@@ -88,7 +88,7 @@ export class ReviewsWidget extends Component {
       // Add the new reviews to review storage
       productReviews = [...productReviews, ...newReviews];
       // Filter all the reviews
-      filteredReviews = this.filterReviews(productReviews);
+      filteredReviews = filterReviews(productReviews, this.state.reviewFilters);
 
     }
 
@@ -119,16 +119,6 @@ export class ReviewsWidget extends Component {
   /*************************
    * ===== FILTERING ===== *
   *************************/
-
-  filterReviews(reviews) {
-    // If there are filters toggled to true
-    if (this.state.reviewFilters.count > 0) {
-      reviews = reviews.filter((review) => {
-        return this.state.reviewFilters[review.rating];
-      });
-    }
-    return reviews;
-  }
 
   toggleRatingFilter(rating) {
     let newState = updateFilters(this.state.reviewFilters, rating);

@@ -43,7 +43,16 @@ export const updateFilters = (filtersState, rating) => {
     };
   }
 
-  return updateFilters;
+  return updatedFilters;
+};
+
+export const filterReviews = (reviews, filters) => {
+  if (filters.count > 0) {
+    reviews = reviews.filter((review) => {
+      return filters[review.rating];
+    });
+  }
+  return reviews;
 };
 
 export const api = {

@@ -27,14 +27,19 @@ Complete redesign of product web page for client-facing retail website.
     ```
     npm install
     ```
-7. Then run this to start your server
+7. Next build the app bundle by running the command
+    ```
+    npm build
+    ```
+
+8. Once the app bundle is done building run this to start your server
     ```
     npm start
     ```
 ​
-8. In your browser go to: http://localhost:3000 where the application should load up.  
+9. In your browser go to: http://localhost:3000 where the application should load up.  
 ​
-9. Feel free to click around the application and explore the interactivity of the various components.
+10. Feel free to click around the application and explore the interactivity of the various components.
 ​
 
 Happy tinkering!

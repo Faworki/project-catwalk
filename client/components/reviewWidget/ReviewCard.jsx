@@ -1,5 +1,5 @@
-import React from "react";
-import StarAverage from "../shared/StarAverage.jsx";
+import React from 'react';
+import StarAverage from '../shared/StarAverage.jsx';
 
 const ReviewCard = ({ review, index, markReviewHelpful, reportReview }) => {
   // Conditionally render a response if present
@@ -59,14 +59,14 @@ const ReviewCard = ({ review, index, markReviewHelpful, reportReview }) => {
       </div>
       <div className="review-footer">
         <div>
-          Helpful?{" "}
+          Helpful?{' '}
           <a
             onClick={() => {
               markReviewHelpful(review.review_id, index);
             }}
           >
             Yes
-          </a>{" "}
+          </a>{' '}
           {`(${review.helpfulness})`}
         </div>
         <div>

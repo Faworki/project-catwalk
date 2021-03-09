@@ -35,8 +35,8 @@ export class AddReviewModal extends Component {
     console.log('Validating form');
   }
 
-  apiSubmitReview(review){
-    console.log('Sending Review')
+  apiSubmitReview(review) {
+    console.log('Sending Review');
   }
 
   render() {

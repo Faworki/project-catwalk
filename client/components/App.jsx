@@ -5,7 +5,7 @@ import RelatedProducts from './RelatedProducts.jsx';
 import QnAs from './QnAs/QnAs.jsx';
 import RatingsAndReviews from './ReviewsWidget.jsx';
 import { sumReviewCount, calculateReviewAverage } from '../helpers/reviewsHelpers';
-import { BrowserRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 
 class App extends React.Component {
@@ -125,4 +125,4 @@ class App extends React.Component {
   }
 }
 
-export default App;
+export default withRouter(App);

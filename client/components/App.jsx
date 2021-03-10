@@ -5,17 +5,12 @@ import RelatedProducts from './RelatedProducts.jsx';
 import QnAs from './QnAs/QnAs.jsx';
 import RatingsAndReviews from './ReviewsWidget.jsx';
 import { sumReviewCount, calculateReviewAverage } from '../helpers/reviewsHelpers';
-import {
-  BrowserRouter,
-  Switch,
-  Route,
-  Link
-} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 
 class App extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       product: {
@@ -98,7 +93,7 @@ class App extends React.Component {
 
   render () {
     return (
-      <BrowserRouter>
+      // <BrowserRouter>
         <div>
           <Overview
             product={this.state.product}
@@ -125,7 +120,7 @@ class App extends React.Component {
             reviewCount={this.state.reviewCount}
           />
         </div>
-      </BrowserRouter>
+      // </BrowserRouter>
     );
   }
 }

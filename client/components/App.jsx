@@ -64,7 +64,15 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.getNewProduct(11001);
+    let productId = this.props.location.pathname.slice(1) || 11001;
+    this.getNewProduct(productId);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      let productId = this.props.location.pathname.slice(1) || 11001;
+      this.getNewProduct(productId);
+    }
   }
 
   addToOutfit() {
@@ -93,7 +101,6 @@ class App extends React.Component {
 
   render () {
     return (
-      // <BrowserRouter>
         <div>
           <Overview
             product={this.state.product}
@@ -120,7 +127,6 @@ class App extends React.Component {
             reviewCount={this.state.reviewCount}
           />
         </div>
-      // </BrowserRouter>
     );
   }
 }

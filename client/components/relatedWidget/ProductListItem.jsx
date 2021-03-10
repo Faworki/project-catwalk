@@ -1,6 +1,6 @@
 import React from 'react';
 import StarAverage from '../shared/StarAverage.jsx';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ActionButton from './ActionButton.jsx';
 
 class ProductListItem extends React.Component {
@@ -11,12 +11,6 @@ class ProductListItem extends React.Component {
   render() {
     var page = '/' + this.props.text.id;
     return (
-      // <div
-      //   onClick={()=>{
-      //     this.props.getNewProduct(this.props.text.id);
-      //   }}
-      //  className={'menu-item'}
-      // >
       <div className={'menu-item'}>
         <h4>{this.props.text.category}</h4>
         <Link exact to={page}>
@@ -30,8 +24,6 @@ class ProductListItem extends React.Component {
           productId={this.props.text.id}
         />
       </div>
-
-      // <Route component={Home} />
     );
   }
 }

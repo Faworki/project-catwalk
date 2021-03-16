@@ -238,6 +238,7 @@ export class ReviewsWidget extends Component {
             reviewAverage={this.props.reviewAverage}
             reviewCount={this.props.reviewCount}
             toggleRatingFilter={this.toggleRatingFilter}
+            reviewFilters={this.state.reviewFilters}
           />
           <ReviewList
             reviews={this.state.filteredReviews.slice(

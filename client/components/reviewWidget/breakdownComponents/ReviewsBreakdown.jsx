@@ -21,7 +21,20 @@ const ReviewsBreakdown = ({ ratings, toggleRatingFilter, reviewFilters }) => {
     );
   }
 
-  return <section>{bars}</section>;
+  return (
+    <section>
+      {bars}
+      <article className="review-bar">
+        <span
+          onClick={() => {
+            toggleRatingFilter('reset');
+          }}
+        >
+          Clear Filters
+        </span>
+      </article>
+    </section>
+  );
 };
 
 export default ReviewsBreakdown;

@@ -142,8 +142,16 @@ export class ReviewsWidget extends Component {
    * ===== FILTERING ===== *
    *************************/
 
+  // Rating can be number 1-5 corresponding to the star ratings or
+  // rating can be 'reset' which will reset filters back to the
+  // default state
   toggleRatingFilter(rating) {
-    let newState = updateFilters(this.state.reviewFilters, rating);
+    let newState;
+    if (rating === 'reset') {
+      newState = DEFAULT_STATE.reviewFilters;
+    } else {
+      newState = updateFilters(this.state.reviewFilters, rating);
+    }
     this.setState({
       reviewFilters: newState,
     });

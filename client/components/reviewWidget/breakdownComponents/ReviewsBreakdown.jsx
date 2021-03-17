@@ -1,7 +1,7 @@
 import React from 'react';
 import ReviewBar from './ReviewBar';
 
-const ReviewsBreakdown = ({ ratings, toggleRatingFilter }) => {
+const ReviewsBreakdown = ({ ratings, toggleRatingFilter, reviewFilters }) => {
   let bars = [];
   let totalRatings = Object.values(ratings).reduce(
     (sum, num) => sum + parseInt(num),
@@ -14,13 +14,27 @@ const ReviewsBreakdown = ({ ratings, toggleRatingFilter }) => {
       <ReviewBar
         key={i}
         rating={i}
+        active={reviewFilters[i] || reviewFilters.count === 0}
         percentOfRatings={percentOfRatings}
         toggleRatingFilter={toggleRatingFilter}
       />
     );
   }
 
-  return <section>{bars}</section>;
+  return (
+    <section>
+      {bars}
+      <article className="review-bar">
+        <span
+          onClick={() => {
+            toggleRatingFilter('reset');
+          }}
+        >
+          Clear Filters
+        </span>
+      </article>
+    </section>
+  );
 };
 
 export default ReviewsBreakdown;

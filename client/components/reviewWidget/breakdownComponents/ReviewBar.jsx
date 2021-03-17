@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReviewBar = ({rating, percentOfRatings, toggleRatingFilter}) => {
+const ReviewBar = ({rating, percentOfRatings, toggleRatingFilter, active}) => {
   return (
     <article
       className="review-bar"
@@ -8,7 +8,7 @@ const ReviewBar = ({rating, percentOfRatings, toggleRatingFilter}) => {
     >
       <span>{rating + ' stars'}</span>
       <div className="star-bar">
-        <div className="star-bar-filled" style={{width: percentOfRatings + '%'}}></div>
+        <div className={active ? 'star-bar-filled active' : 'star-bar-filled'} style={{width: percentOfRatings + '%'}}></div>
       </div>
     </article>
   );

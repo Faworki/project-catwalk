@@ -8,9 +8,13 @@
 }
 
 .star-bar-filled {
-  background-color: #467c46;
+  background-color: #626262;
   box-shadow: 2px 0px 2px -1px rgba(0, 0, 0, 0.399);
   height: 100%;
+}
+
+.star-bar-filled.active {
+  background-color: #467c46;
 }
 
 .star-bar {

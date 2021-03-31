@@ -46,7 +46,7 @@ export class AddReviewModal extends Component {
         <button className="close-modal-btn" onClick={this.props.closeModal}>
           X
         </button>
-        <form>
+        <form id="add-review-form">
           <h2>Tell Us What You Think</h2>
 
           <div id="rating-input">
@@ -54,7 +54,7 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="review-summary">
-            <label htmlFor="summary">Summary:</label>
+            <label htmlFor="summary">Review Summary:</label>
             <input
               type="text"
               name="summary"
@@ -66,7 +66,7 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="review-body">
-            <label htmlFor="body">Review:</label>
+            <label htmlFor="body">Review Body:</label>
             <textarea
               name="body"
               maxLength="1000"

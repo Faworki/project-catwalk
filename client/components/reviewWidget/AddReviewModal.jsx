@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
-
 export class AddReviewModal extends Component {
   constructor(props) {
     super(props);
@@ -75,14 +74,20 @@ export class AddReviewModal extends Component {
               value={this.state.body}
               onChange={this.handleInputChange}
             ></textarea>
-            <span style={{color: charCountCol}}>{this.state.body.length}</span>
+            <span style={{ color: charCountCol }}>
+              {this.state.body.length}
+            </span>
           </div>
 
           <div id="review-submit-img">
             <label htmlFor="images">Add Product Images</label>
-            <input type="file" name="images" accept=".jpg, .jpeg, .png" multiple></input>
-            <div className="image-preview">
-            </div>
+            <input
+              type="file"
+              name="images"
+              accept=".jpg, .jpeg, .png"
+              multiple
+            ></input>
+            <div className="image-preview"></div>
           </div>
 
           <div id="review-nickname">

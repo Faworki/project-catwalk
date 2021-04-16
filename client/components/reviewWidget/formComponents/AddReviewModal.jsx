@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Modal from 'react-modal';
 import RateCharacteristic from './RateCharacteristic';
 import { CHAR_RATINGS } from '../utils/characteristics.js';
+import ReviewStars from './ReviewStars';
 
 export class AddReviewModal extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export class AddReviewModal extends Component {
       summary: '',
       body: '',
       nickname: '',
-      email: ''
+      email: '',
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -52,7 +53,10 @@ export class AddReviewModal extends Component {
           <h2>Tell Us What You Think</h2>
 
           <div id="rating-input">
-            <label htmlFor="rating">Rating:</label>
+            <ReviewStars
+              currentValue={this.state.rating}
+              handleInputChange={this.handleInputChange}
+            />
           </div>
 
           <div id="characteristics-input">
@@ -61,7 +65,7 @@ export class AddReviewModal extends Component {
                 <RateCharacteristic
                   characteristic={characteristic}
                   ratings={CHAR_RATINGS[characteristic]}
-                  handleInputChange = {this.handleInputChange}
+                  handleInputChange={this.handleInputChange}
                   currentValue={this.state[characteristic] || ''}
                   key={characteristic}
                 />

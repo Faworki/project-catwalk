@@ -1,5 +1,10 @@
 #add-review-form {
-  display:flex;
+  display: flex;
+  flex-direction: column;
+}
+
+#add-review-form div {
+  display: flex;
 }
 
 //===============================

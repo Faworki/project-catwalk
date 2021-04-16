@@ -10,6 +10,7 @@ export class AddReviewModal extends Component {
       body: '',
       nickname: '',
       email: '',
+      characteristics: this.props.characteristics,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);

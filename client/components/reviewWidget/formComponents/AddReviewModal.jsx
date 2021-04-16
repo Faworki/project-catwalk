@@ -3,7 +3,6 @@ import Modal from 'react-modal';
 import RateCharacteristic from './RateCharacteristic';
 import { CHAR_RATINGS } from '../utils/characteristics.js';
 
-const dummyChar = ['Size', 'Width'];
 export class AddReviewModal extends Component {
   constructor(props) {
     super(props);
@@ -13,8 +12,7 @@ export class AddReviewModal extends Component {
       summary: '',
       body: '',
       nickname: '',
-      email: '',
-      characteristics: this.props.characteristics,
+      email: ''
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -32,7 +30,7 @@ export class AddReviewModal extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    console.log('Submited');
+    console.log('Submitted');
   }
 
   validateForm() {
@@ -58,11 +56,14 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="characteristics-input">
-            {dummyChar.map((characteristic) => {
+            {this.props.characteristics.map((characteristic) => {
               return (
                 <RateCharacteristic
                   characteristic={characteristic}
                   ratings={CHAR_RATINGS[characteristic]}
+                  handleInputChange = {this.handleInputChange}
+                  currentValue={this.state[characteristic] || ''}
+                  key={characteristic}
                 />
               );
             })}

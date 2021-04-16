@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import Modal from 'react-modal';
+import RateCharacteristic from './RateCharacteristic';
+import { CHAR_RATINGS } from '../utils/characteristics.js';
+
+const dummyChar = ['Size', 'Width'];
 export class AddReviewModal extends Component {
   constructor(props) {
     super(props);
@@ -51,6 +55,17 @@ export class AddReviewModal extends Component {
 
           <div id="rating-input">
             <label htmlFor="rating">Rating:</label>
+          </div>
+
+          <div id="characteristics-input">
+            {dummyChar.map((characteristic) => {
+              return (
+                <RateCharacteristic
+                  characteristic={characteristic}
+                  ratings={CHAR_RATINGS[characteristic]}
+                />
+              );
+            })}
           </div>
 
           <div id="review-summary">

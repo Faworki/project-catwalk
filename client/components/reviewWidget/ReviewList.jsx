@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import ReviewCard from './ReviewCard';
-import AddReviewModal from './AddReviewModal.jsx';
+import AddReviewModal from './formComponents/AddReviewModal.jsx';
 
 // todo: Look in to making select element accessible friendly
 
@@ -13,6 +13,7 @@ const ReviewList = ({
   showMoreReviewsButton,
   markReviewHelpful,
   reportReview,
+  characteristics,
 }) => {
 
   const [showModal, setShowModal] = useState(false);
@@ -51,6 +52,7 @@ const ReviewList = ({
       <AddReviewModal
         showModal={showModal}
         closeModal={()=>{ setShowModal(false); }}
+        characteristics={characteristics}
       />
     </main>
   );

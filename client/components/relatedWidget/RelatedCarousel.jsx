@@ -84,6 +84,7 @@ class RelatedCarousel extends React.Component {
   render() {
     return (
       <div>
+        <div className='widgetHeader'>Related Products</div>
         <ScrollMenu
           data={this.productItems}
           arrowLeft={ArrowLeft}

@@ -74,7 +74,7 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="review-summary">
-            <label htmlFor="summary">Review Summary:</label>
+            <label htmlFor="summary"><h4>Review Title</h4></label>
             <input
               type="text"
               name="summary"
@@ -86,7 +86,7 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="review-body">
-            <label htmlFor="body">Review Body:</label>
+            <label htmlFor="body"><h4>Review Body</h4></label>
             <textarea
               name="body"
               maxLength="1000"
@@ -101,7 +101,7 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="review-submit-img">
-            <label htmlFor="images">Add Product Images</label>
+            <label htmlFor="images"><h4>Add Product Images</h4></label>
             <input
               type="file"
               name="images"
@@ -112,7 +112,7 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="review-nickname">
-            <label htmlFor="nickname">Nickname:</label>
+            <label htmlFor="nickname"><h4>Nickname</h4></label>
             <input
               type="text"
               name="nickname"
@@ -124,7 +124,7 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="review-email">
-            <label htmlFor="email">Email:</label>
+            <label htmlFor="email"><h4>Email</h4></label>
             <input
               type="email"
               name="email"

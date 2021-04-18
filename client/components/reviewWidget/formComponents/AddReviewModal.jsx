@@ -9,7 +9,7 @@ export class AddReviewModal extends Component {
     super(props);
     this.state = {
       showModal: false,
-      rating: '',
+      rating: 0,
       summary: '',
       body: '',
       nickname: '',

@@ -50,6 +50,7 @@ class Outfit extends React.Component {
   }
 
   render() {
+    this.buildCarousel();
     return (
       <div>
         <div className='widgetHeader'>Outfit Carousel</div>

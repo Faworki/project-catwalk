@@ -82,6 +82,7 @@ class RelatedCarousel extends React.Component {
   }
 
   render() {
+    this.buildCarousel();
     return (
       <div>
         <div className='widgetHeader'>Related Products</div>

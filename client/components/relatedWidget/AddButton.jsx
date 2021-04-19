@@ -10,15 +10,15 @@ class AddButton extends React.Component {
   render() {
     return (
         <div className="menu-item add-button">
-          <h4>Add To Outfit</h4>
+          <h4>Like this product?</h4>
           <a href>
-            <h4 style={{textDecoration: "underline"}}>Product Name</h4>
+            <h4 style={{textDecoration: "underline"}}>Add it to your outift!</h4>
           </a>
           <button className="outfit-button" onClick={this.props.addToOutfit}>
             +
           </button>
-          <h4>Price</h4>
-          <StarAverage reviewAverage={this.props.stars} />
+          <h4>See your outfit here!</h4>
+          <StarAverage reviewAverage={5} />
           <ActionButton
             buttonCallback={this.props.buttonCallback}
           />

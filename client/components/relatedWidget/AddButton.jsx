@@ -12,7 +12,12 @@ class AddButton extends React.Component {
         <div className="menu-item add-button">
           <h4>Like this product?</h4>
           <a href>
-            <h4 style={{textDecoration: "underline"}}>Add it to your outift!</h4>
+            <h4
+              style={{textDecoration: "underline"}}
+              onClick={this.props.addToOutfit}
+            >
+                Click to add it to your outift!
+            </h4>
           </a>
           <button className="outfit-button" onClick={this.props.addToOutfit}>
             <svg width="200px" height="250px" viewBox="0 0 485.946 485.946">

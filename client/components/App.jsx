@@ -115,6 +115,7 @@ class App extends React.Component {
             yourOutfit={this.state.yourOutfit}
             getNewProduct={this.getNewProduct}
             addToOutfit={this.addToOutfit}
+            removeFromOutfit={this.removeFromOutfit}
             styles={this.state.styles}
           />
           <QnAs

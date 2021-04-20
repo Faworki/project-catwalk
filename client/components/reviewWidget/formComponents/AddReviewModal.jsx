@@ -6,12 +6,12 @@ import ReviewStars from './ReviewStars';
 
 const modalStyles = {
   content: {
-    'min-width': '550px',
+    minWidth: '550px',
     left: '50%',
     right: 'auto',
     transform: 'translate(-50%)',
-    'border-radius': '0',
-    'padding-top': '0',
+    borderRadius: '0',
+    paddingTop: '0',
   },
 };
 
@@ -25,6 +25,7 @@ export class AddReviewModal extends Component {
       body: '',
       nickname: '',
       email: '',
+      recommend: null,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -80,6 +81,26 @@ export class AddReviewModal extends Component {
               currentValue={this.state.rating}
               handleInputChange={this.handleInputChange}
             />
+          </div>
+
+          <div id="recommend-input">
+            <h4>Would you recommend this product?</h4>
+            <label>
+              <input type="radio"
+              name="recommend"
+              value={'true'}
+              checked={this.state.recommend === 'true'}
+              onChange={this.handleInputChange}/>
+              Yes
+            </label>
+            <label>
+              <input type="radio"
+              name="recommend"
+              value={'false'}
+              checked={this.state.recommend === 'false'}
+              onChange={this.handleInputChange}/>
+              No
+            </label>
           </div>
 
           <div id="characteristics-input">

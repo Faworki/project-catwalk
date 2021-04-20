@@ -6,7 +6,7 @@ describe('Validate Email', () => {
   });
 
   it('should return false for an invalid email address', () => {
-    expect(formUtils.validateEmail('notAnEmailATdotall'));
+    expect(formUtils.validateEmail('notAnEmailAtDotAll'));
   });
 });
 

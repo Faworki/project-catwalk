@@ -1,7 +1,7 @@
+const axios = require('axios');
+
 const sendReview = (body) => {
-  // validate inputs
-  // If all inputs succeed send message
-  // change state to show thank you
+  return axios.post('/reviews', body);
 };
 
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;

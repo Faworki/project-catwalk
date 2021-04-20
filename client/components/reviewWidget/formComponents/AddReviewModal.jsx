@@ -60,6 +60,10 @@ export class AddReviewModal extends Component {
         style={modalStyles}
         isOpen={this.props.showModal}
         id="add-review-modal"
+        onRequestClose={this.props.closeModal}
+        shouldCloseOnOverlayClick={true}
+        shouldCloseOnEsc={true}
+        parentSelector={() => document.querySelector('.list-footer')}
       >
         <div className="modal-controls">
           <button className="close-modal-btn" onClick={this.props.closeModal}>

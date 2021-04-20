@@ -4,6 +4,17 @@ import RateCharacteristic from './RateCharacteristic';
 import { CHAR_RATINGS } from '../utils/characteristics.js';
 import ReviewStars from './ReviewStars';
 
+const modalStyles = {
+  content: {
+    'min-width': '600px',
+    left: '50%',
+    right: 'auto',
+    transform: 'translate(-50%)',
+    'border-radius': '0',
+    'padding-top': '0',
+  },
+};
+
 export class AddReviewModal extends Component {
   constructor(props) {
     super(props);
@@ -45,13 +56,18 @@ export class AddReviewModal extends Component {
   render() {
     let charCountCol = this.state.body.length < 51 ? 'red' : 'inherit';
     return (
-      <Modal isOpen={this.props.showModal}>
-        <button className="close-modal-btn" onClick={this.props.closeModal}>
-          X
-        </button>
-        <form id="add-review-form">
+      <Modal
+        style={modalStyles}
+        isOpen={this.props.showModal}
+        id="add-review-modal"
+      >
+        <div className="modal-controls">
+          <button className="close-modal-btn" onClick={this.props.closeModal}>
+            X
+          </button>
           <h2>Tell Us What You Think</h2>
-
+        </div>
+        <form id="add-review-form">
           <div id="rating-input">
             <ReviewStars
               currentValue={this.state.rating}
@@ -74,7 +90,9 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="review-summary">
-            <label htmlFor="summary"><h4>Review Title</h4></label>
+            <label htmlFor="summary">
+              <h4>Review Title</h4>
+            </label>
             <input
               type="text"
               name="summary"
@@ -86,7 +104,9 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="review-body">
-            <label htmlFor="body"><h4>Review Body</h4></label>
+            <label htmlFor="body">
+              <h4>Review Body</h4>
+            </label>
             <textarea
               name="body"
               maxLength="1000"
@@ -95,13 +115,18 @@ export class AddReviewModal extends Component {
               value={this.state.body}
               onChange={this.handleInputChange}
             ></textarea>
-            <span style={{ color: charCountCol }}>
-              {this.state.body.length}
-            </span>
+            <div>
+              <span>*Review body must be at least 50 characters</span>
+              <span style={{ color: charCountCol }}>
+                {this.state.body.length <= 50 ? this.state.body.length : null}
+              </span>
+            </div>
           </div>
 
           <div id="review-submit-img">
-            <label htmlFor="images"><h4>Add Product Images</h4></label>
+            <label htmlFor="images">
+              <h4>Add Product Images</h4>
+            </label>
             <input
               type="file"
               name="images"
@@ -112,7 +137,9 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="review-nickname">
-            <label htmlFor="nickname"><h4>Nickname</h4></label>
+            <label htmlFor="nickname">
+              <h4>Nickname</h4>
+            </label>
             <input
               type="text"
               name="nickname"
@@ -124,7 +151,9 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="review-email">
-            <label htmlFor="email"><h4>Email</h4></label>
+            <label htmlFor="email">
+              <h4>Email</h4>
+            </label>
             <input
               type="email"
               name="email"

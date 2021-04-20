@@ -5,7 +5,7 @@ export default function ReviewStars({ currentValue, handleInputChange }) {
   return (
     <>
       <h4>Product Rating</h4>
-      <span className="star-radio-group">
+      <span id="star-radio-group">
         {[...Array(5)].map((el, rating) => {
           rating += 1;
           return (

@@ -22,12 +22,20 @@ class Outfit extends React.Component {
       image: []
     };
     this.productItems = [];
+    this.removeOutfitImage = this.removeOutfitImage.bind(this);
   }
 
   getImage (productId) {
       let imageArray = this.state.image.slice();
       imageArray.push(this.props.styles[0].photos[0].thumbnail_url);
       this.setState({image: imageArray});
+  }
+
+  removeOutfitImage(index) {
+    console.log('clicking action button');
+    let outfitImages = this.state.image.slice();
+    outfitImages.splice(index, 1);
+    this.setState({image: outfitImages});
   }
 
   buildCarousel() {
@@ -38,7 +46,8 @@ class Outfit extends React.Component {
     },
       this.props.getNewProduct,
       this.props.removeFromOutfit,
-      this.props.reviewAverage
+      this.props.reviewAverage,
+      this.removeOutfitImage
       );
   }
 

@@ -6,7 +6,7 @@ import ReviewStars from './ReviewStars';
 
 const modalStyles = {
   content: {
-    'min-width': '600px',
+    'min-width': '500px',
     left: '50%',
     right: 'auto',
     transform: 'translate(-50%)',

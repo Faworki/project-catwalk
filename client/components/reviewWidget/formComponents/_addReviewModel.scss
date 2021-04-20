@@ -34,6 +34,11 @@
   font-size: 1.1em;
 }
 
+.close-modal-btn:focus {
+  border: none;
+  outline-style: none;
+}
+
 #add-review-form textarea,
 #add-review-form input[type='text'],
 #add-review-form input[type='email'] {
@@ -51,10 +56,17 @@
   outline-style: -webkit-focus-ring-color auto 1px;
 }
 
-
+#add-review-form input[type='text'],
+#add-review-form input[type='email'] {
+  font-weight: bolder;
+}
 
 .char-radio label {
   font-size: 0.8em;
+}
+.radio-options {
+  display: flex;
+  justify-content: space-evenly;
 }
 
 #review-body div {
@@ -67,6 +79,7 @@
 }
 
 #add-review-form textarea {
+  font-family: inherit;
   height: 7em;
 }
 

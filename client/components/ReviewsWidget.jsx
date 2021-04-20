@@ -261,6 +261,7 @@ export class ReviewsWidget extends Component {
             markReviewHelpful={this.markReviewHelpful}
             reportReview={this.reportReview}
             characteristics = {Object.keys(this.props.reviewMetaData.characteristics)}
+            productName={this.props.productName}
           />
         </div>
       </div>

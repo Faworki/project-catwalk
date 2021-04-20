@@ -14,6 +14,7 @@ const ReviewList = ({
   markReviewHelpful,
   reportReview,
   characteristics,
+  productName,
 }) => {
 
   const [showModal, setShowModal] = useState(false);
@@ -53,6 +54,7 @@ const ReviewList = ({
         showModal={showModal}
         closeModal={()=>{ setShowModal(false); }}
         characteristics={characteristics}
+        productName={productName}
       />
     </main>
   );

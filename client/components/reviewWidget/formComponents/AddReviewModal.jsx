@@ -6,7 +6,7 @@ import ReviewStars from './ReviewStars';
 
 const modalStyles = {
   content: {
-    'min-width': '500px',
+    'min-width': '550px',
     left: '50%',
     right: 'auto',
     transform: 'translate(-50%)',
@@ -69,7 +69,10 @@ export class AddReviewModal extends Component {
           <button className="close-modal-btn" onClick={this.props.closeModal}>
             X
           </button>
-          <h2>Tell Us What You Think</h2>
+          <div>
+          <h2>Write Your Review</h2>
+          <h3>{'About ' + this.props.productName}</h3>
+          </div>
         </div>
         <form id="add-review-form">
           <div id="rating-input">

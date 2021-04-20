@@ -7,6 +7,7 @@
 }
 
 .modal-controls h2,
+.modal-controls h3,
 #add-review-form h4 {
   margin: 0;
 }
@@ -21,6 +22,7 @@
 }
 
 .modal-controls {
+  align-items: self-end;
   display: flex;
   flex-flow: row-reverse;
   justify-content: space-between;

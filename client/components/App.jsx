@@ -123,6 +123,7 @@ class App extends React.Component {
           />
           <RatingsAndReviews
             productId={this.state.product.id}
+            productName={this.state.product.name}
             reviewMetaData={this.state.reviewMetaData}
             reviewAverage={this.state.reviewAverage}
             reviewCount={this.state.reviewCount}

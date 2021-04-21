@@ -260,6 +260,8 @@ export class ReviewsWidget extends Component {
             showMoreReviewsButton={this.state.showMoreReviewsButton}
             markReviewHelpful={this.markReviewHelpful}
             reportReview={this.reportReview}
+            characteristics = {this.props.reviewMetaData.characteristics}
+            productName={this.props.productName}
           />
         </div>
       </div>

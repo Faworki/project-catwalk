@@ -1,14 +1,6 @@
 import React from 'react';
-import CharacteristicsScale from './CharacteristicScale';
-
-const labelDict = {
-  'Size': ['Too small', 'Perfect', 'Too large'],
-  'Width': ['Too narrow', 'Perfect', 'Too wide'],
-  'Comfort': ['Poor', 'Perfect'],
-  'Quality': ['Poor', 'Perfect'],
-  'Length': ['Runs short', 'Perfect', 'Runs long'],
-  'Fit': ['Runs tight', 'Perfect', 'Runs loose']
-};
+import CharacteristicsScale from './CharacteristicScale.jsx';
+import { LABEL_DICT } from '../utils/characteristics.js';
 
 const CharacteristicsBreakdown = ({characteristics}) => {
   return (
@@ -18,7 +10,7 @@ const CharacteristicsBreakdown = ({characteristics}) => {
           <CharacteristicsScale
             name={name}
             valuePercent={Math.trunc(parseFloat(data.value) / 5 * 100)}
-            labels={labelDict[name]}
+            labels={LABEL_DICT[name]}
             key={data.id}
           />
         );

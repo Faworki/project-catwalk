@@ -54,6 +54,7 @@ const ReviewList = ({
         showModal={showModal}
         closeModal={()=>{ setShowModal(false); }}
         characteristics={characteristics}
+        charNames={Object.keys(characteristics)}
         productName={productName}
       />
     </main>

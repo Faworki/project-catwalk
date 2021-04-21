@@ -11,14 +11,14 @@ export default function RateCharacteristic({
     <div className="char-radio">
       <h4 style={isNotValid ? { color: 'red' } : {}}>{characteristic}</h4>
       <div className="radio-options">
-        {ratings.map((rating) => {
+        {ratings.map((rating, i) => {
           return (
-            <label key={characteristic + rating}>
+            <label key={characteristic + (i + 1)}>
               <input
                 type="radio"
                 name={characteristic}
-                value={rating}
-                checked={rating === currentValue}
+                value={i + 1}
+                checked={rating === ratings[currentValue - 1]}
                 onChange={handleInputChange}
               />
               {rating}

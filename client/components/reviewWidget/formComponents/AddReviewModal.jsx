@@ -62,7 +62,6 @@ export class AddReviewModal extends Component {
     if (this.validateForm()) {
       //package body
       let { rating, summary, body, nickname, email, recommend } = this.state;
-      //todo: figure this out when we sort out passing down characteristics
       let characteristics = {};
       let reviewBody = {
         rating,
@@ -114,9 +113,9 @@ export class AddReviewModal extends Component {
       errors.recommend = true;
       isValid = false;
     }
-    //Validate characteristics
+    // Validate characteristics
     if (
-      !this.props.characteristics.reduce((acc, charName) => {
+      !this.props.charNames.reduce((acc, charName) => {
         let isValidChar = form.validateNotEmpty(this.state[charName]);
         if (!isValidChar) {
           errors[charName] = true;
@@ -208,7 +207,7 @@ export class AddReviewModal extends Component {
             </div>
 
             <div id="characteristics-input">
-              {this.props.characteristics.map((characteristic) => {
+              {this.props.charNames.map((characteristic) => {
                 return (
                   <RateCharacteristic
                     isNotValid={!!this.state.errors[characteristic]}

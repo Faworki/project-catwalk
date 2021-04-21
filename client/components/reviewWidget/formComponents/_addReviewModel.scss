@@ -1,0 +1,90 @@
+#add-review-modal div {
+  margin-bottom: 10px;
+}
+
+#add-review-modal div:last-child {
+  margin-bottom: 0;
+}
+
+.modal-controls h2,
+.modal-controls h3,
+#add-review-form h4 {
+  margin: 0;
+}
+
+#add-review-form h4 {
+  margin-bottom: 5px;
+}
+
+#add-review-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-controls {
+  align-items: self-end;
+  display: flex;
+  flex-flow: row-reverse;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.close-modal-btn {
+  border: none;
+  margin: 0;
+  padding: 0px;
+  font-size: 1.1em;
+}
+
+.close-modal-btn:focus {
+  border: none;
+  outline-style: none;
+}
+
+#add-review-form textarea,
+#add-review-form input[type='text'],
+#add-review-form input[type='email'] {
+  width: 95%;
+  height: 40px;
+  padding-left: 10px;
+  border-radius: 0;
+  border-width: 2px;
+}
+
+#add-review-form textarea:focus,
+#add-review-form input[type='text']:focus,
+#add-review-form input[type='email']:focus {
+  border-radius: 0;
+  outline-style: -webkit-focus-ring-color auto 1px;
+}
+
+#add-review-form input[type='text'],
+#add-review-form input[type='email'] {
+  font-weight: bolder;
+}
+
+.char-radio label {
+  font-size: 0.8em;
+}
+.radio-options {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#review-body div {
+  display: flex;
+  flex-flow: row;
+  font-size: .7em;
+  justify-content: space-between;
+  line-height: .7em;
+  width: 95%;
+}
+
+#add-review-form textarea {
+  font-family: inherit;
+  height: 7em;
+}
+
+//===============================
+// ----
+//===============================

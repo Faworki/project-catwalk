@@ -17,6 +17,12 @@ const modalStyles = {
   },
 };
 
+const INVALID_MES = (
+  <p style={{ color: 'red', margin: '0' }}>
+    *Please fill out all required fields.
+  </p>
+);
+
 export class AddReviewModal extends Component {
   constructor(props) {
     super(props);
@@ -29,6 +35,7 @@ export class AddReviewModal extends Component {
       email: '',
       recommend: null,
       errors: {},
+      isValid: true,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -51,15 +58,15 @@ export class AddReviewModal extends Component {
     if (this.validateForm()) {
       //package body
       let body = {};
-      axios.post('/reviews', body)
+      /* axios
+        .post('/reviews', body)
         .then(() => {
           // Render thank you and close
         })
         .catch((err) => {
           // Render something went wrong and close
-        });
+        }); */
     }
-    console.log('Submitted');
   }
 
   validateForm() {
@@ -69,7 +76,7 @@ export class AddReviewModal extends Component {
       errors.rating = true;
       isValid = false;
     }
-    if (!form.validateMinLength(this.state.body,50)) {
+    if (!form.validateMinLength(this.state.body, 50)) {
       errors.body = true;
       isValid = false;
     }
@@ -82,21 +89,22 @@ export class AddReviewModal extends Component {
       isValid = false;
     }
     if (!form.validateNotEmpty(this.state.recommend)) {
-      errors.recommended = true;
+      errors.recommend = true;
       isValid = false;
     }
     //Validate characteristics
-    if (!this.props.characteristics.reduce((acc, charName) => {
-      let isValidChar = form.validateNotEmpty(this.state[charName]);
-      if (!isValidChar) {
-        errors[charName] = true;
-      }
-      return isValidChar && acc;
-    }, true)) {
+    if (
+      !this.props.characteristics.reduce((acc, charName) => {
+        let isValidChar = form.validateNotEmpty(this.state[charName]);
+        if (!isValidChar) {
+          errors[charName] = true;
+        }
+        return isValidChar && acc;
+      }, true)
+    ) {
       isValid = false;
     }
-
-    this.setState({errors});
+    this.setState({ errors, isValid });
     return isValid;
   }
 
@@ -124,13 +132,22 @@ export class AddReviewModal extends Component {
         <form id="add-review-form">
           <div id="rating-input">
             <ReviewStars
+              isNotValid={!!this.state.errors.rating}
               currentValue={this.state.rating}
               handleInputChange={this.handleInputChange}
             />
           </div>
 
           <div id="recommend-input">
-            <h4>Would you recommend this product?</h4>
+            <h4
+              style={
+                this.state.errors.recommend === true
+                  ? { color: 'red' }
+                  : { color: 'inherit' }
+              }
+            >
+              Would you recommend this product?
+            </h4>
             <label>
               <input
                 type="radio"
@@ -157,6 +174,7 @@ export class AddReviewModal extends Component {
             {this.props.characteristics.map((characteristic) => {
               return (
                 <RateCharacteristic
+                  isNotValid={!!this.state.errors[characteristic]}
                   characteristic={characteristic}
                   ratings={CHAR_RATINGS[characteristic]}
                   handleInputChange={this.handleInputChange}
@@ -183,7 +201,9 @@ export class AddReviewModal extends Component {
 
           <div id="review-body">
             <label htmlFor="body">
-              <h4>Review Body</h4>
+              <h4 style={this.state.errors.body ? { color: 'red' } : {}}>
+                Review Body
+              </h4>
             </label>
             <textarea
               name="body"
@@ -216,7 +236,9 @@ export class AddReviewModal extends Component {
 
           <div id="review-nickname">
             <label htmlFor="nickname">
-              <h4>Nickname</h4>
+              <h4 style={this.state.errors.nickname ? { color: 'red' } : {}}>
+                Nickname
+              </h4>
             </label>
             <input
               type="text"
@@ -230,7 +252,9 @@ export class AddReviewModal extends Component {
 
           <div id="review-email">
             <label htmlFor="email">
-              <h4>Email</h4>
+              <h4 style={this.state.errors.email ? { color: 'red' } : {}}>
+                Email
+              </h4>
             </label>
             <input
               type="email"
@@ -243,6 +267,7 @@ export class AddReviewModal extends Component {
           </div>
 
           <div id="submit-review">
+            {this.state.isValid ? null : INVALID_MES}
             <button onClick={this.handleSubmit}>Submit Review</button>
           </div>
         </form>

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 
-export default function ReviewStars({ currentValue, handleInputChange }) {
+export default function ReviewStars({
+  currentValue,
+  handleInputChange,
+  isNotValid,
+}) {
   const [hover, setHover] = useState(0);
   return (
     <>
-      <h4>Product Rating</h4>
+      <h4 style={isNotValid ? { color: 'red' } : {}}>Product Rating</h4>
       <span id="star-radio-group">
         {[...Array(5)].map((el, rating) => {
           rating += 1;
@@ -19,7 +23,7 @@ export default function ReviewStars({ currentValue, handleInputChange }) {
               }}
               onClick={handleInputChange}
             >
-              {currentValue >= rating || hover >= rating ? '★' : '☆' }
+              {currentValue >= rating || hover >= rating ? '★' : '☆'}
               <input type="radio" name="rating" value={rating} />
             </label>
           );

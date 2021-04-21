@@ -60,9 +60,12 @@ export class AddReviewModal extends Component {
   handleSubmit(event) {
     event.preventDefault();
     if (this.validateForm()) {
-      //package body
       let { rating, summary, body, nickname, email, recommend } = this.state;
-      let characteristics = {};
+      let characteristics = this.props.charNames.reduce((acc, charName) => {
+        let id = this.props.characteristics[charName].id;
+        acc[id] = this.state[charName];
+        return acc;
+      }, {});
       let reviewBody = {
         rating,
         summary,
@@ -129,14 +132,14 @@ export class AddReviewModal extends Component {
     return isValid;
   }
 
-  handleCloseModal () {
+  handleCloseModal() {
     let resetState = {
-      'Size': undefined,
-      'Width': undefined,
-      'Comfort': undefined,
-      'Quality': undefined,
-      'Length': undefined,
-      'Fit': undefined,
+      Size: undefined,
+      Width: undefined,
+      Comfort: undefined,
+      Quality: undefined,
+      Length: undefined,
+      Fit: undefined,
     };
     Object.assign(resetState, INITIAL_STATE);
     this.props.closeModal();

@@ -23,25 +23,28 @@ const INVALID_MES = (
   </p>
 );
 
+const INITIAL_STATE = {
+  showModal: false,
+  rating: null,
+  summary: '',
+  body: '',
+  nickname: '',
+  email: '',
+  recommend: null,
+  errors: {},
+  isValid: true,
+  submitText: null,
+};
+
 export class AddReviewModal extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      showModal: false,
-      rating: null,
-      summary: '',
-      body: '',
-      nickname: '',
-      email: '',
-      recommend: null,
-      errors: {},
-      isValid: true,
-      submitText: null,
-    };
+    this.state = INITIAL_STATE;
 
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.validateForm = this.validateForm.bind(this);
+    this.handleCloseModal = this.handleCloseModal.bind(this);
   }
 
   handleInputChange(event) {
@@ -127,6 +130,20 @@ export class AddReviewModal extends Component {
     return isValid;
   }
 
+  handleCloseModal () {
+    let resetState = {
+      'Size': undefined,
+      'Width': undefined,
+      'Comfort': undefined,
+      'Quality': undefined,
+      'Length': undefined,
+      'Fit': undefined,
+    };
+    Object.assign(resetState, INITIAL_STATE);
+    this.props.closeModal();
+    this.setState(resetState);
+  }
+
   render() {
     let charCountCol = this.state.body.length < 51 ? 'red' : 'inherit';
     return (
@@ -134,13 +151,13 @@ export class AddReviewModal extends Component {
         style={modalStyles}
         isOpen={this.props.showModal}
         id="add-review-modal"
-        onRequestClose={this.props.closeModal}
+        onRequestClose={this.handleCloseModal}
         shouldCloseOnOverlayClick={true}
         shouldCloseOnEsc={true}
         parentSelector={() => document.querySelector('.list-footer')}
       >
         <div className="modal-controls">
-          <button className="close-modal-btn" onClick={this.props.closeModal}>
+          <button className="close-modal-btn" onClick={this.handleCloseModal}>
             X
           </button>
           <div>

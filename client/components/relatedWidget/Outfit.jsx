@@ -55,7 +55,7 @@ class Outfit extends React.Component {
     this.buildCarousel();
     return (
       <div>
-        <div className='widgetHeader'>Outfit Carousel</div>
+        <div className='widgetHeader'>My Outfit</div>
         <ScrollMenu
           data={[
             <AddButton

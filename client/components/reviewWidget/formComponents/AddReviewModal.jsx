@@ -36,6 +36,7 @@ export class AddReviewModal extends Component {
       recommend: null,
       errors: {},
       isValid: true,
+      submitText: null,
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -57,15 +58,33 @@ export class AddReviewModal extends Component {
     event.preventDefault();
     if (this.validateForm()) {
       //package body
-      let body = {};
-      /* axios
-        .post('/reviews', body)
+      let { rating, summary, body, nickname, email, recommend } = this.state;
+      //todo: figure this out when we sort out passing down characteristics
+      let characteristics = {};
+      let reviewBody = {
+        rating,
+        summary,
+        body,
+        name: nickname,
+        email,
+        recommend,
+        photos: [],
+        characteristics,
+      };
+      axios
+        .post('/reviews', reviewBody)
         .then(() => {
-          // Render thank you and close
+          console.log('Good response');
+          this.setState({
+            submitText: 'Thank you for submitting a review!',
+          });
         })
         .catch((err) => {
-          // Render something went wrong and close
-        }); */
+          console.error(err);
+          this.setState({
+            submitText: 'Oops something went wrong, please try again later.',
+          });
+        });
     }
   }
 
@@ -129,148 +148,152 @@ export class AddReviewModal extends Component {
             <h3>{'About ' + this.props.productName}</h3>
           </div>
         </div>
-        <form id="add-review-form">
-          <div id="rating-input">
-            <ReviewStars
-              isNotValid={!!this.state.errors.rating}
-              currentValue={this.state.rating}
-              handleInputChange={this.handleInputChange}
-            />
-          </div>
-
-          <div id="recommend-input">
-            <h4
-              style={
-                this.state.errors.recommend === true
-                  ? { color: 'red' }
-                  : { color: 'inherit' }
-              }
-            >
-              Would you recommend this product?
-            </h4>
-            <label>
-              <input
-                type="radio"
-                name="recommend"
-                value={'true'}
-                checked={this.state.recommend === 'true'}
-                onChange={this.handleInputChange}
+        {this.state.submitText === null ? (
+          <form id="add-review-form">
+            <div id="rating-input">
+              <ReviewStars
+                isNotValid={!!this.state.errors.rating}
+                currentValue={this.state.rating}
+                handleInputChange={this.handleInputChange}
               />
-              Yes
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="recommend"
-                value={'false'}
-                checked={this.state.recommend === 'false'}
-                onChange={this.handleInputChange}
-              />
-              No
-            </label>
-          </div>
-
-          <div id="characteristics-input">
-            {this.props.characteristics.map((characteristic) => {
-              return (
-                <RateCharacteristic
-                  isNotValid={!!this.state.errors[characteristic]}
-                  characteristic={characteristic}
-                  ratings={CHAR_RATINGS[characteristic]}
-                  handleInputChange={this.handleInputChange}
-                  currentValue={this.state[characteristic] || ''}
-                  key={characteristic}
-                />
-              );
-            })}
-          </div>
-
-          <div id="review-summary">
-            <label htmlFor="summary">
-              <h4>Review Title</h4>
-            </label>
-            <input
-              type="text"
-              name="summary"
-              maxLength="60"
-              placeholder="Example: Best purchase ever!"
-              value={this.state.summary}
-              onChange={this.handleInputChange}
-            ></input>
-          </div>
-
-          <div id="review-body">
-            <label htmlFor="body">
-              <h4 style={this.state.errors.body ? { color: 'red' } : {}}>
-                Review Body
-              </h4>
-            </label>
-            <textarea
-              name="body"
-              maxLength="1000"
-              minLength="50"
-              placeholder="Why did you like the product or not?"
-              value={this.state.body}
-              onChange={this.handleInputChange}
-            ></textarea>
-            <div>
-              <span>*Review body must be at least 50 characters</span>
-              <span style={{ color: charCountCol }}>
-                {this.state.body.length <= 50 ? this.state.body.length : null}
-              </span>
             </div>
-          </div>
 
-          <div id="review-submit-img">
-            <label htmlFor="images">
-              <h4>Add Product Images</h4>
-            </label>
-            <input
-              type="file"
-              name="images"
-              accept=".jpg, .jpeg, .png"
-              multiple
-            ></input>
-            <div className="image-preview"></div>
-          </div>
-
-          <div id="review-nickname">
-            <label htmlFor="nickname">
-              <h4 style={this.state.errors.nickname ? { color: 'red' } : {}}>
-                Nickname
+            <div id="recommend-input">
+              <h4
+                style={
+                  this.state.errors.recommend === true
+                    ? { color: 'red' }
+                    : { color: 'inherit' }
+                }
+              >
+                Would you recommend this product?
               </h4>
-            </label>
-            <input
-              type="text"
-              name="nickname"
-              maxLength="60"
-              placeholder="Example: jackson11!"
-              value={this.state.nickname}
-              onChange={this.handleInputChange}
-            ></input>
-          </div>
+              <label>
+                <input
+                  type="radio"
+                  name="recommend"
+                  value={'true'}
+                  checked={this.state.recommend === 'true'}
+                  onChange={this.handleInputChange}
+                />
+                Yes
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="recommend"
+                  value={'false'}
+                  checked={this.state.recommend === 'false'}
+                  onChange={this.handleInputChange}
+                />
+                No
+              </label>
+            </div>
 
-          <div id="review-email">
-            <label htmlFor="email">
-              <h4 style={this.state.errors.email ? { color: 'red' } : {}}>
-                Email
-              </h4>
-            </label>
-            <input
-              type="email"
-              name="email"
-              maxLength="60"
-              placeholder="Example: jackson11@email.com"
-              value={this.state.email}
-              onChange={this.handleInputChange}
-            ></input>
-          </div>
+            <div id="characteristics-input">
+              {this.props.characteristics.map((characteristic) => {
+                return (
+                  <RateCharacteristic
+                    isNotValid={!!this.state.errors[characteristic]}
+                    characteristic={characteristic}
+                    ratings={CHAR_RATINGS[characteristic]}
+                    handleInputChange={this.handleInputChange}
+                    currentValue={this.state[characteristic] || ''}
+                    key={characteristic}
+                  />
+                );
+              })}
+            </div>
 
-          <div id="submit-review">
-            {this.state.isValid ? null : INVALID_MES}
-            <button onClick={this.handleSubmit}>Submit Review</button>
-          </div>
-        </form>
+            <div id="review-summary">
+              <label htmlFor="summary">
+                <h4>Review Title</h4>
+              </label>
+              <input
+                type="text"
+                name="summary"
+                maxLength="60"
+                placeholder="Example: Best purchase ever!"
+                value={this.state.summary}
+                onChange={this.handleInputChange}
+              ></input>
+            </div>
+
+            <div id="review-body">
+              <label htmlFor="body">
+                <h4 style={this.state.errors.body ? { color: 'red' } : {}}>
+                  Review Body
+                </h4>
+              </label>
+              <textarea
+                name="body"
+                maxLength="1000"
+                minLength="50"
+                placeholder="Why did you like the product or not?"
+                value={this.state.body}
+                onChange={this.handleInputChange}
+              ></textarea>
+              <div>
+                <span>*Review body must be at least 50 characters</span>
+                <span style={{ color: charCountCol }}>
+                  {this.state.body.length <= 50 ? this.state.body.length : null}
+                </span>
+              </div>
+            </div>
+
+            <div id="review-submit-img">
+              <label htmlFor="images">
+                <h4>Add Product Images</h4>
+              </label>
+              <input
+                type="file"
+                name="images"
+                accept=".jpg, .jpeg, .png"
+                multiple
+              ></input>
+              <div className="image-preview"></div>
+            </div>
+
+            <div id="review-nickname">
+              <label htmlFor="nickname">
+                <h4 style={this.state.errors.nickname ? { color: 'red' } : {}}>
+                  Nickname
+                </h4>
+              </label>
+              <input
+                type="text"
+                name="nickname"
+                maxLength="60"
+                placeholder="Example: jackson11!"
+                value={this.state.nickname}
+                onChange={this.handleInputChange}
+              ></input>
+            </div>
+
+            <div id="review-email">
+              <label htmlFor="email">
+                <h4 style={this.state.errors.email ? { color: 'red' } : {}}>
+                  Email
+                </h4>
+              </label>
+              <input
+                type="email"
+                name="email"
+                maxLength="60"
+                placeholder="Example: jackson11@email.com"
+                value={this.state.email}
+                onChange={this.handleInputChange}
+              ></input>
+            </div>
+
+            <div id="submit-review">
+              {this.state.isValid ? null : INVALID_MES}
+              <button onClick={this.handleSubmit}>Submit Review</button>
+            </div>
+          </form>
+        ) : (
+          <h3 style={{ textAlign: 'center' }}>{this.state.submitText}</h3>
+        )}
       </Modal>
     );
   }

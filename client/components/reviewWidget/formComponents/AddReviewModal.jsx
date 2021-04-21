@@ -3,6 +3,8 @@ import Modal from 'react-modal';
 import RateCharacteristic from './RateCharacteristic';
 import { CHAR_RATINGS } from '../utils/characteristics.js';
 import ReviewStars from './ReviewStars';
+import form, { sendReview } from '../utils/forms.js';
+import axios from 'axios';
 
 const modalStyles = {
   content: {
@@ -20,15 +22,18 @@ export class AddReviewModal extends Component {
     super(props);
     this.state = {
       showModal: false,
-      rating: 0,
+      rating: null,
       summary: '',
       body: '',
       nickname: '',
       email: '',
       recommend: null,
+      errors: {},
     };
 
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.validateForm = this.validateForm.bind(this);
   }
 
   handleInputChange(event) {
@@ -43,15 +48,56 @@ export class AddReviewModal extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    if (this.validateForm()) {
+      //package body
+      let body = {};
+      axios.post('/reviews', body)
+        .then(() => {
+          // Render thank you and close
+        })
+        .catch((err) => {
+          // Render something went wrong and close
+        });
+    }
     console.log('Submitted');
   }
 
   validateForm() {
-    console.log('Validating form');
-  }
+    const errors = {};
+    let isValid = true;
+    if (!form.validateNotEmpty(this.state.rating)) {
+      errors.rating = true;
+      isValid = false;
+    }
+    if (!form.validateMinLength(this.state.body,50)) {
+      errors.body = true;
+      isValid = false;
+    }
+    if (!form.validateNotEmpty(this.state.nickname)) {
+      errors.nickname = true;
+      isValid = false;
+    }
+    if (!form.validateEmail(this.state.email)) {
+      errors.email = true;
+      isValid = false;
+    }
+    if (!form.validateNotEmpty(this.state.recommend)) {
+      errors.recommended = true;
+      isValid = false;
+    }
+    //Validate characteristics
+    if (!this.props.characteristics.reduce((acc, charName) => {
+      let isValidChar = form.validateNotEmpty(this.state[charName]);
+      if (!isValidChar) {
+        errors[charName] = true;
+      }
+      return isValidChar && acc;
+    }, true)) {
+      isValid = false;
+    }
 
-  apiSubmitReview(review) {
-    console.log('Sending Review');
+    this.setState({errors});
+    return isValid;
   }
 
   render() {
@@ -71,8 +117,8 @@ export class AddReviewModal extends Component {
             X
           </button>
           <div>
-          <h2>Write Your Review</h2>
-          <h3>{'About ' + this.props.productName}</h3>
+            <h2>Write Your Review</h2>
+            <h3>{'About ' + this.props.productName}</h3>
           </div>
         </div>
         <form id="add-review-form">
@@ -86,19 +132,23 @@ export class AddReviewModal extends Component {
           <div id="recommend-input">
             <h4>Would you recommend this product?</h4>
             <label>
-              <input type="radio"
-              name="recommend"
-              value={'true'}
-              checked={this.state.recommend === 'true'}
-              onChange={this.handleInputChange}/>
+              <input
+                type="radio"
+                name="recommend"
+                value={'true'}
+                checked={this.state.recommend === 'true'}
+                onChange={this.handleInputChange}
+              />
               Yes
             </label>
             <label>
-              <input type="radio"
-              name="recommend"
-              value={'false'}
-              checked={this.state.recommend === 'false'}
-              onChange={this.handleInputChange}/>
+              <input
+                type="radio"
+                name="recommend"
+                value={'false'}
+                checked={this.state.recommend === 'false'}
+                onChange={this.handleInputChange}
+              />
               No
             </label>
           </div>

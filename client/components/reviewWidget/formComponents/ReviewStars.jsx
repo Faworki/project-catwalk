@@ -15,7 +15,7 @@ export default function ReviewStars({ currentValue, handleInputChange }) {
                 setHover(rating);
               }}
               onMouseOut={() => {
-                setHover(0);
+                setHover(null);
               }}
               onClick={handleInputChange}
             >

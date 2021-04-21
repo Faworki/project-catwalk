@@ -1,9 +1,3 @@
-const axios = require('axios');
-
-const sendReview = (body) => {
-  return axios.post('/reviews', body);
-};
-
 const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
 const validateEmail = (email) => {
@@ -33,9 +27,8 @@ const validateNotEmpty = (input) => {
 };
 
 module.exports = {
-  submitReview,
   validateEmail,
   validateNotEmpty,
   validateMaxLength,
-  validateMinLength
+  validateMinLength,
 };

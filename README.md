@@ -1,7 +1,27 @@
-# Project-Catwalk
-Complete redesign of product web page for client-facing retail website.
-​
-## Getting Started​
+# SPHINX
+![Sphinx Title Image](./readme_images/title-image.png)
+
+Working from a detailed Business Requirement Document and an accompanying wireframe we were tasked with creating a functioning product page for an e-commerce site.  This project was created in a week with a 4 person development team.  Each team member took on one of the four widgets that make up the webpage. The project uses Node.js, Express.js and React.
+
+My main contributions to the project where:
+- Building the 'Ratings & Reviews' section
+- Setting up our testing frame work (Jest, Enzyme, Puppeteer)
+- Implementing React Router to allow for unique URLs for each product
+# Table Of Contents
+
+- [Technology Used](#technology-used)
+
+- [Requirements](#requirements)
+
+- [Installation](#installation)
+
+- [Ratings & Reviews](#ratings-&-reviews)
+
+
+## Technology Used
+
+## Requirements
+## Installation 
 1. Fork the repo and clone it down to your computer.
 ​
 2. Open it in VS Code (or whatever IDE you use) like you normally would.
@@ -40,6 +60,30 @@ Complete redesign of product web page for client-facing retail website.
 9. In your browser go to: http://localhost:3000 where the application should load up.  
 ​
 10. Feel free to click around the application and explore the interactivity of the various components.
-​
 
-Happy tinkering!
+
+# Ratings & Reviews
+This component was build to the specifications given in the business requirement document and the accompanying wireframe. All components were build from scratch in React and styles using SCSS. 
+
+
+## Ratings Breakdown 
+---
+| Wireframe | Actual |
+| --- | --- |
+| ![Ratings Wireframe](./readme_images/ratings-breakdown-wireframe.png) | ![Ratings Actual](./readme_images/ratings-breakdown-actual.png) |
+### Requirements
+- Display the products meta data, including:
+  - Average star rating
+  - The percent of customers that recommend the product 
+  - Visual breakdown of how many reviews there are for each star rating
+  - The breakdown by star ratings should be able to filter the reviews list
+  - Visual breakdown of how users rate the product on relevant characteristics.
+  
+
+## Reviews List Breakdown 
+---
+### Requirements
+
+## Add A Review Form Breakdown
+---
+### Requirements

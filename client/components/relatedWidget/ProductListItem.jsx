@@ -13,7 +13,7 @@ class ProductListItem extends React.Component {
     return (
       <div className={'menu-item'}>
         <h4>{this.props.text.category}</h4>
-        <Link exact to={page}>
+        <Link to={page}>
           <h4>{this.props.text.name}</h4>
         </Link>
         <img src={this.props.image} width="200" height="250" />

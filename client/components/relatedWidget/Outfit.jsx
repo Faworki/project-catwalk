@@ -22,12 +22,20 @@ class Outfit extends React.Component {
       image: []
     };
     this.productItems = [];
+    this.getImage = this.getImage.bind(this);
+    this.removeOutfitImage = this.removeOutfitImage.bind(this);
   }
 
-  getImage (productId) {
+  getImage(image) {
       let imageArray = this.state.image.slice();
-      imageArray.push(this.props.styles[0].photos[0].thumbnail_url);
+      imageArray.push(image);
       this.setState({image: imageArray});
+  }
+
+  removeOutfitImage(index) {
+    let outfitImages = this.state.image.slice();
+    outfitImages.splice(index, 1);
+    this.setState({image: outfitImages});
   }
 
   buildCarousel() {
@@ -38,28 +46,24 @@ class Outfit extends React.Component {
     },
       this.props.getNewProduct,
       this.props.removeFromOutfit,
-      this.props.reviewAverage
+      this.props.reviewAverage,
+      this.removeOutfitImage
       );
-  }
-
-  componentDidUpdate(prevProps) {
-    if (this.props.product.id !== prevProps.product.id) {
-      this.getImage();
-    }
-    this.buildCarousel();
   }
 
   render() {
     this.buildCarousel();
     return (
       <div>
-        <div className='widgetHeader'>Outfit Carousel</div>
+        <div className='widgetHeader'>My Outfit</div>
         <ScrollMenu
           data={[
             <AddButton
               product={this.props.product}
               yourOutfit={this.props.yourOutfit}
               addToOutfit={this.props.addToOutfit}
+              getImage={this.getImage}
+              productImage={this.props.styles}
             />,
             ...this.productItems
           ]}

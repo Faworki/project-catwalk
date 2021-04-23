@@ -21,7 +21,9 @@ class ProductListItem extends React.Component {
         <StarAverage reviewAverage={this.props.stars} />
         <ActionButton
           buttonCallback={this.props.buttonCallback}
+          buttonCallback2={this.props.buttonCallback2}
           productId={this.props.text.id}
+          index={this.props.index}
         />
       </div>
     );

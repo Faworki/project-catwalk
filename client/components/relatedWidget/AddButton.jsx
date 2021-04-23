@@ -14,12 +14,21 @@ class AddButton extends React.Component {
           <a href>
             <h4
               style={{textDecoration: "underline"}}
-              onClick={this.props.addToOutfit}
+              onClick={()=>{
+                this.props.addToOutfit();
+                this.props.getImage(this.props.productImage[0].photos[0].thumbnail_url);
+              }}
             >
                 Click to add it to your outift!
             </h4>
           </a>
-          <button className="outfit-button" onClick={this.props.addToOutfit}>
+          <button
+            className="outfit-button"
+            onClick={()=>{
+              this.props.addToOutfit();
+              this.props.getImage(this.props.productImage[0].photos[0].thumbnail_url);
+            }}
+          >
             <svg width="200px" height="250px" viewBox="0 0 485.946 485.946">
               <path d="M338.122,282.09l-40.543-117.134c-5.155-14.855-4.077-31.148,2.944-45.195l24.297-48.609
                 c3.32-6.629,3.543-14.363,0.634-21.168c-2.927-6.801-8.698-11.957-15.759-14.109l-22.809-6.961

@@ -11,7 +11,7 @@ class AddButton extends React.Component {
     return (
         <div className="menu-item add-button">
           <h4>Like this product?</h4>
-          <a href>
+          <a>
             <h4
               style={{textDecoration: "underline"}}
               onClick={()=>{

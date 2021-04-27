@@ -8,15 +8,17 @@ class ActionButton extends React.Component {
   render() {
     return (
       <div>
-        <img
-        src='https://duce5lj2f2sxj.cloudfront.net/icon/premium/png-256/1620154.png?Expires=1619049600&Signature=SoXmoqr~8y-ptEGqE0zNngg29SUZLXKydSTMp1ek4uUEBrmFejZyxxfhtJ104deeQL~Zx1O3YWrdhAasAlx0MTg5H76~F~49N6l-nCGWNiqgD9GRSWEiANW4URDyFTObOdolRkJwDq~bdKkT94Ta6ggJCnKT6IspWiFJ1ekFLlOknzuYbA5lvEIs7JCEni-VTrDESMWTue4svP-gf9W8Z8NV9RfF~BvmMb1hibCgcSAiXWHULySYoJ--xN8UVcYoMBOq0W4zW2SN0ouKj7jSKKSJ6vc9yNmSc4QsfjidMWG4ZEidq56ON2bnhcuIzQbHpZWol80HNqHG5rVr3bghmw__&Key-Pair-Id=APKAIONEDRCDZGBCR6PA'
-         onClick={()=>{
-          this.props.buttonCallback(this.props.productId);
-          this.props.buttonCallback2(this.props.index);
-          }}
-          width='25px'
-          height='25px'
-          />
+        <svg width="25px" height="25px" viewBox="0 0 32.055 32.055"
+          onClick={()=>{
+            this.props.buttonCallback(this.props.productId);
+            this.props.buttonCallback2(this.props.index);
+            }}
+        >
+          <path d="M3.968,12.061C1.775,12.061,0,13.835,0,16.027c0,2.192,1.773,3.967,3.968,3.967c2.189,0,3.966-1.772,3.966-3.967
+            C7.934,13.835,6.157,12.061,3.968,12.061z M16.233,12.061c-2.188,0-3.968,1.773-3.968,3.965c0,2.192,1.778,3.967,3.968,3.967
+            s3.97-1.772,3.97-3.967C20.201,13.835,18.423,12.061,16.233,12.061z M28.09,12.061c-2.192,0-3.969,1.774-3.969,3.967
+            c0,2.19,1.774,3.965,3.969,3.965c2.188,0,3.965-1.772,3.965-3.965S30.278,12.061,28.09,12.061z"/>
+        </svg>
       </div>
     );
   }

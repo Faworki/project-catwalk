@@ -68,22 +68,33 @@ This component was build to the specifications given in the business requirement
 
 ## Ratings Breakdown 
 ---
+### Requirements
+Display the products meta data, including:
+- Average star rating
+- The percent of customers that recommend the product 
+- Visual breakdown of how many reviews there are for each star rating
+- The breakdown by star rating should be able to filter the reviews list
+- Visual breakdown of how users rate the product on relevant characteristics.
+
 | Wireframe | Actual |
 | --- | --- |
 | ![Ratings Wireframe](./readme_images/ratings-breakdown-wireframe.png) | ![Ratings Actual](./readme_images/ratings-breakdown-actual.png) |
-### Requirements
-- Display the products meta data, including:
-  - Average star rating
-  - The percent of customers that recommend the product 
-  - Visual breakdown of how many reviews there are for each star rating
-  - The breakdown by star ratings should be able to filter the reviews list
-  - Visual breakdown of how users rate the product on relevant characteristics.
   
 
 ## Reviews List Breakdown 
 ---
 ### Requirements
+- Display a list of review cards
+- Should display two cards by default
+- Should have a button to show more reviews
+- Should have a dropdown menu for sorting the reviews
+- Should be filterable by the star rating
+- Should have a way for users to mark reviews helpful or report the reviews
+- Display user uploaded images
 
+| Wireframe | Actual |
+| --- | --- |
+| ![Review List Wireframe](./readme_images/review-list-wireframe.png) | ![Ratings Actual](./readme_images/review-list-actual.png) |
 ## Add A Review Form Breakdown
 ---
 ### Requirements

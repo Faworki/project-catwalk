@@ -2,7 +2,7 @@
 
 ![Sphinx Title Image](./readme_images/title-image.png)
 
-Working from a detailed Business Requirement Document and an accompanying wireframe we were tasked with creating a functioning product page for an e-commerce site. This project was created in a week with a 4 person development team. Each team member took on one of the four widgets that make up the webpage. The project uses Node.js, Express.js and React.
+Working from a detailed business requirement document and an accompanying wireframe we were tasked with creating a functioning product page for an e-commerce site. This project was created in a week with a 4 person development team. Each team member took on one of the four widgets that make up the webpage. The project uses Node.js, Express.js and React.
 
 My main contributions to the project where:
 
@@ -20,11 +20,17 @@ My main contributions to the project where:
 
 - [Ratings & Reviews](#ratings-&-reviews)
 
+  - [Ratings Breakdown](#ratings-breakdown)
+
+  - [Reviews List Breakdown](#reviews-list-breakdown)
+
+  - [Add A Review Form Breakdown](#add-a-review-form-breakdown)
+***
 ## Technology Used
 
 <div style="text-align: center">
-  <img src="./readmeFiles/tech-stack-fec.png" alt="Tech Stack: Node.js, Express, MongoDB, Docker, NGINX    " height="75">
-  </div>
+  <img src="./readme_images/tech-stack-fec.png" alt="Tech Stack: Node.js, Express, MongoDB, Docker, NGINX    " height="75">
+</div>
 
 ### Front End
 
